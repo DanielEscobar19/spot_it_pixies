@@ -140,9 +140,9 @@ Link del proyecto: [https://github.com/DanielEscobar19/spot_it_pixies](https://g
 [contributors-shield]: https://img.shields.io/badge/Contributors-4-green?style=for-the-badge
 [contributors-url]: https://github.com/DanielEscobar19/spot_it_pixies/graphs/contributors
 [issues-shield]: https://img.shields.io/badge/Issues-0-orange?style=for-the-badge
-[issues-url]: https://img.shields.io/badge/Contributors-0-orange?style=for-the-badge
+[issues-url]: https://github.com/DanielEscobar19/spot_it_pixies/graphs/issues
 [license-shield]: https://img.shields.io/badge/License-MIT-blue?style=for-the-badge
-[license-url]: https://github.com/DanielEscobar19/spot_it_pixies/LICENSE.txt
+[license-url]: https://github.com/DanielEscobar19/spot_it_pixies/resources/LICENSE.txt
 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
