@@ -116,7 +116,7 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 <!-- LICENSE -->
 ## Licencia
 
-Distribuido bajo la licencia MIT. Consulte [Licencia](/resources/LICENSE.txt) para obtener más información.
+Distribuido bajo la licencia MIT. Consulte [Licencia](/resources/License.txt) para obtener más información.
 
 <p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
 
