@@ -1,19 +1,19 @@
-# Spot It Pixies
+# Spot It - Team Pixies
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/DanielEscobar19/spot_it_pixiese">
-    <img src="resources/spot-It-logo.png" alt="Logo" width="200" height="200">
+    <img src="resources/Spotit_pixies.jpg" alt="Logo" width="500" height="200">
   </a>
 
   <h2 align="center">Spot it! The Well</h3>
   <br>
   <h3 align="center">
-  Repositorio para el juego spot it del curso de desarrollo web CI-0137.
+  Repositorio para el proyecto grupal del curso de desarrollo web CI-0137.
   </p>
   <p align="center">
     <br />
@@ -24,8 +24,6 @@
     <a href="https://github.com/DanielEscobar19/spot_it_pixies/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -51,35 +49,46 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## Acerca Del Proyecto
 
-En este proyecto se desarrolla un mini juego, El Pozo (The Well), del juego Spot it. Se requiere contar con la capacidad de jugar en línea entre dos a ocho jugadores al mismo tiempo de modo que un jugador tenga el rol de anfitrión de la sesión y ésta cuente con un código que permite a los demás jugadores, invitados a participar en la misma partida. 
+En este proyecto se desarrolla un mini juego, El Pozo (The Well), del juego Spot it. Se requiere contar con la capacidad de jugar en línea entre dos a ocho jugadores al mismo tiempo de modo que un jugador tenga el rol de anfitrión de la sesión y ésta cuente con un código que permite a los demás jugadores, invitados a participar en la misma partida.
 
 El juego debe ser ejecutado mediante una plataforma web (servidor), respetando las reglas originales del juego; en adición, se espera implementar al menos dos adaptaciones extra que agregan funcionalidades (audiovisuales, cambio de reglas u otras) distintas a las que ya cuenta éste.
 
 El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, leaderboard (que contempla manejar una base de datos para registrar el ranking), salas de espera (anfitrión e invitados) y las pantallas principales del juego.
 
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
-
+<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
 ### Adaptaciones
 
-<img src="resources/under-construction.png" alt="under construction" width="200" height="75">
+1. El contador de tiempo para las partidas, que sirve como un marcador de “mejor tiempo” para un jugador en el leaderboard y como contador para el chat de eventos.
+   - Ejemplo - Durante la partida.  
+   ![img](design/img/adap_MatchTime.jpg)
+   - Ejemplo - Al final de la partida.  
+   ![img](design/img/adap_MatchDuration.jpg)
+   - Ejemplo - Leaderboard.  
+   ![img](design/img/adap_BestTime.png)
 
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
+2. Efectos de sonido y/o animación en el nombre del jugador, cuando "empareja" una carta.
+   - Ejemplo - antes de emparejar.  
+   ![img](design/img/adap_Spotit-Before.jpg)
+   - Ejemplo - después de emparejar.  
+   ![img](design/img/adap_Spotit-After.jpg)
+
+3. Chat de eventos que marca un “historial” de los emparejamientos de cartas.
+   - Ejemplo - Chat de eventos, incluye el uso del tiempo.  
+   ![img](design/img/adapt_eventsChat.png)
+
+<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
 ### Librerias
 
 Librerias y frameworks usados para construir el proyecto:
 
-[![Bootstrap][Bootstrap.com]][Bootstrap-url]
+[![Bootstrap][Bootstrap.com]][Bootstrap-url] (e.g)
 
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
-
-
+<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
 <!-- GETTING STARTED -->
 ## Reglas
@@ -90,50 +99,39 @@ Coloca una carta boca abajo en el centro de la mesa y reparte el resto de las ca
 
 Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, solo hay un símbolo idéntico en común entre cada carta.
 
-
 <!-- USAGE EXAMPLES -->
 ## Uso
 
 <img src="resources/under-construction.png" alt="under construction" width="200" height="75">
 
-
 <!-- ROADMAP -->
 ## Roadmap
-- [x]Entregable 1
-    - [x] Agregar Sketchs
-    - []  Agregar Mapa del sito
-    - [x] Agregar readme.md
-    - [] Adaptaciones
-    - [] Agregar wireframes
-    - [] Agregar design.md
-- []Entregable 2
-- []Entregable 3
 
+- [-] Entregable 1
+  - [x] Agregar Sketchs
+  - [-]  Agregar Mapa del sito
+  - [x] Agregar readme.md
+  - [x] Adaptaciones
+  - [-] Agregar wireframes
+  - [-] Agregar design.md
+- [-]Entregable 2
+- [-]Entregable 3
 
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
-
-
-<!-- LICENSE -->
-## Licencia
-
-Distribuido bajo la licencia MIT. Consulte [Licencia](/resources/License.txt) para obtener más información.
-
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
-
+<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
 <!-- CONTACT -->
-## Contacto
+**Autores:**
 
-Daniel Escobar -\
-Fabian Orozco -\
-Gabriel Bonilla -\
-Manuel Arroyo - manuel.arroyoportilla@ucr.ac.cr
+| Nombre               | Contacto                        |
+| :---                 | :---                            |
+| Fabián Orozco        | fabian.orozcochaves@ucr.ac.cr   |
+| Daniel Escobar       | daniel.escobargiraldo@ucr.ac.cr |
+| Gabriel Bonilla      | gabriel.bonillarivera@ucr.ac.cr |
+| Manuel Arroyo        | manuel.arroyoportilla@ucr.ac.cr |
 
-Link del proyecto: [https://github.com/DanielEscobar19/spot_it_pixies](https://github.com/DanielEscobar19/spot_it_pixies)
+[Link del proyecto en github](https://github.com/DanielEscobar19/spot_it_pixies)
 
-<p align="right">(<a href="#spot-it-pixies">volver arriba</a>)</p>
-
-
+<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
