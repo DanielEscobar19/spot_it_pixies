@@ -9,14 +9,22 @@ Estos cambios fueron adoptados de las salas de espera realizadas por Daniel (B).
 | Sala de espera A     | Sala de espera B                |
 | :---                 | :---                            |
 | ![Imagen de la opcion A invitado](img/invitadoSalaEsperaA.png)  ![Imagen de la opcion A anfitrio](img/anfitrionSalaEsperaA.png) | ![Imagen de la opcion B anfitrion](img/anfitrionSalaEsperaB.png) ![Imagen de la opcion B anfitrion](img/anfitrionSalaEsperaB.png)|
-| ![Resultado del invitado](img/resutadoEsperaInvitado.png) | ![Resultado del anfitrion](img/resultadoEsperaAnfitrion.png) |
+
+|  Resultado   |
+| :---                 |
+| ![Resultado del invitado](img/resutadoEsperaInvitado.png) ![Resultado del anfitrion](img/resultadoEsperaAnfitrion.png) |
 
 
 Para la pantalla de juego, se decidió hacer un reacomodo general de los elementos, y se le agregó la sección de Eventos del sketch de Daniel, además se consideró tener que agregar un contador para las cartas que le quedan en la pila/mano del jugador.
 
-| Sala de espera A     | Sala de espera B                |
+| Pantalla de juego A     | Pantalla de juego B                |
 | :---                 | :---                            |
-| ![Imagen de la opcion A](image.jpg) | fabian.orozcochaves@ucr.ac.cr   |
+| ![Imagen de pantalla de juego A](img/pantallaJuegoA.png) | ![Imagen de pantalla de juego B](img/pantallaJuegoB.png)   |
+
+| Resultado |
+| :---                 |
+| ![Imagen de pantalla de juego Resultado](img/pantallaJuegoResultado.png)  | 
+
 
 Por último, se le agregó a cada pantalla un logo del juego en la esquina superior izquierda que funciona como botón de Home, para que haya un flujo de salida en cada una de ellas y así el usuario no se sienta atrapado en una sola pantalla. 
 
