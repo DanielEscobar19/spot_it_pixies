@@ -6,27 +6,52 @@ El principal cambio realizado al sketch de Fabián fue en la sala de espera (A) 
 
 Estos cambios fueron adoptados de las salas de espera realizadas por Daniel (B). Además se decidió agregar el botón de Help que muestra en un popup las reglas del juego para que los jugadores puedan repasar durante la espera.
 
-| Sala de espera A     | Sala de espera B                |
-| :---                 | :---                            |
-| ![Imagen de la opcion A invitado](img/invitadoSalaEsperaA.png)  ![Imagen de la opcion A anfitrio](img/anfitrionSalaEsperaA.png) | ![Imagen de la opcion B anfitrion](img/anfitrionSalaEsperaB.png) ![Imagen de la opcion B anfitrion](img/anfitrionSalaEsperaB.png)|
+<table>
+  <tr>
+    <th>Sala de espera A</th>
+    <th>Sala de espera B</th>
+  </tr>
+  <tr>
+    <td><img src="img/invitadoSalaEsperaA.png" alt="Logo" width="600px"> <br> <img src="img/anfitrionSalaEsperaA.png" alt="Logo" width="600px"></td>
+    <td><img src="img/anfitrionSalaEsperaB.png" alt="Logo" width="600px"> <br> <img src="img/invitadoSalaEsperaB.png" alt="Logo" width="600px"></td>
+  </tr>
+</table>
 
-|  Resultado   |
-| :---                 |
-| ![Resultado del invitado](img/resutadoEsperaInvitado.png) ![Resultado del anfitrion](img/resultadoEsperaAnfitrion.png) |
+<table>
+  <tr>
+    <th>Resultado</th>
+  </tr>
+  <tr>
+    <td><img src="img/resutadoEsperaInvitado.png" alt="Logo" width="600px"> <img src="img/resultadoEsperaAnfitrion.png" alt="Logo" width="600px"></td>
+  </tr>
+</table>
 
 
 Para la pantalla de juego, se decidió hacer un reacomodo general de los elementos, y se le agregó la sección de Eventos del sketch de Daniel, además se consideró tener que agregar un contador para las cartas que le quedan en la pila/mano del jugador.
 
-| Pantalla de juego A     | Pantalla de juego B                |
-| :---                 | :---                            |
-| ![Imagen de pantalla de juego A](img/pantallaJuegoA.png) | ![Imagen de pantalla de juego B](img/pantallaJuegoB.png)   |
 
-| Resultado |
-| :---                 |
-| ![Imagen de pantalla de juego Resultado](img/pantallaJuegoResultado.png)  | 
+<table>
+  <tr>
+    <th>Pantalla de juego A</th>
+    <th>Pantalla de juego B</th>
+  </tr>
+  <tr>
+    <td><img src="img/pantallaJuegoA.png" alt="Logo" width="600px"></td>
+    <td><img src="img/pantallaJuegoB.png" alt="Logo" width="600px"></td>
+  </tr>
+</table>
 
+<table>
+  <tr>
+    <th>Resultado</th>
+  </tr>
+  <tr>
+    <td><img src="img/pantallaJuegoResultado.png" alt="Logo" width="600px"></td>
+  </tr>
+</table>
 
 Por último, se le agregó a cada pantalla un logo del juego en la esquina superior izquierda que funciona como botón de Home, para que haya un flujo de salida en cada una de ellas y así el usuario no se sienta atrapado en una sola pantalla. 
+
 
 <p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
 
