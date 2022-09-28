@@ -22,7 +22,7 @@ Estos cambios fueron adoptados de las salas de espera realizadas por Daniel (B).
     <th>Resultado</th>
   </tr>
   <tr>
-    <td><img src="img/resutadoEsperaInvitado.png" alt="Logo" width="500px"> <img src="img/resultadoEsperaAnfitrion.png" alt="Logo" width="500px"></td>
+    <td><img src="img/resutadoEsperaInvitado.png" alt="Logo" width="400px"> <img src="img/resultadoEsperaAnfitrion.png" alt="Logo" width="400px"></td>
   </tr>
 </table>
 
