@@ -44,6 +44,7 @@
     </li>
     <li><a href="#uso">Uso</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#mapa-del-sitio">Mapa Del Sitio</a></li>
     <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ol>
@@ -58,7 +59,7 @@ El juego debe ser ejecutado mediante una plataforma web (servidor), respetando l
 
 El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, leaderboard (que contempla manejar una base de datos para registrar el ranking), salas de espera (anfitrión e invitados) y las pantallas principales del juego.
 
-<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 ### Adaptaciones
 
@@ -80,7 +81,7 @@ El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, le
    - Ejemplo - Chat de eventos, incluye el uso del tiempo.  
    ![img](design/img/adapt_eventsChat.png)
 
-<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 ### Librerias
 
@@ -88,7 +89,7 @@ Librerias y frameworks usados para construir el proyecto:
 
 [![Bootstrap][Bootstrap.com]][Bootstrap-url] (e.g)
 
-<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 <!-- GETTING STARTED -->
 ## Reglas
@@ -109,15 +110,21 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 
 - [-] Entregable 1
   - [x] Agregar Sketchs
-  - [-]  Agregar Mapa del sito
+  - [X]  Agregar Mapa del sito
   - [x] Agregar readme.md
   - [x] Adaptaciones
-  - [-] Agregar wireframes
-  - [-] Agregar design.md
+  - [X] Agregar wireframes
+  - [X] Agregar design.md
 - [-]Entregable 2
 - [-]Entregable 3
 
-<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
+
+## Mapa Del Sitio
+
+<img src="mapa del sitio/spotit_map.svg"  style="background-color:#fff" alt="mapa del sito spot it">
+
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 <!-- CONTACT -->
 **Autores:**
@@ -131,7 +138,7 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 
 [Link del proyecto en github](https://github.com/DanielEscobar19/spot_it_pixies)
 
-<p align="right"><a href="#spot-it-pixies">↑ volver al inicio</a></p>
+<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
