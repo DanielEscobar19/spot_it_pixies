@@ -122,6 +122,7 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
   - [x] Agregar readme.md
   - [x] Adaptaciones
   - [x] Agregar wireframes
+  - [x] Agregar Acuerdos de diagramas
   - [x] Agregar readme.md de design
 - [-]Entregable 2
 - [-]Entregable 3
