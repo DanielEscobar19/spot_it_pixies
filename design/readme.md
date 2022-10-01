@@ -1,10 +1,7 @@
+# Justificación del diseño
 
-# Pantallas y flujos:
+## Pantalla Principal
 
-### Link figma: https://www.figma.com/file/7EKI0R0xJH1RVGjZheae10/Proyecto_Web?node-id=0%3A1
-<br/>
-
-## Pantalla Principal:
 En el encabezado de la pantalla, se muestran las opciones para dirigirse a la pantalla de Ayuda (Help) y de Créditos (Credits). Por otro lado, el usuario puede decidir si crear una sesión o unirse a una existente. En el caso de que el usuario decida crear una sesión, deberá agregar el nombre de la misma y presionar el botón de "Create", el cual lo va a redirigir a la pantalla de espera del anfitrión. Por otro lado, si el usuario desea ingresar a una sesión existente, este deberá ingresar el códgio de la sesión a la que desea ingresar y posteriormente presionar el botón de "Join"; en caso de que el número de sesión ingresado sea válido, se redirige a la sala de espera de invitados.  
 
 Para ingresar a ella desde otras aplicaciones solo se necesita presionar el logo del juego en la esquina superior izquierda<br/><br/>
@@ -12,11 +9,11 @@ Para ingresar a ella desde otras aplicaciones solo se necesita presionar el logo
 <br/><br/>
 
 
-## Sala de espera anfitrión sin jugadores:
+## Sala de espera anfitrión sin jugadores
+
 En esta pantalla se muestra cómo se vería la pantalla de espera del anfitrión en caso de que aún no haya ingresado ningún jugador. En este caso, se le muestra al anfitrión que se está esperando a que se unan mas jugadores y el PIN de la sesión. La opción de "Start" o de empezar la partida se encuentra desabilitada.  <br/><br/>
 <img src="img/anfitrionnojugadores.png" width=400px>
 <br/><br/>
-
 
 ## Sala espera anfitrión con jugadores
 
@@ -60,5 +57,6 @@ Para ingresar a esta pantalla solo se presiona el botón de "Help" en el encabez
 
 <br/><br/>
 
+## Otras rutas
 
-
+- [Link del prototipo en figma](https://www.figma.com/proto/7EKI0R0xJH1RVGjZheae10/Proyecto_Web?node-id=16%3A31&scaling=scale-down&page-id=0%3A1&starting-point-node-id=16%3A31&show-proto-sidebar=1)
