@@ -33,20 +33,19 @@
       <a href="#acerca-del-proyecto">Acerca Del Proyecto</a>
       <ul>
         <li><a href="#adaptaciones">Adaptaciones</a></li>
-        <li><a href="#librerias">Librerias</a></li>
+        <!--
+        <li><a href="#librerias">Librerias</a></li> -->
       </ul>
     </li>
     <li>
       <a href="#reglas">Reglas</a>
-      <ul>
-        <li><a href="#cartas">Cartas</a></li>
-      </ul>
     </li>
-    <li><a href="#uso">Uso</a></li>
+    <!-- <li><a href="#uso">Uso</a></li>
+    -->
+    <li><a href="#mapa-del-sitio">Mapa del Sitio</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#mapa-del-sitio">Mapa Del Sitio</a></li>
-    <li><a href="#licencia">Licencia</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#autores">Autores</a></li>
+    <li><a href="#otras rutas">Otras rutas</a></li>
   </ol>
 </details>
 
@@ -83,6 +82,7 @@ El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, le
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
+<!-- 
 ### Librerias
 
 Librerias y frameworks usados para construir el proyecto:
@@ -90,7 +90,7 @@ Librerias y frameworks usados para construir el proyecto:
 [![Bootstrap][Bootstrap.com]][Bootstrap-url] (e.g)
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
-
+-->
 <!-- GETTING STARTED -->
 ## Reglas
 
@@ -100,34 +100,34 @@ Coloca una carta boca abajo en el centro de la mesa y reparte el resto de las ca
 
 Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, solo hay un símbolo idéntico en común entre cada carta.
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE EXAMPLES
 ## Uso
 
 <img src="resources/under-construction.png" alt="under construction" width="200" height="75">
+-->
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [-] Entregable 1
-  - [x] Agregar Sketchs
-  - [X]  Agregar Mapa del sito
-  - [x] Agregar readme.md
-  - [x] Adaptaciones
-  - [-] Agregar wireframes
-  - [X] Agregar design.md
-- [-]Entregable 2
-- [-]Entregable 3
-
-<p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
-
+<!--SITEMAP-->
 ## Mapa Del Sitio
 
 <img src="mapa del sitio/spotit_map.svg"  style="background-color:#fff" alt="mapa del sito spot it">
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
-<!-- CONTACT -->
-**Autores:**
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Entregable 1
+  - [x] Agregar Sketchs
+  - [x] Agregar Mapa del sito
+  - [x] Agregar readme.md
+  - [x] Adaptaciones
+  - [x] Agregar wireframes
+  - [x] Agregar readme.md de design
+- [-]Entregable 2
+- [-]Entregable 3
+
+<!-- AUTORES -->
+## Autores
 
 | Nombre               | Contacto                        |
 | :---                 | :---                            |
@@ -136,7 +136,10 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 | Gabriel Bonilla      | gabriel.bonillarivera@ucr.ac.cr |
 | Manuel Arroyo        | manuel.arroyoportilla@ucr.ac.cr |
 
-[Link del proyecto en github](https://github.com/DanielEscobar19/spot_it_pixies)
+## Otras rutas
+
+- [Link del proyecto en github](https://github.com/DanielEscobar19/spot_it_pixies)  
+- [Link del prototipo en figma](https://www.figma.com/proto/7EKI0R0xJH1RVGjZheae10/Proyecto_Web?node-id=16%3A31&scaling=scale-down&page-id=0%3A1&starting-point-node-id=16%3A31&show-proto-sidebar=1)
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
