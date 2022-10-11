@@ -7,37 +7,48 @@
   --dark-green-color: #38AD11;
   --dark-gray-color: rgb(40, 40, 40);
   --gray-color: rgb(230, 230, 230);
+  --text-font-size: 2vw;
 }
 
 .box-container {
+  position: inherit;
   display: flex;
   flex-direction: row;
   align-items: center;
   border-radius: 10px;
-  background-color: #F3F3F3;
+  background-color: var(--gray-color);
   width: fit-content;
   height: fit-content;
   padding: 10px;
-}
-
-.player-count-container {
-  padding: 3px 10px ;
+  margin: 0px;
 }
 
 .session-pin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
 
+.session-pin-container p,h2 {
+  font-size: var(--text-font-size);
+  padding: 0px;
+  margin: 0px;
+}
+
+.player-count-container {
+  padding: 3px 10px;
+  margin: 0px;
 }
 
 .player-count-container img{
-  width: 68px;
-  height: 65px;
+  width: 2vw;
+  height: auto;
   margin-inline: 5px;
 }
 
 .player-count-container p{
   padding: 0px;
   margin: 0px;
-  font-size: 60px;
+  font-size: var(--text-font-size);
   margin-inline: 5px;
-
 }

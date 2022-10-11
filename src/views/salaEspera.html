@@ -24,24 +24,37 @@
             </h1>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <div class="player-count-container box-container">
+        <!-- Row with player count, session pin and start button -->
+        <div class="row d-flex align-items-end">
+          <div class="col d-flex justify-content-center">
+            <!-- Player count -->
+            <div class="player-count-container box-container ">
               <img src="../img/common/userIcon.svg" alt="Player icon"/>
               <!-- We get the player count by counting the number of players connected -->
               <p>2</p>
             </div>
           </div>
-          <div class="col text-center">
-            <div class="session-pin-container">
-              <h2>Session pin</h2>
-              <div class="box-container">
-                1234
-              </div>
+          <!-- Session pin -->
+          <div class="col text-center session-pin-container">
+            <h2>Session pin</h2>
+            <div class="box-container">
+              <p>1234</p>
             </div>
           </div>
-          <div class="col">
-            
+          <!-- Start button. Is clickable if all players are ready -->
+          <div class="col d-flex justify-content-center">
+            <div class="box-container">
+              <h2>Start</h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row with connected player names -->
+        <div class="row">
+          <div class="col d-flex text-center justify-content-center">
+            <section class="box-container">
+              <h2>Waiting for players...</h2>
+            </section>
           </div>
         </div>
       </section>
