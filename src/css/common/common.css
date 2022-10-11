@@ -1,0 +1,43 @@
+@charset "8-UTF";
+:root {
+  --purple-color: #8500FA;
+  --yellow-color: #FACE0C;
+  --green-color: #47FA0C;
+  --dark-yellow-color: #AD9011;
+  --dark-green-color: #38AD11;
+  --dark-gray-color: rgb(40, 40, 40);
+  --gray-color: rgb(230, 230, 230);
+}
+
+.box-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #F3F3F3;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+}
+
+.player-count-container {
+  padding: 3px 10px ;
+}
+
+.session-pin-container {
+
+}
+
+.player-count-container img{
+  width: 68px;
+  height: 65px;
+  margin-inline: 5px;
+}
+
+.player-count-container p{
+  padding: 0px;
+  margin: 0px;
+  font-size: 60px;
+  margin-inline: 5px;
+
+}
