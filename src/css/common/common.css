@@ -10,6 +10,14 @@
   --text-font-size: 2vw;
 }
 
+#player-hostname {
+  color: var(--purple-color);
+}
+
+.player-names {
+  
+}
+
 .box-container {
   position: inherit;
   display: flex;
@@ -23,13 +31,7 @@
   margin: 0px;
 }
 
-.session-pin-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} 
-
-.session-pin-container p,h2 {
+p,h2 {
   font-size: var(--text-font-size);
   padding: 0px;
   margin: 0px;
