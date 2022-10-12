@@ -1,0 +1,47 @@
+@charset "8-UTF";
+@import "../common/common.css";
+
+#player-hostname {
+  color: var(--purple-color);
+}
+
+.player-names {
+  margin-inline: 15px;
+}
+
+.box-container {
+  position: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
+  background-color: var(--gray-color);
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  margin: 0px;
+}
+
+p,h2 {
+  font-size: var(--medium-font-size);
+  padding: 0px;
+  margin: 0px;
+}
+
+.player-count-container {
+  padding: 3px 10px;
+  margin: 0px;
+}
+
+.player-count-container img{
+  width: 2vw;
+  height: auto;
+  margin-inline: 5px;
+}
+
+.player-count-container p{
+  padding: 0px;
+  margin: 0px;
+  font-size: var(--medium-font-size);
+  margin-inline: 5px;
+}
