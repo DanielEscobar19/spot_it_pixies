@@ -68,13 +68,17 @@
 
           <!-- Row with connected player names -->
           <div class="col d-flex text-center flex-row flex-wrap justify-content-center mb-5">
-            <div id="player-hostname-crown">
-              <p class="mx-3 my-2" id="player-hostname">hostname</p>
+            <div  class="d-flex flex-row position-relative" id="player-hostname-crown">
+              <p class="mx-3 my-2" id="player-hostname">Hostname</p>
+              <span class="position-absolute p-0 badge bg-transparent">
+                <img id="host-crown-icon" src="../img/common/crown.svg" alt="Crown icon">
+              </span>
             </div>
-            <p class="mx-3 my-2">playername1</p>
+            <p class="mx-3 my-2 player-name">playername1</p>
           </div>
 
           <!-- box indicating if we are still waiting for players -->
+          <!-- This text only appears if there is no player connected apart from the host -->
           <div class="col d-flex text-center justify-content-center">
             <section class="box-container">
               <h2>Waiting for players...</h2>

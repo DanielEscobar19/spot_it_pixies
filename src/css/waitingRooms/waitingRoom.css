@@ -5,9 +5,6 @@
   color: var(--purple-color);
 }
 
-.player-names {
-  margin-inline: 15px;
-}
 
 .box-container {
   position: inherit;
@@ -44,4 +41,8 @@ p,h2 {
   margin: 0px;
   font-size: var(--medium-font-size);
   margin-inline: 5px;
+}
+
+#host-crown-icon {
+  width: 1.5vw;
 }
