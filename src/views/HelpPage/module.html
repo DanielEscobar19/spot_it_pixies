@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/common/bootstrapcss/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/common/common.css">
+  <link rel="stylesheet" href="../../css/helpPage/helpPage.css">
+  <script src="../../css/common/botstrapjs/bootstrap.js"></script>
+  <link rel="shortcut icon" href="../../img/common/favicon.ico" type="image/x-icon">
+  <title>Spot it - The Well</title>
+</head>
+
+<body>
+  <div class="px-5">
+    <div class ="d-flex my-3 align-items-center">
+      <img src="../../img/helpPage/help_icon.svg" alt="arrow icon" class="help-icon">
+      <h1 class="px-4"><b>Help page</b></h1>
+    </div>
+
+    <div class="d-flex mb-3 px-4">
+      <section class="box-container py-3 align-items-start">
+        <div class="button-and-tittle">
+          <img src="../../img/helpPage/angle_right.svg" alt="arrow icon" class="arrow-icon" onclick="help(0)">
+          <h1 class="px-3">Game Rules</h1>
+        </div>
+        <p class="hiden">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in diam sit amet nulla blandit porttitor. 
+          Nunc consectetur lectus ligula, sed gravida augue tincidunt ac. Ut vehicula mollis viverra. Fusce posuere imperdiet aliquam. 
+          Morbi at laoreet nisi, eleifend auctor magna. Donec posuere massa sed libero imperdiet molestie. 
+          Nullam varius, orci blandit tincidunt blandit, orci nisi mollis neque, id consectetur erat nunc sed sapien. 
+          Cras eget dui vitae tortor hendrerit fermentum in nec neque. Donec molestie finibus nulla, ultricies pretium orci cursus in. 
+          Nunc quis mauris non nulla pretium semper. Ut mauris ex, commodo ut tristique vel, pretium vitae erat.
+        </p>
+      </section>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+  function help(position) {
+    var text = document.getElementsByClassName('hiden')[position];
+    var arrow = document.getElementsByClassName('arrow-icon')[position];
+    if (text.style.display === "block") {
+      text.style.display = "none";
+      arrow.src = "../../img/helpPage/angle_right.svg";
+    } else {
+      text.style.display = "block";
+      arrow.src = "../../img/helpPage/angle_down.svg";
+    }
+  }
+</script>
+</body>
