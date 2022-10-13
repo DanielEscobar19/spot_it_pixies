@@ -22,3 +22,19 @@
   padding: 10px;
   margin: 0px;
 }
+
+/* Header navbar */
+.homeLogo img {
+  width: 20em;
+}
+
+.nav-item a {
+  font-size: 2em;
+  text-align: center;
+}
+
+.navbar-toggler-icon{
+  padding: 1.3em !important;
+}
+
+/* end Header navbar */
