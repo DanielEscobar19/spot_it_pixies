@@ -38,3 +38,6 @@
 }
 
 /* end Header navbar */
+.green-color {
+  color: var(--green-color)
+}

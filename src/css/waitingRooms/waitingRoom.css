@@ -1,13 +1,16 @@
 @charset "8-UTF";
 @import "../common/common.css";
 
+:root {
+  --disconnected-color: #B8B8B8;
+  --connected-color: #47FA0C;
+
+}
+
 #player-hostname {
   color: var(--purple-color);
 }
 
-.player-names {
-  margin-inline: 15px;
-}
 
 .box-container {
   position: inherit;
@@ -44,4 +47,26 @@ p,h2 {
   margin: 0px;
   font-size: var(--medium-font-size);
   margin-inline: 5px;
+}
+
+#host-crown-icon {
+  width: 1.5vw;
+}
+
+.player-connection-dot {
+  font-size: 50px;
+  line-height: 0;
+  width: 30px;
+}
+
+.player-name {
+  display: inline-block;
+}
+
+.player-connected {
+  color: var(--connected-color);
+}
+
+.player-disconnected {
+  color: var(--disconnected-color);
 }
