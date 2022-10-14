@@ -1,0 +1,41 @@
+@import url(../common/common.css);
+
+.btn {
+  font-size: var(--medium-font-size);
+}
+.b-duration {
+  font-size: var(--medium-font-size);
+}
+
+.crown-icon {
+  width: 3rem;
+}
+
+table tbody {
+  font-size: var(--medium-font-size);
+}
+
+.leaderboard-s-col {
+  padding: 0 4em;
+}
+
+.leaderboard-container .row {
+  border-radius: 1em;
+  box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.25);
+  width: 90em;
+}
+
+.leaderboard-container .row:hover {
+  background-color: rgba(0, 108, 250, 0.09);
+  box-shadow: 2px 3px 5px 2px rgba(0,0,0,0.25), 1px 1px 4px 6px rgba(174, 194, 221, 0.164) inset;
+}
+
+.col-name h3 {
+  color: var(--dark-gray-color);
+  font-weight: 350;
+}
+
+.col-position h2, .col-wincount h2 {
+  font-size: 3em;
+  
+}
