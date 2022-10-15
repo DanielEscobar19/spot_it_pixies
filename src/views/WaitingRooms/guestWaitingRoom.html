@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml"> 
+<html> 
 <head>
   <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -60,8 +58,8 @@
           <div class="col d-flex flex-column align-items-end">
             <!-- Player count -->
             <div class="player-count-container box-container d-flex">
-              <img src="../../img/common/userIcon.svg" alt="Player icon"/>
-              <!-- We get the player count by counting the number of players connected -->
+              <img src="../../img/common/plaza.png" alt="Player icon"/>
+              <!-- TODO: this number is calculated counting the number of player connected including the host -->
               <p>2</p>
             </div>
           </div>
@@ -85,7 +83,7 @@
 
       </section>
 
-      <!-- sectin with player names and status (waiting for players or ready) -->
+      <!-- section with player names and status (waiting for players or ready) -->
       <section class="container">
 
         <div class="row flex-column text-center justify-content-center">
@@ -97,44 +95,50 @@
               <span class="p-0 badge bg-transparent">
                 <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon">
               </span>
-              <p class="mx-3 my-2" id="player-hostname">Hostname</p>
+              <p class="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
             </div>
 
+            <!-- TODO: connecion dot chages to class player-connected if it is connected, else it uses class player-disconnected -->
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 green-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 yellow-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 red-color cyan-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 dark-green-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 pink-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div  class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot"></span> 
-              <p class=" ms-2 me-3 my-2 p-0">playername</p>
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 orange-color selectable-text-all">playername</p>
+            </div>
+            <!-- player with connection status dot -->
+            <div class="d-flex col-3 align-items-center justify-content-center">
+              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+              <p class=" ms-2 me-3 my-2 p-0 gray-color selectable-text-all">playername</p>
             </div>
           </div>
 
           <!-- box indicating if we for the host to start the game -->
           <!-- This text only appears if there is no player connected apart from the host -->
-          <div class="col d-flex text-center justify-content-center my-5">
+          <div class="col d-flex text-center justify-content-center my-5 d-cursor">
             <section class="box-container py-3">
               <h1>
                 Please wait
