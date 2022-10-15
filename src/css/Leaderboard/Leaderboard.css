@@ -1,28 +1,24 @@
 @import url(../common/common.css);
 
+/*match info section*/
 .btn {
   font-size: var(--medium-font-size);
 }
-.b-duration {
-  font-size: var(--medium-font-size);
-}
 
+.b-duration h2 {  
+  font-size: var(--medium-font-size);
+
+}
+/*end match info section*/
+
+/*Leaderboard section*/
 .crown-icon {
   width: 3rem;
-}
-
-table tbody {
-  font-size: var(--medium-font-size);
-}
-
-.leaderboard-s-col {
-  padding: 0 4em;
 }
 
 .leaderboard-container .row {
   border-radius: 1em;
   box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.25);
-  width: 90em;
 }
 
 .leaderboard-container .row:hover {
@@ -37,5 +33,5 @@ table tbody {
 
 .col-position h2, .col-wincount h2 {
   font-size: 3em;
-  
 }
+/*end leaderboard section*/
