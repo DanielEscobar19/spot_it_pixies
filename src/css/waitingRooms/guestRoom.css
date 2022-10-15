@@ -7,6 +7,26 @@
 
 }
 
+.red-color {
+  color: #FA1D1B;
+}
+
+.cyan-color {
+  color: #12E6E0;
+}
+
+.pink-color {
+  color: #F76CFF;
+}
+
+.orange-color {
+  color: #FA8E00;
+}
+
+.gray-color {
+  color: #A3A3A2;
+}
+
 #player-hostname {
   color: var(--purple-color);
 }
@@ -36,8 +56,8 @@ p,h2 {
 }
 
 #host-crown-icon {
-  margin-top: -25px;
-  margin-right: -30px;
+  margin-top: -27px;
+  margin-right: -27px;
   width: 1.5vw;
   z-index: 1;
   position: relative;
@@ -64,6 +84,7 @@ p,h2 {
 .ready-button {
   background-color: #198A17; 
   color: white;
+  cursor: pointer;
 }
 
 .quote {
@@ -75,5 +96,5 @@ p,h2 {
 .hand-logo {
   height: calc(4rem + 4vw);
   margin-top: -5vw;
-  margin-left: -13vw;
+  margin-left: -9vw;
 }
