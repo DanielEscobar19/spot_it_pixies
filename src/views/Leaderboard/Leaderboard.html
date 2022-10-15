@@ -54,13 +54,11 @@
     
     <!-- Row play again option, match session and back to main menu option -->
     <div class="row align-items-end my-5">
-      
-      <div class="col justify-content-start">
-        <!-- Player count -->
-          <!--TODO we must put the real time session-->
-          <button type="button" class="btn btn-success">Play again</button>
+      <!-- Back home button -->
+      <div class="col d-flex justify-content-end">
+        <button type="button" class="btn btn-primary">Back home</button>
       </div>
-
+  
       <!-- Match duration -->
       <div class="col d-flex flex-column align-items-center">
         <h2>Match duration</h2>
@@ -70,37 +68,35 @@
         </div>
       </div>
       
-      <!-- Start button. Is clickable if all players are ready -->
-      <div class="col d-flex justify-content-end">
-          <button type="button" class="btn btn-primary">Back to main menu</button>
+      <!-- Play again button -->
+      <div class="col justify-content-start">
+          <button type="button" class="btn btn-success">Play again</button>
       </div>
     
     </div>
+
   </section>
-  <hr>
   <!-- Leaderboard section-->
   <section>
     <div class="container d-flex">
       <div class="row my-5">
-        <div class="col d-flex flex-nowrap justify-content-center">
+        <div class="col d-flex flex-nowrap justify-content-center align-items-center">
           <img src="../../img/Leaderboard/crown-icon.svg" class="img-fluid crown-icon me-3" alt="Crown icon">
           <h2>Leaderboard</h2>
         </div>
       </div>
     </div>
 
-
-  <div class="section">
-    <div class="container leaderboard-container">
+    <div class="container-sm leaderboard-container">
       <!--TODO reuse code for rows-->
       <!--Player 1-->
       <div class="row d-flex align-items-center mb-3 py-1">
         <div class="col-4 ps-5 col-position">
           <h2>1</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Name</h2>
-          <h3>Bestime</h3>
+          <h3>personal best time</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>Wincount</h2>
@@ -112,7 +108,7 @@
         <div class="col-4 ps-5 col-position">
           <h2>2</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Zeus</h2>
           <h3>02:03</h3>
         </div>
@@ -126,12 +122,12 @@
         <div class="col-4 ps-5 col-position">
           <h2>3</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Kratos</h2>
-          <h3>02:03</h3>
+          <h3>01:50</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
-          <h2>1000</h2>
+          <h2>10</h2>
         </div>
       </div>
 
@@ -140,9 +136,9 @@
         <div class="col-4 ps-5 col-position">
           <h2>4</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Duck</h2>
-          <h3>02:03</h3>
+          <h3>02:01</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>6</h2>
@@ -154,9 +150,9 @@
         <div class="col-4 ps-5 col-position">
           <h2>5</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>NyanCat</h2>
-          <h3>02:03</h3>
+          <h3>02:05</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>2</h2>
@@ -168,9 +164,9 @@
         <div class="col-4 ps-5 col-position">
           <h2>6</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Skrillex</h2>
-          <h3>02:03</h3>
+          <h3>02:06</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>3</h2>
@@ -182,9 +178,9 @@
         <div class="col-4 ps-5 col-position">
           <h2>7</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>Svgvspng</h2>
-          <h3>02:03</h3>
+          <h3>02:30</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>1</h2>
@@ -196,9 +192,9 @@
         <div class="col-4 ps-5 col-position">
           <h2>8</h2>
         </div>
-        <div class="col-4 ps-5 col-name">
+        <div class="col-4 ps-5 col-name text-center">
           <h2>imNoob</h2>
-          <h3>02:03</h3>
+          <h3>02:00</h3>
         </div>
         <div class="col-4 pe-5 col-wincount text-end">
           <h2>0</h2>
@@ -206,5 +202,4 @@
       </div>
 
     </div>
-  </div>
 </body>
