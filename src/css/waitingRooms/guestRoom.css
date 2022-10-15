@@ -98,3 +98,7 @@ p,h2 {
   margin-top: -5vw;
   margin-left: -9vw;
 }
+
+.d-cursor {
+  cursor: default;
+}
