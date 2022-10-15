@@ -1,0 +1,79 @@
+@charset "8-UTF";
+@import "../common/common.css";
+
+:root {
+  --disconnected-color: #B8B8B8;
+  --connected-color: #47FA0C;
+
+}
+
+#player-hostname {
+  color: var(--purple-color);
+}
+
+p,h2 {
+  font-size: var(--medium-font-size);
+  padding: 0px;
+  margin: 0px;
+}
+
+.player-count-container {
+  padding: 3px 10px;
+  margin: 0px;
+}
+
+.player-count-container img{
+  width: 2vw;
+  height: auto;
+  margin-inline: 5px;
+}
+
+.player-count-container p{
+  padding: 0px;
+  margin: 0px;
+  font-size: var(--medium-font-size);
+  margin-inline: 5px;
+}
+
+#host-crown-icon {
+  margin-top: -25px;
+  margin-right: -30px;
+  width: 1.5vw;
+  z-index: 1;
+  position: relative;
+}
+
+.player-connection-dot {
+  font-size: 50px;
+  line-height: 0;
+  width: 30px;
+}
+
+.player-name {
+  display: inline-block;
+}
+
+.player-connected {
+  color: var(--connected-color);
+}
+
+.player-disconnected {
+  color: var(--disconnected-color);
+}
+
+.ready-button {
+  background-color: #198A17; 
+  color: white;
+}
+
+.quote {
+  color: #808080;
+  text-align: end;
+  line-height: 1.6;
+}
+
+.hand-logo {
+  height: calc(4rem + 4vw);
+  margin-top: -5vw;
+  margin-left: -13vw;
+}

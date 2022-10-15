@@ -150,8 +150,6 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 [contributors-url]: https://github.com/DanielEscobar19/spot_it_pixies/graphs/contributors
 [issues-shield]: https://img.shields.io/badge/Issues-0-orange?style=for-the-badge
 [issues-url]: https://github.com/DanielEscobar19/spot_it_pixies/issues
-[license-shield]: https://img.shields.io/badge/License-MIT-blue?style=for-the-badge
-[license-url]: /resources/License.txt
 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com

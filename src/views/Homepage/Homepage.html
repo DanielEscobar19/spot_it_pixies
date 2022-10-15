@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/common/bootstrapcss/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/common/common.css">
+  <link rel="stylesheet" href="../../css/Homepage/Homepage.css">
+  <script src="../../css/common/botstrapjs/bootstrap.js"></script>
+  <link rel="shortcut icon" href="../../img/common/favicon.ico" type="image/x-icon">
+  <title>Spot it - The Well</title>
+</head>
+
+<body>
+  <!--TODO: usar layout común para el header-->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+
+        <a class="navbar-brand homeLogo col-8" href="layout.html">  
+          <img src="../../Img/common/spot-it-logo.svg" alt="Spot it logo" class="img-fluid ps-5">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end pe-5" id="navbarText">
+          <ul class="navbar-nav mr-auto ">
+            <li class="nav-item">
+              <a class="nav-link " href="#">Help</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Credits</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- Welcome message and image -->
+  <section class="row d-flex flex-nowrap align-items-center justify-content-center mt-2">
+        <h1 class="Welcome-msg col-12 col-md-7 ">
+          <b>Welcome to<u>The Well</u> <br> 
+          A <u>Spot it</u> minigame</b>
+        </h1>
+        <img src="../../img\Homepage\spot-it-hand.png" alt="Spot it hand decorative image" class="col-4 dec-img-spot-it d-none d-md-block img-fluid">
+  </section>
+
+  <!-- Form to enter a name and session info -->
+  <section class="d-flex justify-content-center">
+    <form action="Homepage.html" method="GET">
+      <div class="row inputName d-flex flex-column justify-content-center align-items-center">
+        <div class="col d-flex justify-content-center">
+          <div class="mb-4 ">
+            <label for="playerName" class="form-label h2">Your name</label>
+            <input type="text" class="form-control" id="playerName" placeholder="e.g: Timmy">
+          </div>
+        </div>
+      </div>
+      <div class="row sessions d-flex flex-wrap justify-content-center">
+        <div class="col col-6 mb-3">
+          <div class="card create-session">
+            <h2 class="card-header">Create session</h2>
+            <div class="card-body">
+              <label for="sessionName" class="form-label h3">Session name</label>
+              <input type="text" class="form-control mb-3" id="sessionName" placeholder="e.g: The golden game">
+              <a href="#" class="btn btn-primary btn-lg">Create</a>
+            </div>
+          </div>
+        </div>
+        <div class="col col-6">
+          <div class="card join-session">
+            <h2 class="card-header">Join session</h2>
+            <div class="card-body">
+              <label for="sessionPin" class="form-label h3">Session pin</label>
+              <input type="text" class="form-control mb-3" id="sessionPin" placeholder="e.g: 1254">
+              <a href="#" class="btn btn-primary btn-lg">Join</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  
+</body>
