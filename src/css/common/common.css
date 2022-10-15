@@ -39,5 +39,42 @@
 
 /* end Header navbar */
 .green-color {
-  color: var(--green-color)
+  color: var(--green-color);
+}
+
+.purple-color {
+  color: var(--purple-color);
+}
+
+.dark-yellow-color {
+  color: var(--dark-yellow-color);
+}
+
+.dark-gray-color {
+  color: var(--dark-gray-color);
+}
+
+.yellow-color {
+  color: var(--yellow-color);
+}
+
+.dark-green-color {
+  color: var(--dark-green-color);
+}
+
+.selectable-text-all {
+  user-select: all;
+}
+
+.selectable-text {
+  user-select: text;
+}
+
+.unselectable-text {
+  user-select: none;
+}
+
+.purple-background {
+  background-color: var(--purple-color);
+  border-color: var(--purple-color);
 }
