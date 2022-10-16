@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     width: 100vw;
-    height: 90vh;
+    height: 85vh;
 }
 
 #seccion-izquierda {
@@ -16,7 +16,7 @@
 #subseccion-nombres{
     margin-top: 50px;
     width: 100%;
-    height: 70%;
+    height: 50%;
 }
 
 .tarjeta-nombres{
@@ -73,7 +73,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 30%;
+    height: 50%;
     width: 100%;
 }
 
@@ -82,9 +82,9 @@
     flex-direction: column;
     align-items: center;
     width: 90%;
-    height: 90%;
+    height: 70%;
     border-radius: 10px 10px 10px 10px;
-    background-color: lightgray;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 20px;
 }
 
 #seccion-derecha {
