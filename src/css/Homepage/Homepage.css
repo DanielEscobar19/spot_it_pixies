@@ -37,10 +37,6 @@
   flex-wrap: wrap;
 }
 
-.sessions .col {
-  width: 35em;
-}
-
 input::placeholder {
   font-size: 1.3em;
 } 
