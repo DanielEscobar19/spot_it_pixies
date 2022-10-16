@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
 
-        <a class="navbar-brand homeLogo" href="../Homepage/Homepage.html">
+        <a class="navbar-brand homeLogo col-8" href="../Homepage/Homepage.html">
           <img src="../../Img/common/spot-it-logo.svg" alt="Spot it logo" class="img-fluid ps-5">
         </a>
 
@@ -87,53 +87,52 @@
 
         <div class="row flex-column text-center justify-content-center">
 
-          <!-- Row with connected player names -->
-          <div class="col d-flex text-center flex-row flex-wrap justify-content-center mb-5">
+           <!-- Row with connected player names -->
+           <div class="col d-flex text-center flex-row flex-wrap justify-content-center mb-5">
             <!-- name of the host player -->
-            <div  class="d-flex flex-row position-relative" id="player-hostname-crown">
-              <p class="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
-              <span class="position-absolute p-0 badge bg-transparent">
+            <div  class="d-flex col-3 align-items-center justify-content-center" id="player-hostname-crown">
+              <span class="p-0 badge bg-transparent">
                 <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon">
               </span>
+              <p class="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
             </div>
 
             <!-- TODO: connecion dot chages to class player-connected if it is connected, else it uses class player-disconnected -->
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 green-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 yellow-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 red-color cyan-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 dark-green-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 pink-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 orange-color selectable-text-all">playername</p>
             </div>
             <!-- player with connection status dot -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex col-3 align-items-center justify-content-center">
               <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
               <p class=" ms-2 me-3 my-2 p-0 gray-color selectable-text-all">playername</p>
             </div>
-          </div>
 
           <!-- box indicating if we are still waiting for players -->
           <!-- TODO: This text only appears if there is no player connected apart from the host -->
