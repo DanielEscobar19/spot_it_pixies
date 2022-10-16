@@ -74,6 +74,12 @@
   user-select: none;
 }
 
+.btn:hover {
+  background-color: var(--yellow-color);
+  border-color: var(--yellow-color);
+  color: black;
+}
+
 .purple-background {
   background-color: var(--purple-color);
   border-color: var(--purple-color);
