@@ -6,13 +6,24 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+@media (max-width: 700px) {
+    #seccion-izquierda {
+        display: flex;
+        flex-direction: column;
+        height: 0%;
+        width: 0%;
+        color: black;
+    }
+}
 
-#seccion-izquierda {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 15%;
-    color: black;
+@media (min-width: 701px) {
+    #seccion-izquierda {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 15%;
+        color: black;
+    }
 }
 
 #subseccion-nombres{
@@ -91,6 +102,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 20px;
 }
 
+@media (min-width: 701px) {
 #seccion-derecha {
     display: flex;
     flex-direction: column;
@@ -99,6 +111,18 @@
     height: 100%;
     width: 85%;
 }
+}
+
+@media (max-width: 700px) {
+    #seccion-derecha {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+    }
 
 #subseccion-circulos{
     display: flex;
