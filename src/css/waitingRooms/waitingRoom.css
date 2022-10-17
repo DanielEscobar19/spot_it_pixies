@@ -74,7 +74,11 @@ p,h2 {
 }
 
 #host-crown-icon {
+  margin-top: -27px;
+  margin-right: -27px;
   width: 1.5vw;
+  z-index: 1;
+  position: relative;
 }
 
 .player-connection-dot {

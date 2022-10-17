@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../css/waitingRooms/guestRoom.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> 
   <link rel="shortcut icon" href="../../img/common/favicon.ico" type="image/x-icon">
-  <title>Sala de espera - Spot it</title>
+  <title>Guest waiting room - Spot it</title>
 </head>
 <body>
   <!--TODO: usar layout común para el header-->
@@ -39,129 +39,124 @@
     </nav>
   </header>
   <main>
-      <!-- information about the session section -->
-      <section class="container text-center">
-        <div class="row my-5">
-        
-          <div class="col">
-            <h1> 
-              <!-- Instead of "Session name", we must put the name given by the host" -->
-              <span class="text-muted">The Well/</span>Session name
-            </h1>
-          </div>
-        
+    <!-- information about the session section -->
+    <section class="container text-center">
+      <div class="row my-5">
+      
+        <div class="col">
+          <h1> 
+            <!-- Instead of "Session name", we must put the name given by the host" -->
+            <span class="text-muted">The Well/</span>Session name
+          </h1>
         </div>
+      
+      </div>
+      
+      <!-- Row with player count, session pin and start button -->
+      <div class="row align-items-end my-5">
         
-        <!-- Row with player count, session pin and start button -->
-        <div class="row align-items-end my-5">
-          
-          <div class="col d-flex flex-column align-items-end">
-            <!-- Player count -->
-            <div class="player-count-container box-container d-flex">
-              <img src="../../img/common/plaza.png" alt="Player icon"/>
-              <!-- TODO: this number is calculated counting the number of player connected including the host -->
-              <p>2</p>
-            </div>
+        <div class="col d-flex flex-column align-items-end">
+          <!-- Player count -->
+          <div class="player-count-container box-container d-flex">
+            <img src="../../img/common/plaza.png" alt="Player icon"/>
+            <!-- TODO: this number is calculated counting the number of player connected including the host -->
+            <p>2</p>
           </div>
-
-          <!-- Session pin -->
-          <div class="col text-center d-flex flex-column justify-content-center align-items-center offset-1">
-            <h2>Session pin</h2>
-            <div class="box-container mt-2">
-              <p>1234</p>
-            </div>
-          </div>
-          
-          <!-- Start button. Is clickable if all players are ready -->
-          <div class="col d-flex justify-content-start offset-1">
-            <div class="box-container ready-button">
-              <a href="../gameRoom.html">
-                <h2>I'm Ready</h2>
-              </a>
-            </div>
-          </div>
-        
         </div>
 
-      </section>
-
-      <!-- section with player names and status (waiting for players or ready) -->
-      <section class="container">
-
-        <div class="row flex-column text-center justify-content-center">
-
-          <!-- Row with connected player names -->
-          <div class="col d-flex text-center flex-row flex-wrap justify-content-center mb-5">
-            <!-- name of the host player -->
-            <div  class="d-flex col-3 align-items-center justify-content-center" id="player-hostname-crown">
-              <span class="p-0 badge bg-transparent">
-                <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon">
-              </span>
-              <p class="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
-            </div>
-
-            <!-- TODO: connecion dot chages to class player-connected if it is connected, else it uses class player-disconnected -->
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 green-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 yellow-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 red-color cyan-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 dark-green-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 pink-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 orange-color selectable-text-all">playername</p>
-            </div>
-            <!-- player with connection status dot -->
-            <div class="d-flex col-3 align-items-center justify-content-center">
-              <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
-              <p class=" ms-2 me-3 my-2 p-0 gray-color selectable-text-all">playername</p>
-            </div>
-
-          <!-- box indicating if we for the host to start the game -->
-          <!-- This text only appears if there is no player connected apart from the host -->
-          <div class="col d-flex text-center justify-content-center my-5 d-cursor">
-            <section class="box-container py-3">
-              <h1>
-                Please wait
-                <br />
-                The sesion host will start game soon.
-              </h1>
-            </section>
-            <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" class="hand-logo">
+        <!-- Session pin -->
+        <div class="col text-center d-flex flex-column justify-content-center align-items-center offset-1">
+          <h2>Session pin</h2>
+          <div class="box-container mt-2">
+            <p>1234</p>
           </div>
+        </div>
+        
+        <!-- Start button. Is clickable if all players are ready -->
+        <div class="col d-flex justify-content-start offset-1">
+          <a type="button" class="btn btn-primary ready-button" href="../gameRoom.html">
+            <h2>I'm Ready</h2>
+          </a>
+        </div>
+      
+      </div>
 
-          <!-- inspirational quotes -->
-          <div class="col d-flex text-center justify-content-center mb-5">
-            <h3 class="quote">
-              are you good? be better
-              <br />
-              -Sanderson
-            </h3>
-          </div>
+    </section>
 
+    <!-- section with player names and status (waiting for players or ready) -->
+    <section class="container">
+
+      <!-- Row with connected player names -->
+      <div class="col d-flex text-center flex-row flex-wrap justify-content-center mb-5">
+
+        <!-- name of the host player -->
+        <div  class="d-flex col-3 align-items-center justify-content-center" id="player-hostname-crown">
+          <span class="p-0 badge bg-transparent">
+            <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon">
+          </span>
+          <p class="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
         </div>
 
-      </section>
+        <!-- TODO: connecion dot chages to class player-connected if it is connected, else it uses class player-disconnected -->
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 green-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 yellow-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 red-color cyan-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 dark-green-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-connected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 pink-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 orange-color selectable-text-all">playername</p>
+        </div>
+        <!-- player with connection status dot -->
+        <div class="d-flex col-3 align-items-center justify-content-center">
+          <span class="bi bi-dot player-disconnected player-connection-dot unselectable-text "></span> 
+          <p class=" ms-2 me-3 my-2 p-0 gray-color selectable-text-all">playername</p>
+        </div>
+      </div>
+
+      <!-- box indicating if we for the host to start the game -->
+      <!-- This text only appears if there is no player connected apart from the host -->
+      <div class="col d-flex text-center justify-content-center my-5 d-cursor pt-5">
+        <section class="box-container py-3">
+          <h1>
+            Please wait
+            <br />
+            The sesion host will start game soon.
+          </h1>
+        </section>
+        <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" class="hand-logo">
+      </div>
+
+      <!-- inspirational quotes -->
+      <div class="col d-flex text-center justify-content-center mb-5">
+        <h3 class="quote">
+          are you good? be better
+          <br />
+          -Sanderson
+        </h3>
+      </div>
+    </section>
   </main>
 
 </body>
