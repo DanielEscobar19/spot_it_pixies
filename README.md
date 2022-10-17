@@ -124,7 +124,18 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
   - [x] Agregar wireframes
   - [x] Agregar Acuerdos de diagramas
   - [x] Agregar readme.md de design
-- [-]Entregable 2
+- [X]Entregable 2
+  - [x] Contenido de todas las páginas de los wireframes en XHTML
+  - [x] Favicon en todas las páginas
+  - [x] Página de juego con sus contenidos sin posicionar
+  - [x] Sitio navegable por todas las páginas
+  - [x] Dar crédito a los autores de las imágenes/recursos
+  - [x] Usar una paleta de colores generada por un programa
+  - [x] Diseño adaptativo en todas las páginas (responsive design)
+  - [x] Estilos uniformes a lo largo del sitio
+  - [x] Reutilizar archivos de estilo a lo largo del sitio
+  - [x] Modularización: estilos propios de cada página
+  - [x] Transiciones/animaciones básicas
 - [-]Entregable 3
 
 <!-- AUTORES -->
