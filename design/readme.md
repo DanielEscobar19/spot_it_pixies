@@ -55,7 +55,11 @@ Para dirigirse a esta pantalla se necesita presionar el botón de "Credits" loca
 Para ingresar a esta pantalla solo se presiona el botón de "Help" en el encabezado de todas las páginas. Para salirse solo se preiona el logo del juego en la esquina superior derecha.<br/><br/>
 <img src="img/help.png"  alt="Logo" width="400px">
 
-<br/><br/>
+## Paleta de color
+
+Fue elegida utilizando <a href="https://color.adobe.com/">Adobe Color</a>, basándonos en los colores orignales de spot it.
+
+<img src="../resources/ColorPalette.png"  alt="Logo" width="800px">
 
 ## Otras rutas
 
