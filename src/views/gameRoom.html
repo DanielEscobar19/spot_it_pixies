@@ -12,6 +12,7 @@
   <title>Game room - Spot it</title>
 </head>
 <body>
+    <!--Layout de la página-->
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
           <div class="container-fluid">
@@ -37,63 +38,77 @@
           </div>
         </nav>
       </header>
-    <div class="container-principal">
-        <div id="seccion-izquierda">
-            <div id="subseccion-nombres">
+    <!--Contenedor principal de la página-->
+    <section class="container-principal">
+        <!--Sección del container principal donde se encuentra la lista de jugadores y el cuadro de los eventos-->
+        <section id="seccion-izquierda">
+            <!--Subsección donde se encuentra la lista de los nombres de los jugadores y su posición dentro de la partida-->
+            <section id="subseccion-nombres">
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
+                <!--Container que almacena el nombre del jugador y su posición dentro de la partida-->
                 <div class="tarjeta-nombres">
                     <div class="nombre-jugador">
                         <p class="h6">Jugador 1</p>
                     </div>
                     <div class="numero-jugador"><p class="h6">1</p></div>
                 </div>
-            </div>
-            <div id="subseccion-eventos">
+            </section>
+            <!--Container en el que se encuentra el cuadro de los eventos-->
+            <section id="subseccion-eventos">
+                <!--Cuadro que muestra los diferentes eventos de la partida-->
                 <div id="cuadro-eventos" class="overflow-auto">
                     <div id="titulo-eventos">
                         <p class="h4">Events</p>
                     </div>
+                    <!--Lista de eventos de la partida-->
                     <div id="textbox-eventos" class="overflow-auto">
                         <p class="h6 evento"> El Jugador 1 realizó x acción</p>
                         <p class="h6 evento"> El Jugador 2 realizó x acción</p>
@@ -107,60 +122,75 @@
                         <p class="h6 evento"> El Jugador 10 realizó x acción</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="seccion-derecha">
+            </section>
+        </section>
+        <!--Sección del container principal donde se encuentra el container donde están las cartas del juego-->
+        <section id="seccion-derecha">
             <a class="btn " href="../views/Leaderboard/Leaderboard.html">Simulacion victoria</a>
-            <div id="subseccion-circulos">
+            <section id="subseccion-circulos">
+                <!--Container que almacena a un círculo, su nombre y la cantidad de cartas en la pila (Circulo Izquierdo)-->
                 <div class="columna-circulos">
                     <p class="h2"> Top of the well</p>
+                    <!--Carta izquierda-->
                     <div class=" rounded-circle circulo-carta">
-                        <div class="fila-imagenes">
-                                <img src="../img/common/estrella.png" class="img-fluid" style="margin-top: 80px;" >
+                        <!--Container de imagenes de la carta-->
+                        <div class="fila-imagenes-laterales">
+                                <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png" class="img-fluid" style="margin-right: 80px;">
-                            <img src="../img/common/estrella.png" style="margin-left: 80px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes-centro">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-left: 60px;">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-right: 60px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-right: 80px;">
-                            <img src="../img/common/estrella.png"  style="margin-left: 80px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
-                        <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-bottom: 80px;">
+                        <!--Container de imagenes de la carta-->
+                        <div class="fila-imagenes-laterales">
+                            <img src="../img/common/estrella.png">
                         </div>
                     </div>
                     <p class="h4"> Cartas restantes: 15</p>
                 </div>
+                <!--Container que almacena a un círculo y su nombre (Circulo derecho)-->
                 <div class="columna-circulos">
-                    <p class="h2"> Nombre del jugador</p>
+                    <p class="h2"> Nombre </p>
+                    <!--Carta derecha-->
                     <div class="circulo-carta rounded-circle">
-                        <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-top: 80px;">
+                        <!--Container de imagenes de la carta-->
+                        <div class="fila-imagenes-laterales">
+                            <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-right: 80px;">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-left: 80px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes-centro">
-                            <img src="../img/common/estrella.png" class="img-fluid" style="margin-left: 60px;">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-right: 60px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
+                        <!--Container de imagenes de la carta-->
                         <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png" class="img-fluid" style="margin-right: 80px;">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-left: 80px;">
+                            <img src="../img/common/estrella.png">
+                            <img src="../img/common/estrella.png">
                         </div>
-                        <div class="fila-imagenes">
-                            <img src="../img/common/estrella.png"  class="img-fluid" style="margin-bottom: 80px;">
+                        <!--Container de imagenes de la carta-->
+                        <div class="fila-imagenes-laterales">
+                            <img src="../img/common/estrella.png">
                         </div>
                     </div>
                     <p class="h4" style="opacity: 0.0;"> Cartas restantes: 15</p>
                 </div>
-            </div>
-        </div>
-    </div>
+            </section>
+        </section>
+    </section>
 </body>

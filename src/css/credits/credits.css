@@ -8,7 +8,7 @@
 #seccion-titulo{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-content: center;
     justify-content: flex-start;
     margin-top: 40px;
     height: 15%;
@@ -23,6 +23,7 @@
 }
 
 #imagen-corona{
+    margin-bottom: 1%;
     width:3%; 
     height:width; 
     transform: rotate(25deg);
