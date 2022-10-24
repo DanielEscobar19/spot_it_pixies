@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/common/bootstrapcss/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/common/common.css">
+  <link rel="stylesheet" href="../../css/Leaderboard/Leaderboard.css">
+  <script src="../../css/common/botstrapjs/bootstrap.js"></script>
+  <link rel="shortcut icon" href="../../img/common/favicon.ico" type="image/x-icon">
+  <title>Spot it - The Well</title>
+</head>
+
+<body>
+  <!--TODO: usar layout común para el header-->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+
+        <a class="navbar-brand homeLogo" href="../Homepage/Homepage.html">
+          <img src="../../Img/common/spot-it-logo.svg" alt="Spot it logo" class="img-fluid ps-5">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end pe-5" id="navbarText">
+          <ul class="navbar-nav mr-auto ">
+            <li class="nav-item">
+              <a class="nav-link " href="../HelpPage/helpPage.html">Help</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../credits.html">Credits</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- information about the session section -->
+  <section class="container text-center">
+    <div class="row my-5">
+    
+      <div class="col">
+        <h1> 
+          <!--TODO Instead of "Session name", we must put the name given by the host" -->
+          <span class="text-muted">The Well/</span>Session name
+        </h1>
+      </div>
+    
+    </div>
+    
+    <!-- Row play again option, match session and back to main menu option -->
+    <div class="row align-items-end my-5">
+      <!-- Back home button -->
+      <div class="col d-flex justify-content-end">
+        <a type="button" class="btn btn-primary purple-background" href="../Homepage/Homepage.html">Back home</a>
+      </div>
+  
+      <!-- Match duration -->
+      <div class="col d-flex flex-column align-items-center">
+        <h2>Match duration</h2>
+        <div class="box-container mt-2 b-duration">
+          <!--TODO we must put the real time session-->
+          <h2>02:10</h2>
+        </div>
+      </div>
+      
+      <!-- Play again button -->
+      <div class="col justify-content-start">
+        <!-- TODO: We have to return to host waiting or guest waiting room depending of the user -->
+          <a type="button" class="btn btn-success" href="../WaitingRooms/guestWaitingRoom.html">Play again</a>
+      </div>
+    
+    </div>
+
+  </section>
+  <!-- Leaderboard section-->
+  <section>
+    <div class="container d-flex">
+      <div class="row my-5">
+        <div class="col d-flex flex-nowrap justify-content-center align-items-center">
+          <img src="../../img/Leaderboard/crown-icon.svg" class="img-fluid crown-icon me-3" alt="Crown icon">
+          <h2>Leaderboard</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-sm leaderboard-container">
+      <!--TODO reuse code for rows-->
+      <!--Player 1-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>1</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Name</h2>
+          <h3>personal best time</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>Wincount</h2>
+        </div>
+      </div>
+
+      <!--Player 2-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>2</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Zeus</h2>
+          <h3>02:03</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>4</h2>
+        </div>
+      </div>
+
+      <!--Player 3-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>3</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Kratos</h2>
+          <h3>01:50</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>10</h2>
+        </div>
+      </div>
+
+      <!--Player 4-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>4</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Duck</h2>
+          <h3>02:01</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>6</h2>
+        </div>
+      </div>
+
+      <!--Player 5-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>5</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>NyanCat</h2>
+          <h3>02:05</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>2</h2>
+        </div>
+      </div>
+
+      <!--Player 6-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>6</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Skrillex</h2>
+          <h3>02:06</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>3</h2>
+        </div>
+      </div>
+
+      <!--Player 7-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>7</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>Svgvspng</h2>
+          <h3>02:30</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>1</h2>
+        </div>
+      </div>
+
+      <!--Player 8-->
+      <div class="row d-flex align-items-center mb-3 py-1">
+        <div class="col-4 ps-5 col-position">
+          <h2>8</h2>
+        </div>
+        <div class="col-4 ps-5 col-name text-center">
+          <h2>imNoob</h2>
+          <h3>02:00</h3>
+        </div>
+        <div class="col-4 pe-5 col-wincount text-end">
+          <h2>0</h2>
+        </div>
+      </div>
+
+    </div>
+</body>
