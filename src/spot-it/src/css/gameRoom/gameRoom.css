@@ -1,0 +1,205 @@
+.container-principal {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 85vh;
+}
+@media (max-width: 600px) {
+    #seccion-izquierda {
+        display: flex;
+        flex-direction: column;
+        height: 0%;
+        width: 0%;
+        color: black;
+    }
+}
+
+@media (min-width: 601px) {
+    #seccion-izquierda {
+        display: flex;
+        flex-direction: column;
+        height: 97%;
+        width: 15%;
+        color: black;
+    }
+}
+
+#subseccion-nombres{
+    margin-top: 20%;
+    width: 100%;
+    height: 50%;
+}
+
+.tarjeta-nombres{
+    width: 100%;
+    height: 13%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1%;
+}
+
+.nombre-jugador{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 80%;
+    margin-right: 5%;
+    background-color: #C9C9C9;
+    border-radius: 2px;
+}
+
+
+.numero-jugador{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    height: 75%;
+    background-color: white;
+    border: solid 3px black;
+    border-radius: 100%;
+}
+
+#subseccion-eventos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+#titulo-eventos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 20%;
+}
+
+#textbox-eventos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 80%;
+    width: 100%;
+}
+
+
+#cuadro-eventos{
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 70%;
+    border-radius:5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 20px;
+}
+
+
+@media (min-width: 1001px) {
+#seccion-derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 97%;
+    width: 85%;
+}
+}
+
+@media (max-width: 1000px) {
+    #seccion-derecha {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 97%;
+        width: 100%;
+    }
+    }
+
+#subseccion-circulos{
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    width: 95%;
+    height: 95%;
+    background-color: lightgray;
+}
+
+.columna-circulos{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.titulo-carta{
+    font-size: xx-large;
+}
+
+.circulo-carta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.fila-imagenes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 65%;
+    height: 20%;
+}
+
+.fila-imagenes-laterales{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 20%;
+}
+
+.fila-imagenes-centro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 20%;
+}
+
+.imagen-carta:hover {
+    transition: .2s ease;
+    cursor: pointer;
+    transform: scale(1.3);
+    filter: drop-shadow(0px 0px 5px #333);
+}
+
+.imagen-carta{
+    height: 5vh;
+    width: auto;
+}
+
+.evento{
+    opacity: 0.5;
+    font-size: small;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
