@@ -3,7 +3,7 @@ import Layout from './Layout'
 import './css/common/common.css'
 import './css/Homepage/Homepage.css'
 
-export default function HomaPage() {
+export default function HomePage() {
   return (
     <section>
       {/* We renderize the layout component*/}
