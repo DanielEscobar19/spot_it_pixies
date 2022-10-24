@@ -1,5 +1,4 @@
 import React from 'react'
-import './css/common/common.css';
 
 export default function Layout() {
   return (

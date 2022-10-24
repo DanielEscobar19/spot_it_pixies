@@ -1,6 +1,3 @@
-@import url("../../css/common/common.css");
-
-
 /* welcome msg*/
 .Welcome-msg u:first-child {
   color: var(--purple-color);
@@ -13,7 +10,7 @@
 }
 
 .Welcome-msg u:nth-child(3){ /*reestablece grosor de "spot it"*/
-  font-weight: 100;
+  font-weight: 100px;
 }
 
 .dec-img-spot-it {

@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from './Layout'
-import './css/common/common.css'
 import './css/Homepage/Homepage.css'
 
 export default function HomePage() {
