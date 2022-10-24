@@ -1,5 +1,6 @@
 @import url("../../css/common/common.css");
 
+
 /* welcome msg*/
 .Welcome-msg u:first-child {
   color: var(--purple-color);

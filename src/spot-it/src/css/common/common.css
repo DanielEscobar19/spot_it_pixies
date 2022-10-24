@@ -1,4 +1,6 @@
 @charset "8-UTF";
+@import url("./bootstrapcss/bootstrap.css");
+
 :root {
   --purple-color: #8500FA;
   --yellow-color: #FACE0C;
