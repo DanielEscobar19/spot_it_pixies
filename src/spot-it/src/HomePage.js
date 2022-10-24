@@ -4,14 +4,11 @@ import './css/common/common.css'
 import './css/Homepage/Homepage.css'
 
 export default function HomaPage() {
-  
-
   return (
     <section>
-      // We renderize the layout component
+      {/* We renderize the layout component*/}
       <Layout />
-
-      // Welcome message and image
+      {/* Welcome message and image */}
       <section class="row d-flex flex-nowrap align-items-center justify-content-center mt-2">
             <h1 class="Welcome-msg col-12 col-md-7 ">
               <b>Welcome to <u>The Well</u> <br/> 
