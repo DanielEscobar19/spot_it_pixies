@@ -1,8 +1,17 @@
 import React from 'react'
 import Layout from './Layout'
 import './css/Homepage/Homepage.css'
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 export default function HomePage() {
+  // object used to navigate between views
+  const navigate = useNavigate();
+
+  const navigateHostWaitingRoom = () => {
+    // 👇️ navigate to /
+    navigate('/WaitingRoomHost.js');
+  };
+
   return (
     <section>
       {/* We renderize the layout component*/}
@@ -33,7 +42,7 @@ export default function HomePage() {
                 <div class="card-body">
                   <label for="sessionName" class="form-label h3">Session name</label>
                   <input type="text" class="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
-                  <a href="../WaitingRooms/hostWaitingRoom.html" class="btn btn-primary btn-lg">Create</a>
+                  <a onClick={navigateHostWaitingRoom} class="btn btn-primary btn-lg">Create</a>
                 </div>
               </div>
             </div>
