@@ -6,11 +6,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './css/common/common.css';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
+import WaitingRoomHost from './WaitingRoomHost';
+import HomePage from './HomePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-    <App />
+    <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/Homepage" element={<HomePage />} />
+        <Route path="/WaitingRoomHost" element={<WaitingRoomHost />} />
+    </Routes>
   </Router>
 );

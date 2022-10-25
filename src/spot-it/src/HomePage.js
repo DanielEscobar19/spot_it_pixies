@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from './Layout'
 import './css/Homepage/Homepage.css'
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function HomePage() {
   // object used to navigate between views
@@ -9,7 +9,7 @@ export default function HomePage() {
 
   const navigateHostWaitingRoom = () => {
     // 👇️ navigate to /
-    navigate('/WaitingRoomHost.js');
+    navigate('/WaitingRoomHost');
   };
 
   return (
