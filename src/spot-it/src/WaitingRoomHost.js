@@ -10,7 +10,11 @@ export default function WaitingRoomHost() {
     document.title = 'Waiting room - host';
   });
 
-  console.log( "Session id received " + searchParams.get("session-id"));
+  console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
+  console.log( "session-name received " + searchParams.get("session-name"));
+  console.log( "host-name received " + searchParams.get("host-name"));
+
+
   return (
     <>
     <Layout/>
@@ -21,7 +25,7 @@ export default function WaitingRoomHost() {
         <div className="col">
           <h1> 
             {/* <!-- TODO: Instead of "Session name", we must put the name given by the host" --> */}
-            <span className="text-muted">The Well/</span>Session name
+            <span className="text-muted">The Well/</span>{searchParams.get("session-name")}
           </h1>
         </div>
       
@@ -44,7 +48,7 @@ export default function WaitingRoomHost() {
           <h2 className="unselectable-text">Session pin</h2>
           <div className="box-container mt-2">
             {/* <!-- TODO: The pin is generated automatically following a generation algorithm --> */}
-            <p className="selectable-text-all">1234</p>
+            <p className="selectable-text-all">{searchParams.get("session-pin")}</p>
           </div>
         </div>
         
@@ -68,7 +72,7 @@ export default function WaitingRoomHost() {
           <span className="p-0 badge bg-transparent">
             <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon"/>
           </span>
-          <p className="mx-3 my-2 selectable-text-all" id="player-hostname">Hostname</p>
+          <p className="mx-3 my-2 selectable-text-all" id="player-hostname">{searchParams.get("host-name")}</p>
         </div>
 
         {/* <!-- TODO: connecion dot chages to class player-connected if it is connected, else it uses class player-disconnected --> */}
