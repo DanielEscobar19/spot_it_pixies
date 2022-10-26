@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Layout from './Layout'
 import './css/waitingRooms/waitingRoom.css'
+import {useSearchParams} from 'react-router-dom';
 
 export default function WaitingRoomHost() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(() => {
+    document.title = 'Waiting room - host';
+  });
+
   return (
-    <section>
+    <>
     <Layout/>
     {/* <!-- information about the session section --> */}
     <section class="container text-center">
@@ -109,6 +116,6 @@ export default function WaitingRoomHost() {
         </section>
       </div>
     </section>
-  </section>
+  </>
   )
 }
