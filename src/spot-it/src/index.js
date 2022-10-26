@@ -15,7 +15,8 @@ root.render(
   <Router>
     <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Homepage" element={<HomePage />} />
+        <Route path="/homepage" exact={true} element={<HomePage />} />
+        {/* <Route path='/homepage/' element={<HomePage />} /> */}
         <Route path="/WaitingRoomHost" element={<WaitingRoomHost />} />
     </Routes>
   </Router>
