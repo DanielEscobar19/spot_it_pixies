@@ -5,39 +5,51 @@ import './css/common/common.css'
 import { useNavigate } from 'react-router-dom';
 import React, { useRef } from 'react';
 
-export default function HomePage() {
+export default function HomePage({session}) {
   const navigate  = useNavigate()
   const userNameRef = useRef();
-  const SessionNameRef = useRef();
-  let sessionName = "";
+  
+  
+  // variables to store the username
   let username = "";
-
   function handleUsernameInput(e) {
     username = userNameRef.current.value;
     console.log(`Name: ${userNameRef.current.value}`);
   }
   
+  // variable to store the session name
+  let sessionName = "";
+  // ref to acces the name of the session
+  const sessionNameRef = useRef();
+  
+  // function to store the input of the session name
   function handleSessionNameInput(e) {
-    sessionName = SessionNameRef.current.value;
-    console.log(`Session: ${SessionNameRef.current.value}`);
+    sessionName = sessionNameRef.current.value;
+    console.log(`Session: ${sessionNameRef.current.value}`);
   }
   
+
+  // variables to store the pi9n of the session to join
+  let joinSessionPin = "";
+
+
   function createSession() {
     if (sessionName === "") {
       alert("You have to assign a name for the session.");
       return;
     }
-
+    
     if (username === "") {
       alert("Do not forget to create your gamertag!");
       return;
     }
-    
-    let sessionId = 1234;
-    navigate(`/new-session?session-id=${sessionId}`, {replace : true});
-  }
-  
 
+    // sets the new session number. It's the previous + 1
+    session.setSessionPin(session.sessionPin++);
+    console.log(`Session pin ${window.session}`);
+
+    navigate(`/new-session?session-pin=${session.sessionPin}&host-name=${username}&session-name=${sessionName}`, {replace : true});
+  }
 
   function joinSession() {
 
@@ -47,7 +59,6 @@ export default function HomePage() {
     <section>
       {/* We renderize the layout component*/}
       <Layout>
-       
         {/* <Layout /> */}
         {/* Welcome message and image */}
         <section className="row d-flex flex-nowrap align-items-center justify-content-center mt-2">
@@ -75,7 +86,7 @@ export default function HomePage() {
                     <h2 className="card-header">Create session</h2>
                     <div className="card-body">
                       <label className="form-label h3">Session name</label>
-                      <input ref={SessionNameRef} onInput={handleSessionNameInput} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
+                      <input ref={sessionNameRef} onInput={handleSessionNameInput} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
                       <button onClick={createSession} className="btn btn-primary btn-lg">Create</button>
                     </div>
                   </div>
