@@ -5,27 +5,26 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useRef } from 'react';
 
 export default function HomePage() {
+  
   const navigate  = useNavigate()
   const userNameRef = useRef();
+  const createButtonRef = useRef();
+
+  // variable to store the session pin
   let sessionPin = 0;
 
-  // variables to store the username
-  let username = "";
-  function handleUsernameInput() {
-    username = userNameRef.current.value;
-    console.log(`Name: ${userNameRef.current.value}`);
+  function checkDataToCreateSession() {
+    if (username != "" && sessionName != "") {
+      createButtonRef.current.disabled = false;
+      // data is valid
+      return true;
+    } else {
+      createButtonRef.current.disabled = true;
+      // data is invalid
+      return false;
+    }
   }
   
-  // variable to store the session name
-  let sessionName = "";
-  // ref to acces the name of the session
-  const sessionNameRef = useRef();
-  
-  // function to store the input of the session name
-  function handleSessionNameInput() {
-    sessionName = sessionNameRef.current.value;
-    console.log(`Session: ${sessionNameRef.current.value}`);
-  }
   useEffect(() => {
     // data fetching here
     // fetching the session pin form api
@@ -33,27 +32,37 @@ export default function HomePage() {
     fetch('https://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1').then(
       (response) => response.json())
       .then((data) => {sessionPin = data[0]} );
-  }, []);
 
-  // variables to store the pin of the session to join
-  // let joinSessionPin = "";
+      // checks data to enable or disable create buttom
+      checkDataToCreateSession();
+    }, []);
+
+    // variable to store the session name
+  let sessionName = "";
+  // ref to acces the name of the session
+  const sessionNameRef = useRef();
+  
+  // variables to store the username
+  let username = "";
+  function handleUsernameInput() {
+    username = userNameRef.current.value;
+    console.log(`Name: ${userNameRef.current.value}`);
+    checkDataToCreateSession();
+  }
+  
+  
+  // function to store the input of the session name
+  function handleSessionNameInput() {
+    sessionName = sessionNameRef.current.value;
+    console.log(`Session: ${sessionNameRef.current.value}`);
+    checkDataToCreateSession();
+  }
 
   function createSession() {
-    if (sessionName === "") {
-      alert("You have to assign a name for the session.");
-      return;
-    }
-    
-    if (username === "") {
-      alert("Do not forget to create your gamertag!");
-      return;
-    }
-
-    // sets the new session number. It's the previous + 1
-    console.log(`Session pin ${window.session}`);
-
+    console.log(`Session pin ${window.sessionPin}`);
     navigate(`/new-session?session-pin=${sessionPin}&host-name=${username}&session-name=${sessionName}`, {replace : true});
   }
+
 
   return (
     <>
@@ -87,7 +96,7 @@ export default function HomePage() {
                   <div className="card-body">
                     <label className="form-label h3">Session name</label>
                     <input ref={sessionNameRef} onInput={handleSessionNameInput} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
-                    <button onClick={createSession} className="btn btn-primary btn-lg">Create</button>
+                    <button onClick={createSession} ref={createButtonRef} className="btn btn-primary btn-lg">Create</button>
                   </div>
                 </div>
               </div>
