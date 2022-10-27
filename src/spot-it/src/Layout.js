@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Layout({children}) {
+export default function Layout() {
 
   return (
     <>
@@ -20,19 +20,16 @@ export default function Layout({children}) {
             <div className="collapse navbar-collapse justify-content-end pe-5" id="navbarText">
               <ul className="navbar-nav mr-auto ">
                 <li className="nav-item">
-                  <a className="nav-link " href="../HelpPage/helpPage.html">Help</a>
+                  <Link to="/help" className="nav-link ">Help</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="../credits.html">Credits</a>
+                  <Link to="/credits" className="nav-link">Credits</Link>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
       </header>
-
-      {/* Layout renderizes the content received */}
-      {children}
     </>
   )
 }
