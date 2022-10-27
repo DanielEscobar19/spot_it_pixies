@@ -1,5 +1,3 @@
-@import url("../../css/common/common.css");
-
 .help-icon {
   height: calc(1.375rem + 1.5vw);
 }
@@ -9,7 +7,7 @@
   align-self: center;
 }
 
-.box-container {
+.help-box-container {
   text-align: left;
   flex-direction: column;
   background-color: white;
