@@ -4,7 +4,7 @@ import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
 
 
-import cards from "./cards.json"
+import cards from "../cards.json"
 import arrayShuffle from 'array-shuffle';
 
 
@@ -14,7 +14,7 @@ export default function GameRoom() {
         for (let i = 0; i < unshuffledCards.length; i += 1) {
             unshuffledCards[i].simbolos = arrayShuffle(unshuffledCards[i].simbolos);
         }
-        return unshuffledCards;
+        return arrayShuffle(unshuffledCards);
     });
     
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
