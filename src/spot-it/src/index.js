@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap';
 import './css/common/common.css';
 import WaitingRoomHost from './WaitingRoomHost';
 import HomePage from './HomePage';
+import GameRoom from './GameRoom';
 import Help from './Help'
 import Credits from './Credits';
 
