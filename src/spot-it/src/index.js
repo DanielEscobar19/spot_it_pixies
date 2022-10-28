@@ -7,6 +7,7 @@ import WaitingRoomHost from './WaitingRoomHost';
 import HomePage from './HomePage';
 import Help from './Help'
 import Credits from './Credits';
+import GameRoom from './GameRoom';
 
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';
