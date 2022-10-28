@@ -1,13 +1,13 @@
+import './css/waitingRooms/waitingRoom.css'
+
 import React, {useEffect} from 'react'
 import Layout from './Layout'
-import './css/waitingRooms/waitingRoom.css'
 import {useSearchParams} from 'react-router-dom';
 
-
 export default function WaitingRoomHost() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, ] = useSearchParams();
   useEffect(() => {
-    document.title = 'Waiting room - host';
+    document.title = 'Spot it - Waiting room - host';
   });
 
   console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
