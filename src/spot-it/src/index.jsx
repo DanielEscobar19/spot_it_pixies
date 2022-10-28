@@ -7,6 +7,7 @@ import WaitingRoomHost from './pages/WaitingRoomHost';
 import HomePage from './pages/HomePage';
 import Help from './pages/Help'
 import Credits from './pages/Credits';
+import GameRoom from './pages/GameRoom';
 
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';
@@ -19,6 +20,7 @@ root.render(
         <Route path="/" element={<HomePage />} />
         <Route path="/home-page" element={<HomePage/>} />
         <Route path="/new-session" element={<WaitingRoomHost />} />
+        <Route path="/game-room" element={<GameRoom/>}/>
         <Route path="/help" element={<Help />}/>
         <Route path="/credits" element={<Credits />}/>
     </Routes>
