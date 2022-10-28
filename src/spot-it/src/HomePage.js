@@ -14,7 +14,7 @@ export default function HomePage() {
   let sessionPin = 0;
 
   function checkDataToCreateSession() {
-    if (username != "" && sessionName != "") {
+    if (username !== "" && sessionName !== "") {
       createButtonRef.current.disabled = false;
       // data is valid
       return true;
