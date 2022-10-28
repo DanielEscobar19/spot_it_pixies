@@ -5,8 +5,11 @@ const Timer = () => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [running, setRunning] = useState(false)
 
   useEffect(() => {
+    if (running) return;
+    setRunning(true)
     let time = 0;
     setInterval(increment, 1000);
 
@@ -17,7 +20,7 @@ const Timer = () => {
       setSeconds(Math.floor(time  % 60));
     }
     
-  }, []);
+  }, [running]);
 
   return (
     <div className="timer" role="timer">
