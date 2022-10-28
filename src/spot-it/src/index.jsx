@@ -2,11 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 //import $ from 'jquery';
 //import Popper from 'popper.js';
-import './css/common/common.css';
-import WaitingRoomHost from './WaitingRoomHost';
-import HomePage from './HomePage';
-import Help from './Help'
-import Credits from './Credits';
+import './css/common/common.scss';
+import WaitingRoomHost from './pages/WaitingRoomHost';
+import HomePage from './pages/HomePage';
+import Help from './pages/Help'
+import Credits from './pages/Credits';
 
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';

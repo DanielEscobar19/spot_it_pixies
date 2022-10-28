@@ -1,5 +1,5 @@
 @charset "8-UTF";
-@import "../common/common.css";
+@import "../common/common.scss";
 
 :root {
   --disconnected-color: #B8B8B8;

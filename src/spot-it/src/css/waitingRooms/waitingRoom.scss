@@ -1,34 +1,28 @@
-@charset "8-UTF";
-@import "../common/common.css";
+@import "../common/common.scss";
 
-:root {
-  --disconnected-color: #B8B8B8;
-  --connected-color: #47FA0C;
-
-}
 
 .red-color {
-  color: #FA1D1B;
+  color: $red;
 }
 
 .cyan-color {
-  color: #12E6E0;
+  color: $cyan;
 }
 
 .pink-color {
-  color: #F76CFF;
+  color: $pink;
 }
 
 .orange-color {
-  color: #FA8E00;
+  color: $orange;
 }
 
 .gray-color {
-  color: #A3A3A2;
+  color: $gray;
 }
 
 #player-hostname {
-  color: var(--purple-color);
+  color: $purple;
 }
 
 
@@ -38,7 +32,7 @@
   flex-direction: row;
   align-items: center;
   border-radius: 10px;
-  background-color: var(--gray-color);
+  background-color: $background;
   width: fit-content;
   height: fit-content;
   padding: 10px;
@@ -46,7 +40,7 @@
 }
 
 p,h2 {
-  font-size: var(--medium-font-size);
+  font-size: $medium-font;
   padding: 0px;
   margin: 0px;
 }
@@ -69,7 +63,7 @@ p,h2 {
 .player-count-container p{
   padding: 0px;
   margin: 0px;
-  font-size: var(--medium-font-size);
+  font-size: $medium-font;
   margin-inline: 5px;
 }
 
@@ -92,16 +86,16 @@ p,h2 {
 }
 
 .player-connected {
-  color: var(--connected-color);
+  color: $connected;
 }
 
 .player-disconnected {
-  color: var(--disconnected-color);
+  color: $disconected;
 }
 
 .star-button:hover {
-  background-color: var(--yellow-color);
-  border-color: var(--yellow-color);
+  background-color: $yellow;
+  border-color: $yellow;
 }
 
 /* Javascript has to be used to change background on click */
@@ -111,6 +105,6 @@ p,h2 {
 } */
 
 .star-button:disabled {
-  background-color: var(--purple-color);
-  border-color: var(--purple-color);
+  background-color: $purple;
+  border-color: $purple;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './/css/common/common.css'
+import '../css/common/common.scss'
 
 export default function Layout() {
 

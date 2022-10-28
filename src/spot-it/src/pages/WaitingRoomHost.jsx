@@ -1,4 +1,4 @@
-import './css/waitingRooms/waitingRoom.css'
+import '../css/waitingRooms/waitingRoom.scss'
 
 import React, {useEffect} from 'react'
 import Layout from './Layout'

@@ -1,6 +1,8 @@
+@import "../common/common.scss";
+
 /* welcome msg*/
 .Welcome-msg u:first-child {
-  color: var(--purple-color);
+  color: $purple;
 }
 
 .Welcome-msg {
@@ -21,13 +23,13 @@
 
 /*form*/
 .inputName {
-  font-size: var(--medium-font-size);
+  font-size: $medium-font;
 
 }
 
 .btn-primary {
-  background-color: var(--purple-color);
-  border-color: var(--purple-color);
+  background-color: $purple;
+  border-color: $purple;
 }
 
 .row .sessions{
