@@ -5,12 +5,16 @@ export default function ErrorNotFound() {
   return (
       <>
         <Layout/>
-        <div id='error'>
-            <h1 className="notFoundTitle">Oops! That page can’t be found.</h1>
-            <p className="notFoundDesc">
-                It looks like nothing was found at this location.
-                Maybe try one of the links in the menu or press back to go to the previous page.
-            </p>
+        <div className='d-flex align-items-center m-5 flex-row flex-wrap justify-content-center'>
+            <div>
+                <h1 >Oops! That page can’t be found.</h1>
+                <p>
+                    It looks like nothing was found at this location.<br/>Maybe try one of the links in the menu.
+                </p>
+            </div>
+            <div className="ms-4" >
+                <img src="../../img/Homepage/spot-it-hand.png" alt="Spot it hand decorative" className="col-4 dec-img-spot-it img-fluid"/>
+            </div>
         </div>
       
       </>
