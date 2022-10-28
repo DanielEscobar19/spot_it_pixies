@@ -1,0 +1,18 @@
+@import "../common/common.scss";
+
+.purple-button {
+  background-color: $purple;
+  border-color: $purple;
+
+  .button:hover {
+    background-color: $yellow;
+    border-color: $yellow;
+  }
+}
+
+.disable {
+  color: white;
+  pointer-events: none;
+  background-color: $gray;
+  border-color: $gray;
+}
