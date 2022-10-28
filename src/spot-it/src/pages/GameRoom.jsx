@@ -1,9 +1,9 @@
+import React from 'react';
 import Layout from './Layout'
-import './css/gameRoom/gameRoom.css'
-import './css/common/common.css'
+import '../css/gameRoom/gameRoom.css'
+import '../css/common/common.scss'
 
-import { useNavigate } from 'react-router-dom';
-import React, { useRef } from 'react';
+
 
 export default function GameRoom() {
   return (

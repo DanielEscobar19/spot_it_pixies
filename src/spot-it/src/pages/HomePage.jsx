@@ -7,25 +7,16 @@ import Button from '../components/Button';
 
 export default function HomePage() {
   const navigate  = useNavigate()
-  const [validation, setValidation] = useState(true);
   const [name, setName] = useState('');
   const [session, setSession] = useState('');
+  const validateSession = !(name.length > 0 && session.length > 0);
+  
 
   // variable to store the session pin
   let sessionPin = 0;
-
-  useEffect(() => {
-    if (name.length !== 0 && session.length !== 0) {
-      // data is valid
-      setValidation(false);
-    } else {
-      // data is invalid
-      setValidation(true);
-    }
-    }, [name, session]);
   
   useEffect(() => {
-    if (!validation) return;
+    if (!validateSession) return;
     // data fetching here
     // fetching the session pin form api
     // TODO: fecth form our server the session pin
@@ -38,7 +29,6 @@ export default function HomePage() {
     console.log(`Session pin ${window.sessionPin}`);
     navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, {replace : true});
   }
-
 
   return (
     <>
@@ -72,7 +62,7 @@ export default function HomePage() {
                   <div className="card-body">
                     <label className="form-label h3">Session name</label>
                     <input value={session} onChange={(e) => {setSession(e.currentTarget.value)}} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
-                    <Button onClick={createSession} title="Create" disabled={validation} />
+                    <Button onClick={createSession} title="Create" disabled={validateSession} />
                   </div>
                 </div>
               </div>
@@ -82,7 +72,7 @@ export default function HomePage() {
                   <div className="card-body">
                     <label  className="form-label h3">Session pin</label>
                     <input type="text" className="form-control mb-3" id="sessionPin" placeholder="e.g: 1254" size="50"/>
-                    <button className="btn btn-primary btn-lg">Join</button>
+                    <Button title="Join" />
                   </div>
                 </div>
               </div>

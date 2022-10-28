@@ -93,18 +93,8 @@ p,h2 {
   color: $disconected;
 }
 
-.star-button:hover {
-  background-color: $yellow;
-  border-color: $yellow;
-}
-
 /* Javascript has to be used to change background on click */
 /* .star-button:active {
   background-color: var(--yellow-color);
   border-color: var(--yellow-color);
 } */
-
-.star-button:disabled {
-  background-color: $purple;
-  border-color: $purple;
-}

@@ -6,7 +6,7 @@ import '../css/components/button.scss'
 export default function Button({ title, disabled, onClick}) {
   
   return (
-    <button onClick={onClick} disabled={disabled} className="btn btn-primary btn-lg">{title}</button>
+    <button onClick={onClick} className={`btn btn-primary btn-lg ${disabled ? 'disable' : 'purple-button'}`}>{title}</button>
   )
 }
 
