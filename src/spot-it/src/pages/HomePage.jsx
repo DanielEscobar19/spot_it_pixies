@@ -1,5 +1,5 @@
 import Layout from './Layout'
-import '../css/Homepage/Homepage.scss'
+import '../css/pages/Homepage.scss'
 
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';

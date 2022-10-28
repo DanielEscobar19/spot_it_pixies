@@ -1,4 +1,4 @@
-import '../css/helpPage/helpPage.css'
+import '../css/pages/helpPage.css'
 
 import React, {useEffect} from 'react'
 import Layout from './Layout'

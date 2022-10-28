@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from './Layout'
-import '../css/credits/credits.css'
+import '../css/pages/credits.css'
 
 export default function Credits() {
   return (
