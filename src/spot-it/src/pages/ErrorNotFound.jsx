@@ -13,7 +13,7 @@ export default function ErrorNotFound() {
                 </p>
             </div>
             <div className="ms-4" >
-                <img src="../../img/Homepage/spot-it-hand.png" alt="Spot it hand decorative" className="col-4 dec-img-spot-it img-fluid"/>
+                <img src="/img/common/spot-it-hand-sad.svg" alt="Spot it hand decorative" className="col-4 dec-img-spot-it img-fluid"/>
             </div>
         </div>
       
