@@ -18,7 +18,7 @@ export default function HelpBox({ title, list}) {
             <h1 className="px-3">{title}</h1>
           </div>
           {/* <!-- Collapsable --> */}
-          <ul className={hidden ? "hiden mx-4" :"mx-4" } >
+          <ul className={hidden ? "hiden mx-4" :"mx-4"} >
             { list.map( (e, i)=> <li key={i}>{e}</li>) }
           </ul>
         </section>

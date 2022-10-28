@@ -9,20 +9,20 @@ export default function HomePage() {
   const navigate  = useNavigate()
   const [name, setName] = useState('');
   const [session, setSession] = useState('');
+  const [sessionPin, setSessionPin] = useState(0);
+  
   const validateSession = !(name.length > 0 && session.length > 0);
   
 
   // variable to store the session pin
-  let sessionPin = 0;
   
   useEffect(() => {
-    if (!validateSession) return;
     // data fetching here
     // fetching the session pin form api
     // TODO: fecth form our server the session pin
     fetch('https://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1').then(
       (response) => response.json())
-      .then((data) => {sessionPin = data[0]} );
+      .then((data) => {setSessionPin(data[0])} );
     }, []);
 
   function createSession() {
