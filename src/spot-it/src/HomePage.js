@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 
 export default function HomePage() {
   
-  const navigate  = useNavigate()
+  const navigate  = useNavigate();
   const userNameRef = useRef();
   const createButtonRef = useRef();
 
