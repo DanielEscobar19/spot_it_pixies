@@ -12,6 +12,7 @@ import Credits from './pages/Credits';
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import ErrorNotFound from './pages/ErrorNotFound';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         <Route path="/game-room" element={<GameRoom/>}/>
         <Route path="/help" element={<Help />}/>
         <Route path="/credits" element={<Credits />}/>
+        <Route path="*" element={<ErrorNotFound />}/>
     </Routes>
   </Router>
 );
