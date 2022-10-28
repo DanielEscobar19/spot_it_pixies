@@ -25,6 +25,7 @@ root.render(
         <Route path="/" element={<HomePage session={{sessionPin, setSessionPin}} />} />
         <Route path="/home-page" element={<HomePage session={{sessionPin, setSessionPin}}/>} />
         <Route path="/new-session" element={<WaitingRoomHost />} />
+        <Route path="/game-room" element={<GameRoom/>}/>
     </Routes>
   </Router>
 );
