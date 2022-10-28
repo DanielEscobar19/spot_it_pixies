@@ -1,8 +1,10 @@
-import './css/waitingRooms/waitingRoom.css'
+import '../css/waitingRooms/waitingRoom.scss'
 
 import React, {useEffect} from 'react'
-import Layout from './Layout'
 import {useSearchParams} from 'react-router-dom';
+
+import Layout from './Layout'
+import Button from '../components/Button';
 
 export default function WaitingRoomHost() {
   const [searchParams, ] = useSearchParams();
@@ -54,9 +56,8 @@ export default function WaitingRoomHost() {
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
         <div className="col d-flex justify-content-end">
-          <a type="button" className="btn btn-primary purple-background star-button" href="../gameRoom.html"> <p>Start</p></a>
+          <Button title="Start" />
         </div>
-      
       </div>
 
     </section>

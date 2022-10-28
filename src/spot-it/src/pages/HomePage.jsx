@@ -1,29 +1,20 @@
 import Layout from './Layout'
-import './css/Homepage/Homepage.css'
+import '../css/pages/Homepage.scss'
 
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 
 export default function HomePage() {
-  
   const navigate  = useNavigate()
-  const userNameRef = useRef();
-  const createButtonRef = useRef();
+  const [name, setName] = useState('');
+  const [session, setSession] = useState('');
+  const [sessionPin, setSessionPin] = useState(0);
+  
+  const validateSession = !(name.length > 0 && session.length > 0);
+  
 
   // variable to store the session pin
-  let sessionPin = 0;
-
-  function checkDataToCreateSession() {
-    if (username != "" && sessionName != "") {
-      createButtonRef.current.disabled = false;
-      // data is valid
-      return true;
-    } else {
-      createButtonRef.current.disabled = true;
-      // data is invalid
-      return false;
-    }
-  }
   
   useEffect(() => {
     // data fetching here
@@ -31,38 +22,13 @@ export default function HomePage() {
     // TODO: fecth form our server the session pin
     fetch('https://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1').then(
       (response) => response.json())
-      .then((data) => {sessionPin = data[0]} );
-
-      // checks data to enable or disable create buttom
-      checkDataToCreateSession();
+      .then((data) => {setSessionPin(data[0])} );
     }, []);
-
-    // variable to store the session name
-  let sessionName = "";
-  // ref to acces the name of the session
-  const sessionNameRef = useRef();
-  
-  // variables to store the username
-  let username = "";
-  function handleUsernameInput() {
-    username = userNameRef.current.value;
-    console.log(`Name: ${userNameRef.current.value}`);
-    checkDataToCreateSession();
-  }
-  
-  
-  // function to store the input of the session name
-  function handleSessionNameInput() {
-    sessionName = sessionNameRef.current.value;
-    console.log(`Session: ${sessionNameRef.current.value}`);
-    checkDataToCreateSession();
-  }
 
   function createSession() {
     console.log(`Session pin ${window.sessionPin}`);
-    navigate(`/new-session?session-pin=${sessionPin}&host-name=${username}&session-name=${sessionName}`, {replace : true});
+    navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, {replace : true});
   }
-
 
   return (
     <>
@@ -83,7 +49,7 @@ export default function HomePage() {
             <div className="col d-flex justify-content-center">
               <div className="mb-4 text-center">
                 <label className="form-label h2">Your name</label>
-                <input ref={userNameRef} onInput={handleUsernameInput} type="text" className="form-control" id="playerName" placeholder="e.g: Timmy" autoFocus={true} size="22"/>
+                <input value={name} onChange={(e) => {setName(e.currentTarget.value)}} type="text" className="form-control" id="playerName" placeholder="e.g: Timmy" autoFocus={true} size="22"/>
               </div>
             </div>
           </div>
@@ -95,8 +61,8 @@ export default function HomePage() {
                   <h2 className="card-header">Create session</h2>
                   <div className="card-body">
                     <label className="form-label h3">Session name</label>
-                    <input ref={sessionNameRef} onInput={handleSessionNameInput} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
-                    <button onClick={createSession} ref={createButtonRef} className="btn btn-primary btn-lg">Create</button>
+                    <input value={session} onChange={(e) => {setSession(e.currentTarget.value)}} type="text" className="form-control mb-3" id="sessionName" placeholder="e.g: The golden game" size="50"/>
+                    <Button onClick={createSession} title="Create" disabled={validateSession} />
                   </div>
                 </div>
               </div>
@@ -106,7 +72,7 @@ export default function HomePage() {
                   <div className="card-body">
                     <label  className="form-label h3">Session pin</label>
                     <input type="text" className="form-control mb-3" id="sessionPin" placeholder="e.g: 1254" size="50"/>
-                    <button className="btn btn-primary btn-lg">Join</button>
+                    <Button title="Join" />
                   </div>
                 </div>
               </div>

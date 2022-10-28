@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Layout from './Layout'
-import './css/gameRoom/gameRoom.css'
-import './css/common/common.css'
+import '../css/pages/gameRoom.css'
+import '../css/common/common.scss'
+
 
 import cards from "./cards.json"
 import arrayShuffle from 'array-shuffle';
