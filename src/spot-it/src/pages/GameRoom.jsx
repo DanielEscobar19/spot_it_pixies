@@ -6,10 +6,11 @@ import '../css/common/common.scss'
 
 import cards from "../cards.json"
 import arrayShuffle from 'array-shuffle';
+import InGameLeaderBoard from '../components/InGameLeaderBoard';
 
 
 export default function GameRoom() {
-    const[shuffledCards, setShuffledCards] = useState(() => {
+    const[shuffledCards, ] = useState(() => {
         let unshuffledCards = cards;
         for (let i = 0; i < unshuffledCards.length; i += 1) {
             unshuffledCards[i].simbolos = arrayShuffle(unshuffledCards[i].simbolos);
@@ -21,11 +22,11 @@ export default function GameRoom() {
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
     const[cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
-
+    const playerList = [{type: "host", name : "Juan", id: 0, cardsRemaining:5}, {type: "host", name : "Juan", id: 1, cardsRemaining:1}, {type: "host", name : "Pedor", id: 2, cardsRemaining:12}];
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
-            if (numeroSimbolo == simbolosCartaOponente[i]) {
+            if (numeroSimbolo === simbolosCartaOponente[i]) {
                 setSimboloAcertado(true);
                 setTimeout(function () {
                     setCartaActualOponente(cartaActualJugador);
@@ -43,56 +44,9 @@ export default function GameRoom() {
     <Layout/>
         <section className="container-principal">
             <section id="seccion-izquierda">
-                <section id="subseccion-nombres">
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                </section>
+                
+                <InGameLeaderBoard players={playerList}/>
+
                 <section id="subseccion-eventos">
                     <div id="cuadro-eventos" className="overflow-auto">
                         <div id="titulo-eventos">
@@ -124,7 +78,7 @@ export default function GameRoom() {
                                     onClick={function(e) {
                                         verificarRelacion(shuffledCards[cartaActualJugador].simbolos[0], shuffledCards[cartaActualOponente].simbolos);      
                                     }}
-                                    className="imagen-carta"/>
+                                    className="imagen-carta" alt="Player icon"/>
                             </div>
                             <div className="fila-imagenes">
 
@@ -132,13 +86,13 @@ export default function GameRoom() {
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[1], shuffledCards[cartaActualOponente].simbolos);         
                                 }}
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card icon"/>
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[2]}.png`} 
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[2], shuffledCards[cartaActualOponente].simbolos);          
                                   }}
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  icon"/>
 
                             </div>
                             <div className="fila-imagenes-centro">
@@ -147,13 +101,13 @@ export default function GameRoom() {
                                  onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[3], shuffledCards[cartaActualOponente].simbolos);          
                                   }}
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  icon"/>
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[4]}.png`} 
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[4], shuffledCards[cartaActualOponente].simbolos);          
                                   }} 
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  icon"/>
 
                             </div>
                             <div className="fila-imagenes">
@@ -162,13 +116,13 @@ export default function GameRoom() {
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[5], shuffledCards[cartaActualOponente].simbolos);          
                                 }}
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  Icon"/>
 
                                 <img src= {`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[6]}.png`} 
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[6], shuffledCards[cartaActualOponente].simbolos);          
                                 }} 
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  Icon"/>
 
                             </div>
                             <div className="fila-imagenes-laterales">
@@ -177,7 +131,7 @@ export default function GameRoom() {
                                 onClick={function(e) {
                                     verificarRelacion(shuffledCards[cartaActualJugador].simbolos[7], shuffledCards[cartaActualOponente].simbolos);         
                                 }}
-                                className="imagen-carta"/>
+                                className="imagen-carta" alt="Player card  Icon"/>
                             </div>
                         </div>
 
@@ -187,22 +141,22 @@ export default function GameRoom() {
                         <p className="h2"> Tope de la pila </p>
                         <div className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[0]}.png`} className="imagen-carta"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[0]}.png`} className="imagen-carta" alt="Top of the well icon"/>
                             </div>
                             <div className="fila-imagenes">
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[1]}.png`} className="imagen-carta"/>
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[2]}.png`} className="imagen-carta"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[1]}.png`} className="imagen-carta" alt="Top of the well icon"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[2]}.png`} className="imagen-carta" alt="Top of the well icon"/>
                             </div>
                             <div className="fila-imagenes-centro">
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[3]}.png`} className="imagen-carta"/>
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[4]}.png`} className="imagen-carta"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[3]}.png`} className="imagen-carta" alt="Top of the well icon"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[4]}.png`} className="imagen-carta" alt="Top of the well icon"/>
                             </div>
                             <div className="fila-imagenes">
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[5]}.png`} className="imagen-carta"/>
-                                <img src= {`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[6]}.png`} className="imagen-carta"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[5]}.png`} className="imagen-carta" alt="Top of the well icon"/>
+                                <img src= {`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[6]}.png`} className="imagen-carta" alt="Top of the well icon"/>
                             </div>
                             <div className="fila-imagenes-laterales">
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[7]}.png`} className="imagen-carta"/>
+                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[7]}.png`} className="imagen-carta" alt="Top of the well icon"/>
                             </div>
                         </div>
                         <p className="h4" style={{opacity: 0.0}}> Cartas restantes: 15</p>

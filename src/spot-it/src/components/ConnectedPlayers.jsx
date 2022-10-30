@@ -1,6 +1,6 @@
 import arrayShuffle from 'array-shuffle';
 import React, {useEffect} from 'react'
-import Player from './Player';
+import PlayerConnection from './PlayerConnection';
 
 
 export default function ConnectedPlayers({playerList, setPlayerList}) {
@@ -18,7 +18,7 @@ export default function ConnectedPlayers({playerList, setPlayerList}) {
 
               // TODO: create unique key. The name of the player can be repeated
               console.log(`colorIndex ${colorIndex} color${color} `);
-              return <Player key={player.name} player={player} colorText={color}/>
+              return <PlayerConnection key={player.id} player={player} colorText={color}/>
             }
           )}
         </div>

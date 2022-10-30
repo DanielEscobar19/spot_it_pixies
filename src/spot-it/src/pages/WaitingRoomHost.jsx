@@ -16,7 +16,7 @@ export default function WaitingRoomHost() {
   console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
   console.log( "session-name received " + searchParams.get("session-name"));
   console.log( "host-name received " + searchParams.get("host-name"));
-  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true, id: 0}]);
 
 
   return (
