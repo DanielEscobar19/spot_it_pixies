@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import { useLocation } from "react-router-dom";
 import Layout from './Layout'
 import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
@@ -9,7 +10,9 @@ import arrayShuffle from 'array-shuffle';
 import InGameLeaderBoard from '../components/InGameLeaderBoard';
 
 
-export default function GameRoom() {
+export default function GameRoom(props) {
+    const location = useLocation();
+    console.log(location);
     const[shuffledCards, ] = useState(() => {
         let unshuffledCards = cards;
         for (let i = 0; i < unshuffledCards.length; i += 1) {
@@ -22,7 +25,12 @@ export default function GameRoom() {
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
     const[cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
-    const playerList = [{type: "host", name : "Juan", id: 0, cardsRemaining:5}, {type: "host", name : "Juan", id: 1, cardsRemaining:1}, {type: "host", name : "Pedor", id: 2, cardsRemaining:12}];
+    
+    // TODO: distribute cards through players and no the same amount to every player
+    location.state.playersConnected.map((player) => {
+        player.cardsRemaining = cantidadCartasJugador;
+        return player;
+    })
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
@@ -45,7 +53,7 @@ export default function GameRoom() {
         <section className="container-principal">
             <section id="seccion-izquierda">
                 
-                <InGameLeaderBoard players={playerList}/>
+                <InGameLeaderBoard players={location.state.playersConnected}/>
 
                 <section id="subseccion-eventos">
                     <div id="cuadro-eventos" className="overflow-auto">
@@ -68,10 +76,9 @@ export default function GameRoom() {
                 </section>
             </section>
             <section id="seccion-derecha">
-                <a className="btn " href="../views/Leaderboard/Leaderboard.html">Simulacion victoria</a>
                 <section id="subseccion-circulos">
-                    <div className="columna-circulos">
-                        <p className="h2"> Nombre Jugador</p>
+                    <div className="columna-circulos unselectable-text">
+                        <p className="h2">{location.state.actualPlayer.name}</p>
                         <div id={simboloAcertado ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
                                     <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[0]}.png`} 
@@ -135,10 +142,10 @@ export default function GameRoom() {
                             </div>
                         </div>
 
-                        <p className="h4"> Cartas restantes: {cantidadCartasJugador}</p>
+                        <p className="h4">Remaining cards: {cantidadCartasJugador}</p>
                     </div>
-                    <div className="columna-circulos">
-                        <p className="h2"> Tope de la pila </p>
+                    <div className="columna-circulos  unselectable-text">
+                        <p className="h2"> Top of the Well </p>
                         <div className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
                                     <img src={`../img/common/cards-img/${shuffledCards[cartaActualOponente].simbolos[0]}.png`} className="imagen-carta" alt="Top of the well icon"/>
