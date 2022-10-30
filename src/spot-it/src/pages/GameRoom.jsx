@@ -30,7 +30,7 @@ export default function GameRoom(props) {
     location.state.playersConnected.map((player) => {
         player.cardsRemaining = cantidadCartasJugador;
         return player;
-    })
+    }) 
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
 
@@ -38,7 +38,7 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
-            if (acertoSimbolo == false) {
+            if (acertoSimbolo === false) {
                 alert("Elegiste un símbolo incorrecto, tienes un cooldown de 5 segundos");
                     setPuedeElegirCarta(false);
                     setTimeout(
@@ -62,7 +62,7 @@ export default function GameRoom(props) {
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         let simboloEncontrado = false;
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
-            if (numeroSimbolo == simbolosCartaOponente[i]) {
+            if (numeroSimbolo === simbolosCartaOponente[i]) {
                 setActivarAnimacion(true);
                 simboloEncontrado = true;
                 setAcertoSimbolo(true);
@@ -76,7 +76,7 @@ export default function GameRoom(props) {
             }
         }
         console.log("simbolo encontrado:" + simboloEncontrado);
-        if (simboloEncontrado == false) {
+        if (simboloEncontrado === false) {
             setAcertoSimbolo(false);
         }
     }
