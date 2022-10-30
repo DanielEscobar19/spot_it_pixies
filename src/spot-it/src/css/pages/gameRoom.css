@@ -24,6 +24,22 @@
     }
 }
 
+#carta-izquierda-slide{
+    transition: transform 1s;
+    transform: translateX(142.9%);
+}
+
+#carta-izquierda-spawn{
+    animation-name: card-spawn;
+    animation-duration: 1s;
+}
+
+@keyframes card-spawn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+
 #subseccion-nombres{
     margin-top: 20%;
     width: 100%;

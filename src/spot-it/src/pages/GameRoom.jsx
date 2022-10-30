@@ -16,7 +16,8 @@ export default function GameRoom() {
         }
         return arrayShuffle(unshuffledCards);
     });
-    
+
+    const [simboloAcertado, setSimboloAcertado] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
     const[cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
@@ -25,9 +26,13 @@ export default function GameRoom() {
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
             if (numeroSimbolo == simbolosCartaOponente[i]) {
-                setCartaActualOponente(cartaActualJugador);
-                setCartaActualJugador(cartaActualJugador+1);
-                setCantidadCartasJugador(cantidadCartasJugador -1);
+                setSimboloAcertado(true);
+                setTimeout(function () {
+                    setCartaActualOponente(cartaActualJugador);
+                    setCartaActualJugador(cartaActualJugador+1);
+                    setCantidadCartasJugador(cantidadCartasJugador -1);
+                    setSimboloAcertado(false);
+                }, 1000);
                 break;
             }
         }
@@ -113,7 +118,7 @@ export default function GameRoom() {
                 <section id="subseccion-circulos">
                     <div className="columna-circulos">
                         <p className="h2"> Nombre Jugador</p>
-                        <div className=" rounded-circle circulo-carta">
+                        <div id={simboloAcertado ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
                                     <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[0]}.png`} 
                                     onClick={function(e) {
@@ -175,6 +180,7 @@ export default function GameRoom() {
                                 className="imagen-carta"/>
                             </div>
                         </div>
+
                         <p className="h4"> Cartas restantes: {cantidadCartasJugador}</p>
                     </div>
                     <div className="columna-circulos">
