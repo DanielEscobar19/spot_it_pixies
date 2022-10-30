@@ -20,11 +20,9 @@ export default function GameRoom() {
     const [activarAnimacion, setActivarAnimacion] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
-    const[cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
+    const [cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
-
-    
 
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
@@ -43,11 +41,7 @@ export default function GameRoom() {
                 return acertoSimbolo;
             }
         });
-    }, [acertoSimbolo])
-
-    
-
-
+    }, [acertoSimbolo]);
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         let simboloEncontrado = false;
