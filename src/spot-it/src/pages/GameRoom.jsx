@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useLocation } from "react-router-dom";
 import Layout from './Layout'
+import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
 
@@ -20,8 +21,7 @@ export default function GameRoom(props) {
         }
         return arrayShuffle(unshuffledCards);
     });
-
-    const [simboloAcertado, setSimboloAcertado] = useState(false);
+    const [activarAnimacion, setActivarAnimacion] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
     const[cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
@@ -31,21 +31,65 @@ export default function GameRoom(props) {
         player.cardsRemaining = cantidadCartasJugador;
         return player;
     })
+    const [acertoSimbolo, setAcertoSimbolo] = useState(true);
+    const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
+
+    
+
+    useEffect(() => {
+        setAcertoSimbolo(acertoSimbolo => {
+            if (acertoSimbolo == false) {
+                alert("Elegiste un símbolo incorrecto, tienes un cooldown de 5 segundos");
+                    setPuedeElegirCarta(false);
+                    setTimeout(
+                        ()=>{
+                            alert("Ya el cooldown ha terminado, puedes elegir un simbolo");
+                            setPuedeElegirCarta(true);
+                        },
+                        5000
+                    );
+            }
+            else {
+                return acertoSimbolo;
+            }
+        });
+    }, [acertoSimbolo])
+
+    
+
+
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
+        let simboloEncontrado = false;
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
-            if (numeroSimbolo === simbolosCartaOponente[i]) {
-                setSimboloAcertado(true);
+            if (numeroSimbolo == simbolosCartaOponente[i]) {
+                setActivarAnimacion(true);
+                simboloEncontrado = true;
+                setAcertoSimbolo(true);
                 setTimeout(function () {
                     setCartaActualOponente(cartaActualJugador);
                     setCartaActualJugador(cartaActualJugador+1);
                     setCantidadCartasJugador(cantidadCartasJugador -1);
-                    setSimboloAcertado(false);
-                }, 1000);
+                    setActivarAnimacion(false);
+                }, 1200);
                 break;
             }
         }
+        console.log("simbolo encontrado:" + simboloEncontrado);
+        if (simboloEncontrado == false) {
+            setAcertoSimbolo(false);
+        }
     }
+
+    function timeoutEleccion(index) {
+        if (puedeElegirCarta) {
+            verificarRelacion(shuffledCards[cartaActualJugador].simbolos[index], shuffledCards[cartaActualOponente].simbolos);
+        }
+        else {
+            alert("Tienes un cooldown de 5 segundos");
+        }
+    }
+
 
   return (
     <>
@@ -55,6 +99,14 @@ export default function GameRoom(props) {
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
 
+                <section id="subseccion-nombres">
+                    <div className="tarjeta-nombres">
+                        <div className="nombre-jugador">
+                            <p className="h6">Jugador 1</p>
+                        </div>
+                        <div className="numero-jugador"><p className="h6">1</p></div>
+                    </div>
+                </section>
                 <section id="subseccion-eventos">
                     <div id="cuadro-eventos" className="overflow-auto">
                         <div id="titulo-eventos">
@@ -62,15 +114,6 @@ export default function GameRoom(props) {
                         </div>
                         <div id="textbox-eventos" className="overflow-auto">
                             <p className="h6 evento"> El Jugador 1 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 2 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 3 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 4 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 5 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 6 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 7 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 8 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 9 realizó x acción</p>
-                            <p className="h6 evento"> El Jugador 10 realizó x acción</p>
                         </div>
                     </div>
                 </section>
@@ -79,11 +122,11 @@ export default function GameRoom(props) {
                 <section id="subseccion-circulos">
                     <div className="columna-circulos unselectable-text">
                         <p className="h2">{location.state.actualPlayer.name}</p>
-                        <div id={simboloAcertado ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
+                        <div id={activarAnimacion ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
                                     <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[0]}.png`} 
                                     onClick={function(e) {
-                                        verificarRelacion(shuffledCards[cartaActualJugador].simbolos[0], shuffledCards[cartaActualOponente].simbolos);      
+                                        timeoutEleccion(0);      
                                     }}
                                     className="imagen-carta" alt="Player icon"/>
                             </div>
@@ -91,13 +134,13 @@ export default function GameRoom(props) {
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[1]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[1], shuffledCards[cartaActualOponente].simbolos);         
+                                    timeoutEleccion(1);         
                                 }}
                                 className="imagen-carta" alt="Player card icon"/>
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[2]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[2], shuffledCards[cartaActualOponente].simbolos);          
+                                    timeoutEleccion(2);         
                                   }}
                                 className="imagen-carta" alt="Player card  icon"/>
 
@@ -106,13 +149,13 @@ export default function GameRoom(props) {
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[3]}.png`}
                                  onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[3], shuffledCards[cartaActualOponente].simbolos);          
+                                    timeoutEleccion(3);           
                                   }}
                                 className="imagen-carta" alt="Player card  icon"/>
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[4]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[4], shuffledCards[cartaActualOponente].simbolos);          
+                                    timeoutEleccion(4); 
                                   }} 
                                 className="imagen-carta" alt="Player card  icon"/>
 
@@ -121,13 +164,13 @@ export default function GameRoom(props) {
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[5]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[5], shuffledCards[cartaActualOponente].simbolos);          
+                                    timeoutEleccion(5);       
                                 }}
                                 className="imagen-carta" alt="Player card  Icon"/>
 
                                 <img src= {`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[6]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[6], shuffledCards[cartaActualOponente].simbolos);          
+                                    timeoutEleccion(6); 
                                 }} 
                                 className="imagen-carta" alt="Player card  Icon"/>
 
@@ -136,7 +179,7 @@ export default function GameRoom(props) {
 
                                 <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[7]}.png`} 
                                 onClick={function(e) {
-                                    verificarRelacion(shuffledCards[cartaActualJugador].simbolos[7], shuffledCards[cartaActualOponente].simbolos);         
+                                    timeoutEleccion(7);         
                                 }}
                                 className="imagen-carta" alt="Player card  Icon"/>
                             </div>

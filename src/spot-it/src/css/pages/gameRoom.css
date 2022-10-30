@@ -25,13 +25,13 @@
 }
 
 #carta-izquierda-slide{
-    transition: transform 1s;
+    transition: transform 1.2s;
     transform: translateX(142.9%);
 }
 
 #carta-izquierda-spawn{
     animation-name: card-spawn;
-    animation-duration: 1s;
+    animation-duration: 1.2s;
 }
 
 @keyframes card-spawn {
