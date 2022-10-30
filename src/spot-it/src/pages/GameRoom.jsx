@@ -99,14 +99,6 @@ export default function GameRoom(props) {
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
 
-                <section id="subseccion-nombres">
-                    <div className="tarjeta-nombres">
-                        <div className="nombre-jugador">
-                            <p className="h6">Jugador 1</p>
-                        </div>
-                        <div className="numero-jugador"><p className="h6">1</p></div>
-                    </div>
-                </section>
                 <section id="subseccion-eventos">
                     <div id="cuadro-eventos" className="overflow-auto">
                         <div id="titulo-eventos">
