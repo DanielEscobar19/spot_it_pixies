@@ -1,7 +1,7 @@
 import '../css/waitingRooms/waitingRoom.scss'
 
 import React, {useEffect, useState} from 'react'
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, Link} from 'react-router-dom';
 
 import Layout from './Layout'
 import Button from '../components/Button';
@@ -16,7 +16,9 @@ export default function WaitingRoomHost() {
   console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
   console.log( "session-name received " + searchParams.get("session-name"));
   console.log( "host-name received " + searchParams.get("host-name"));
-  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true}]);
+
+  // TODO: add the new connected players. This logic is managed through sockets
+  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true, id: 0}]);
 
 
   return (
@@ -58,7 +60,11 @@ export default function WaitingRoomHost() {
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
         <div className="col d-flex justify-content-end">
-          <Button title="Start" />
+          <Link state={{playersConnected : playersList, actualPlayer : playersList[0]}} to={{
+            pathname: "/game-room",
+           }}> 
+            <Button title="Start" /> 
+          </Link>
         </div>
       </div>
 

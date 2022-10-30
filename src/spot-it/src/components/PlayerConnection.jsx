@@ -3,7 +3,7 @@ import '../css/waitingRooms/waitingRoom.scss'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
-export default function Player({player, colorText}) {
+export default function PlayerConnection({player, colorText}) {
   const idRef = useRef(null)
   const playerNameRef = useRef(null);
   const connectionDot = useRef(null);
