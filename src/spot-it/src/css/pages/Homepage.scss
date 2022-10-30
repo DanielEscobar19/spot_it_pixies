@@ -5,6 +5,10 @@
   color: $purple;
 }
 
+body {
+  overflow-x:hidden;
+}
+
 .Welcome-msg {
   white-space: nowrap;
   font-size: 5vw;

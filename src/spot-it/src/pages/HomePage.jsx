@@ -19,7 +19,7 @@ export default function HomePage() {
   useEffect(() => {
     // data fetching here
     // fetching the session pin form api
-    // TODO: fecth form our server the session pin
+    // TODO: fecth from our server the session pin
     fetch('https://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1').then(
       (response) => response.json())
       .then((data) => {setSessionPin(data[0])} );
@@ -34,7 +34,6 @@ export default function HomePage() {
     <>
       {/* We renderize the layout component*/}
       <Layout/>
-      {/* <Layout /> */}
       {/* Welcome message and image */}
       <section className="row d-flex flex-nowrap align-items-center justify-content-center mt-2 unselectable-text">
             <h1 className="Welcome-msg col-12 col-md-7 selectable-text">
@@ -49,7 +48,7 @@ export default function HomePage() {
             <div className="col d-flex justify-content-center">
               <div className="mb-4 text-center unselectable-text">
                 <label className="form-label h2">Your name</label>
-                <input value={name} onChange={(e) => {setName(e.currentTarget.value)}} type="text" className="form-control" id="playerName" placeholder="e.g: Timmy" autoFocus={true} size="22"/>
+                <input value={name} onChange={(e) => {setName(e.currentTarget.value)}} type="text" className="form-control" id="playerName" placeholder="e.g: Timmy" autoFocus={true}/>
               </div>
             </div>
           </div>
