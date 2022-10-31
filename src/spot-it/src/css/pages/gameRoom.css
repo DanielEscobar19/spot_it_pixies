@@ -185,3 +185,32 @@
     margin-bottom: 2%;
     margin-left: 2%;
 }
+
+#seccion-timers{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:33%;
+    height: 100%;
+    justify-content: center;
+}
+
+#cooldown-timer{
+    justify-content: flex-start;
+    margin-left: 2.5%;
+}
+
+#cooldown-timer div{
+    color: red;
+}
+
+

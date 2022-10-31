@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import GameRoom from './pages/GameRoom';
 import Help from './pages/Help'
 import Credits from './pages/Credits';
+import Leaderboard from './pages/Leaderboard';
 
 import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';
@@ -24,6 +25,7 @@ root.render(
         <Route path="/game-room" element={<GameRoom/>}/>
         <Route path="/help" element={<Help />}/>
         <Route path="/credits" element={<Credits />}/>
+        <Route path="/leaderboard" element={<Leaderboard/>}/>
         <Route path="*" element={<ErrorNotFound />}/>
     </Routes>
   </Router>

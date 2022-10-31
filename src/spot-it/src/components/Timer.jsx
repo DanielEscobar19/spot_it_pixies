@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useImperativeHandle} from 'react';
 
 const Timer = () => {
   const [hours, setHours] = useState(0);
@@ -19,11 +19,10 @@ const Timer = () => {
       setMinutes(Math.floor(time / 60 % 60));
       setSeconds(Math.floor(time  % 60));
     }
-    
   }, [running]);
 
   return (
-    <div className="timer" role="timer">
+    <div>
       {hours < 10 ? "0" + hours : hours}:{minutes < 10 ? "0" + minutes : minutes}:{seconds < 10 ? "0" + seconds : seconds}
     </div>
   );

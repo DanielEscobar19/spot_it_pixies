@@ -37,11 +37,9 @@ export default function GameRoom(props) {
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
             if (acertoSimbolo === false) {
-                alert("Elegiste un símbolo incorrecto, tienes un cooldown de 5 segundos");
                     setPuedeElegirCarta(false);
                     setTimeout(
                         ()=>{
-                            alert("Ya el cooldown ha terminado, puedes elegir un simbolo");
                             setPuedeElegirCarta(true);
                         },
                         5000
@@ -89,6 +87,7 @@ export default function GameRoom(props) {
     <>
     <Layout/>
         <section className="container-principal">
+
             <section id="seccion-izquierda">
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
@@ -105,6 +104,15 @@ export default function GameRoom(props) {
                 </section>
             </section>
             <section id="seccion-derecha">
+                <section id="seccion-timers">
+                    <div id="cooldown-timer" class="timer">
+                        {puedeElegirCarta ? "" : <div className='h5'> You chose the wrong symbol, hence you receive a cooldown penalty: <Timer/></div>}
+                    </div>
+                    <div id="match-timer" class="timer">
+                        <h1><Timer/></h1>
+                    </div>
+                    <div class="timer"></div>
+                </section>
                 <section id="subseccion-circulos">
                     <div className="columna-circulos unselectable-text">
                         <p className="h2">{location.state.actualPlayer.name}</p>
