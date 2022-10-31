@@ -59,7 +59,7 @@ export default function WaitingRoomHost() {
         </div>
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
-        <div className="col d-flex justify-content-end">
+        <div className="col d-flex justify-content-center">
           <Link replace={true} state={{playersConnected : playersList, actualPlayer : playersList[0], sessionName : searchParams.get("session-name"), sessionPin : searchParams.get("session-pin")}} to={{
             pathname: "/game-room",
            }}> 
