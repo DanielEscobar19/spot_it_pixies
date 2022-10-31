@@ -33,8 +33,8 @@ export default function Leaderboard() {
       
           <div className="col d-flex flex-column align-items-center">
             <h2>Match duration</h2>
-            <div className="box-container mt-2 b-duration">
-              <h2>02:10</h2>
+            <div className="box-container  b-duration">
+              <h3 className="m-0">02:10</h3>
             </div>
           </div>
           
