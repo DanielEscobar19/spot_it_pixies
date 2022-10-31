@@ -1,5 +1,5 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import React, {useState, useEffect, useRef} from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import Layout from './Layout'
 import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
@@ -10,6 +10,7 @@ import cards from "../cards.json"
 import arrayShuffle from 'array-shuffle';
 import InGameLeaderBoard from '../components/InGameLeaderBoard';
 import GameChat from '../components/GameChat';
+import moment from "moment";
 
 
 export default function GameRoom(props) {
@@ -25,10 +26,9 @@ export default function GameRoom(props) {
     });
     const [activarAnimacion, setActivarAnimacion] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
-    const [cartaActualJugador, setCartaActualJugador] = useState(55);
-    const [cantidadCartasJugador, setCantidadCartasJugador] = useState(2);
-    const [initialTime, setInitialTime] = useState(new Date());
-    const [finalTime, setFinalTime] = useState(new Date());
+    const [cartaActualJugador, setCartaActualJugador] = useState(0);
+    const [cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
+    const [initialTime, setInitialTime] = useState(moment());
     
     // TODO: distribute cards through players and no the same amount to every player
     location.state.playersConnected.map((player) => {
@@ -60,19 +60,31 @@ export default function GameRoom(props) {
                 return acertoSimbolo;
             }
         });
-        if (cartaActualOponente.length) {
-            navigate("/leaderboard", {replace : true, state : {players : location.state.playersConnected}});
-        }
-    }, [acertoSimbolo, cartaActualOponente]);
+    }, [acertoSimbolo]);
 
     useEffect(()=>{
         setCartaActualJugador( () => {
-            if (cartaActualJugador == 57) {
-                setFinalTime(new Date());
+            // TODO: check each player cards
+            if (cartaActualJugador === 57) {
+                let finalTime = moment();
+                let hoursDiff = finalTime.diff(initialTime, "hours");
+                let minutesDiff = finalTime.diff(initialTime, "minutes");
+                let secondsDiff = finalTime.diff(initialTime, "seconds");
+                location.state.playersConnected[0].bestTime = `${hoursDiff}:${minutesDiff}:${secondsDiff}`;
+                navigate("/leaderboard", {replace : true, state : {
+                    playersConnected : location.state.playersConnected, 
+                    sessionName : location.state.sessionName, 
+                    sessionPin :  location.state.sessionPin,
+                    sessionTime : `${hoursDiff}:${minutesDiff}:${secondsDiff}`,
+                }});
             }
             return cartaActualJugador;
         });
-    },[cartaActualJugador]);
+    },[
+        cartaActualJugador, initialTime,
+        location.state.playersConnected, location.state.sessionName,
+        location.state.sessionPin, navigate
+    ]);
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         let simboloEncontrado = false;
@@ -107,9 +119,6 @@ export default function GameRoom(props) {
     <>
     <Layout/>
         <section className="container-principal">
-            <Link state={{playersConnected : location.state.playersConnected, sessionName : location.state.sessionName, sessionPin :  location.state.sessionPin}} to={{
-                pathname: "/leaderboard",
-            }}> click me </Link>
             <section id="seccion-izquierda">
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
