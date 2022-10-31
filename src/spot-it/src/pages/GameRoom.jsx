@@ -9,6 +9,7 @@ import '../css/common/common.scss'
 import cards from "../cards.json"
 import arrayShuffle from 'array-shuffle';
 import InGameLeaderBoard from '../components/InGameLeaderBoard';
+import GameChat from '../components/GameChat';
 
 
 export default function GameRoom(props) {
@@ -92,16 +93,7 @@ export default function GameRoom(props) {
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
 
-                <section id="subseccion-eventos">
-                    <div id="cuadro-eventos" className="overflow-auto">
-                        <div id="titulo-eventos">
-                            <p className="h4">Events</p>
-                        </div>
-                        <div id="textbox-eventos" className="overflow-auto">
-                            <p className="h6 evento"> El Jugador 1 realizó x acción</p>
-                        </div>
-                    </div>
-                </section>
+                <GameChat actualPlayer={location.state.actualPlayer}/>
             </section>
             <section id="seccion-derecha">
                 <section id="seccion-timers">

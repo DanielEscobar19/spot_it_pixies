@@ -46,44 +46,6 @@
     height: 50%;
 }
 
-#subseccion-eventos{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
-    width: 100%;
-}
-
-#titulo-eventos{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 20%;
-}
-
-#textbox-eventos{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 80%;
-    width: 100%;
-}
-
-
-#cuadro-eventos{
-    margin-top: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    height: 70%;
-    border-radius:5px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 20px;
-}
-
-
 @media (min-width: 1001px) {
 #seccion-derecha {
     display: flex;
