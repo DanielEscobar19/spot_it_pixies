@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LeaderBoardPlayer from './LeaderBoardPlayer';
+import InGameLeaderBoardPlayer from './InGameLeaderBoardPlayer';
 import "../css/components/inGameLeaberboard.scss"
 
 export default function InGameLeaderBoard({players}) {
@@ -10,7 +10,7 @@ export default function InGameLeaderBoard({players}) {
     <>
       <section id="subseccion-nombres">
           {sortedList.map((player) => {
-             return <LeaderBoardPlayer key={player.id} player={player}/>
+             return <InGameLeaderBoardPlayer key={player.id} player={player}/>
             }
           )}
       </section>

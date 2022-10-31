@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from './Layout'
 import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
@@ -13,6 +13,7 @@ import GameChat from '../components/GameChat';
 
 
 export default function GameRoom(props) {
+    const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
     const[shuffledCards, ] = useState(() => {
@@ -35,6 +36,7 @@ export default function GameRoom(props) {
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
 
+
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
             if (acertoSimbolo === false) {
@@ -50,7 +52,10 @@ export default function GameRoom(props) {
                 return acertoSimbolo;
             }
         });
-    }, [acertoSimbolo]);
+        if (cartaActualOponente.length) {
+            navigate("/leaderboard", {replace : true, state : {players : location.state.playersConnected}});
+        }
+    }, [acertoSimbolo, cartaActualOponente]);
 
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         let simboloEncontrado = false;
@@ -61,8 +66,8 @@ export default function GameRoom(props) {
                 setAcertoSimbolo(true);
                 setTimeout(function () {
                     setCartaActualOponente(cartaActualJugador);
-                    setCartaActualJugador(cartaActualJugador+1);
-                    setCantidadCartasJugador(cantidadCartasJugador -1);
+                    setCartaActualJugador(cartaActualJugador + 1);
+                    setCantidadCartasJugador(cantidadCartasJugador - 1);
                     setActivarAnimacion(false);
                 }, 1200);
                 break;
@@ -78,9 +83,6 @@ export default function GameRoom(props) {
         if (puedeElegirCarta) {
             verificarRelacion(shuffledCards[cartaActualJugador].simbolos[index], shuffledCards[cartaActualOponente].simbolos);
         }
-        else {
-            alert("Tienes un cooldown de 5 segundos");
-        }
     }
 
 
@@ -88,7 +90,11 @@ export default function GameRoom(props) {
     <>
     <Layout/>
         <section className="container-principal">
-
+            <Link state={{playersConnected : location.state.playersConnected}} to={{
+                pathname: "/leaderboard",
+            }}> 
+            click me
+            </Link>
             <section id="seccion-izquierda">
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>

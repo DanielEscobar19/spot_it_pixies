@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LeaderBoardPlayer({player}) {
+export default function InGameLeaderBoardPlayer({player}) {
   return (
     <div className="tarjeta-nombres unselectable-text">
         <div className="nombre-jugador">
