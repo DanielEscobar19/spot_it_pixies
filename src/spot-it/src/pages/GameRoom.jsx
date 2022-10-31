@@ -31,6 +31,8 @@ export default function GameRoom(props) {
     // TODO: distribute cards through players and no the same amount to every player
     location.state.playersConnected.map((player) => {
         player.cardsRemaining = cantidadCartasJugador;
+        player.victories = 0;
+        player.bestTime = "You have to win to measure your best time!";
         return player;
     }) 
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
@@ -90,11 +92,9 @@ export default function GameRoom(props) {
     <>
     <Layout/>
         <section className="container-principal">
-            <Link state={{playersConnected : location.state.playersConnected}} to={{
+            <Link state={{playersConnected : location.state.playersConnected, sessionName : location.state.sessionName, sessionPin :  location.state.sessionPin}} to={{
                 pathname: "/leaderboard",
-            }}> 
-            click me
-            </Link>
+            }}> click me </Link>
             <section id="seccion-izquierda">
                 
                 <InGameLeaderBoard players={location.state.playersConnected}/>
