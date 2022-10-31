@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useImperativeHandle} from 'react';
+import { useState, useEffect, useImperativeHandle, forwardRef} from 'react';
 
 const Timer = () => {
   const [hours, setHours] = useState(0);
