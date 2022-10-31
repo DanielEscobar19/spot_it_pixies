@@ -1,0 +1,32 @@
+// Mensaje del servidor a clientes con la cantidad de cartas de cada jugador
+{
+  "top-card-index" : 8, 
+  "players" : [{"player-name" : "Juan", "card-count" : 28}, {"player-name" : "Henry", "card-count" : 28}]
+}
+
+// Cliente envia al servidor que hizo match al escoger la carta
+{
+  "symbol-match" : true,
+  "player-name" : "Juan",
+  "card-count" : 27
+}
+
+// Servidor contesta al cliente confirmando si si fue el priemro en hacer match
+{
+  "symbol-match" : true,
+  "player-name" : "Juan",
+  "card-count" : 27
+}
+
+// Cliente envia al servidor mensaje de que gano, el servidor revisa si fue el primero
+{
+  "client-winner" : true,
+  "player-name" : "Juan"
+}
+
+// Servidor envia a clientes quien gano y que se temrino la partida
+{
+  "match-ended" : true,
+  "winner-name" : "Juan"
+}
+
