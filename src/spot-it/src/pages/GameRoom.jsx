@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useLocation } from "react-router-dom";
 import Layout from './Layout'
 import Timer from '../components/Timer'
@@ -24,8 +24,10 @@ export default function GameRoom(props) {
     });
     const [activarAnimacion, setActivarAnimacion] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
-    const [cartaActualJugador, setCartaActualJugador] = useState(0);
-    const [cantidadCartasJugador, setCantidadCartasJugador] = useState(56);
+    const [cartaActualJugador, setCartaActualJugador] = useState(55);
+    const [cantidadCartasJugador, setCantidadCartasJugador] = useState(2);
+    const [initialTime, setInitialTime] = useState(new Date());
+    const [finalTime, setFinalTime] = useState(new Date());
     
     // TODO: distribute cards through players and no the same amount to every player
     location.state.playersConnected.map((player) => {
@@ -34,6 +36,10 @@ export default function GameRoom(props) {
     }) 
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
+
+    useEffect(() => {
+        setInitialTime(new Date());
+    },[]);
 
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
@@ -52,6 +58,15 @@ export default function GameRoom(props) {
         });
     }, [acertoSimbolo]);
 
+    useEffect(()=>{
+        setCartaActualJugador( () => {
+            if (cartaActualJugador == 57) {
+                setFinalTime(new Date());
+            }
+            return cartaActualJugador;
+        });
+    },[cartaActualJugador]);
+
     function verificarRelacion(numeroSimbolo, simbolosCartaOponente) {
         let simboloEncontrado = false;
         for (let i = 0; i < simbolosCartaOponente.length; i += 1) {
@@ -59,12 +74,12 @@ export default function GameRoom(props) {
                 setActivarAnimacion(true);
                 simboloEncontrado = true;
                 setAcertoSimbolo(true);
-                setTimeout(function () {
-                    setCartaActualOponente(cartaActualJugador);
-                    setCartaActualJugador(cartaActualJugador+1);
-                    setCantidadCartasJugador(cantidadCartasJugador -1);
-                    setActivarAnimacion(false);
-                }, 1200);
+                    setTimeout(function () {
+                        setCartaActualOponente(cartaActualJugador);
+                        setCartaActualJugador(cartaActualJugador+1);
+                        setCantidadCartasJugador(cantidadCartasJugador -1);
+                        setActivarAnimacion(false);
+                    }, 1200);
                 break;
             }
         }
@@ -77,9 +92,6 @@ export default function GameRoom(props) {
     function timeoutEleccion(index) {
         if (puedeElegirCarta) {
             verificarRelacion(shuffledCards[cartaActualJugador].simbolos[index], shuffledCards[cartaActualOponente].simbolos);
-        }
-        else {
-            alert("Tienes un cooldown de 5 segundos");
         }
     }
 
@@ -97,16 +109,18 @@ export default function GameRoom(props) {
             </section>
             <section id="seccion-derecha">
                 <section id="seccion-timers">
-                    <div id="cooldown-timer" class="timer">
+                    <div id="cooldown-timer" className="timer">
                         {puedeElegirCarta ? "" : <div className='h5'> You chose the wrong symbol, hence you receive a cooldown penalty: <Timer/></div>}
                     </div>
-                    <div id="match-timer" class="timer">
+                    <div id="match-timer" className="timer">
                         <h1><Timer/></h1>
                     </div>
-                    <div class="timer"></div>
+                    <div className="timer"></div>
                 </section>
                 <section id="subseccion-circulos">
                     <div className="columna-circulos unselectable-text">
+                        {cartaActualJugador < 57 ?
+                        <>
                         <p className="h2">{location.state.actualPlayer.name}</p>
                         <div id={activarAnimacion ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
@@ -114,64 +128,69 @@ export default function GameRoom(props) {
                                     onClick={function(e) {
                                         timeoutEleccion(0);      
                                     }}
-                                    className="imagen-carta" alt="Player icon"/>
+                                    className="imagen-carta" alt="Player icon"/> 
                             </div>
                             <div className="fila-imagenes">
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[1]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(1);         
-                                }}
-                                className="imagen-carta" alt="Player card icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[1]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(1);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[2]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(2);         
-                                  }}
-                                className="imagen-carta" alt="Player card  icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[2]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(2);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
+
 
                             </div>
                             <div className="fila-imagenes-centro">
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[3]}.png`}
-                                 onClick={function(e) {
-                                    timeoutEleccion(3);           
-                                  }}
-                                className="imagen-carta" alt="Player card  icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[3]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(3);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[4]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(4); 
-                                  }} 
-                                className="imagen-carta" alt="Player card  icon"/>
+
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[4]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(4);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
+                                    
 
                             </div>
                             <div className="fila-imagenes">
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[5]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(5);       
-                                }}
-                                className="imagen-carta" alt="Player card  Icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[5]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(5);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
 
-                                <img src= {`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[6]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(6); 
-                                }} 
-                                className="imagen-carta" alt="Player card  Icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[6]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(6);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
 
                             </div>
                             <div className="fila-imagenes-laterales">
 
-                                <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[7]}.png`} 
-                                onClick={function(e) {
-                                    timeoutEleccion(7);         
-                                }}
-                                className="imagen-carta" alt="Player card  Icon"/>
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[7]}.png`} 
+                                    onClick={function(e) {
+                                        timeoutEleccion(7);      
+                                    }}
+                                    className="imagen-carta" alt="Player icon"/> 
                             </div>
                         </div>
-
                         <p className="h4">Remaining cards: {cantidadCartasJugador}</p>
+                        </> 
+                        :  "" }
+
                     </div>
                     <div className="columna-circulos  unselectable-text">
                         <p className="h2"> Top of the Well </p>
