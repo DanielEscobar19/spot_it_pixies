@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useLocation, Link } from "react-router-dom";
 import PlayerLeadearBoard from '../components/PlayerLeadearBoard';
 import Button from '../components/Button';
@@ -8,8 +8,11 @@ import "../css/pages/Leaderboard.css"
 export default function Leaderboard() {
   const location = useLocation();
 
-  const [players, ] = useState(location.state.playersConnected);
-  console.log(players);
+  const [players, ] = useState(() => {
+    location.state.playersConnected[0].bestTime = location.state.sessionTime;
+    return location.state.playersConnected;
+  });
+  console.log(location.state);
   return (
     <>
       <Layout/>
@@ -34,7 +37,7 @@ export default function Leaderboard() {
           <div className="col d-flex flex-column align-items-center">
             <h2>Match duration</h2>
             <div className="box-container  b-duration">
-              <h3 className="m-0">02:10</h3>
+              <h3 className="m-0">{location.state.sessionTime}</h3>
             </div>
           </div>
           
