@@ -59,7 +59,7 @@ Para ingresar a esta pantalla solo se presiona el botón de "Help" en el encabez
 
 Fue elegida utilizando <a href="https://color.adobe.com/">Adobe Color</a>, basándonos en los colores orignales de spot it.
 
-<img src="../resources/ColorPalette.png"  alt="Logo" width="800px">
+<img src="resources/ColorPalette.png"  alt="Logo" width="800px">
 
 ## Otras rutas
 

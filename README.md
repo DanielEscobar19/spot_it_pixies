@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/DanielEscobar19/spot_it_pixiese">
-    <img src="resources/Spotit_pixies.jpg" alt="Logo" width="500" height="200">
+    <img src="design/resources/Spotit_pixies.jpg" alt="Logo" width="500" height="200">
   </a>
 
   <h2 align="center">Spot it! The Well</h3>
@@ -109,7 +109,7 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 <!--SITEMAP-->
 ## Mapa Del Sitio
 
-<img src="mapa del sitio/spotit_map.svg"  style="background-color:#fff" alt="mapa del sito spot it">
+<img src="design/mapa del sitio/spotit_map.svg"  style="background-color:#fff" alt="mapa del sito spot it">
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
