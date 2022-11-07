@@ -1,9 +1,18 @@
-const { Server } = require("net");
-const { parse } = require("path");
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
-const server = new Server();
-server.listen({port:8000, host: "0.0.0.0"}, () => { console.log("Listening on port ", server.address.port);
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
-server.on("data", (data) => {
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
+server.listen(3000, () => {
+  console.log('listening on *:3000');
 });
