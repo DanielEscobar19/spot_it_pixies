@@ -11,9 +11,14 @@ import arrayShuffle from 'array-shuffle';
 import InGameLeaderBoard from '../components/InGameLeaderBoard';
 import GameChat from '../components/GameChat';
 import moment from "moment";
+import io from 'socket.io-client';
 
+
+
+const socket = io("https//");
 
 export default function GameRoom(props) {
+    const [isConnected, setIsConnected] = useState(socket.connected);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -24,6 +29,7 @@ export default function GameRoom(props) {
         }
         return arrayShuffle(unshuffledCards);
     });
+
     const [activarAnimacion, setActivarAnimacion] = useState(false);
     const [cartaActualOponente, setCartaActualOponente] = useState(56);
     const [cartaActualJugador, setCartaActualJugador] = useState(0);
