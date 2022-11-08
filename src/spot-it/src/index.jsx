@@ -28,7 +28,6 @@ root.render(
         <Route path="/credits" element={<Credits />}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
         <Route path="*" element={<ErrorNotFound />}/>
-        <Route path='client' element=<Client/>/>
     </Routes>
   </Router>
 );
