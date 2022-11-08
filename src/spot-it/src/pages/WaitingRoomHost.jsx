@@ -1,26 +1,37 @@
 import '../css/waitingRooms/waitingRoom.scss'
 
 import React, {useEffect, useState} from 'react'
-import {useSearchParams, Link} from 'react-router-dom';
+import {useSearchParams, Link, useLocation} from 'react-router-dom';
 
 import Layout from './Layout'
 import Button from '../components/Button';
 import ConnectedPlayers from '../components/ConnectedPlayers';
+import io from "socket.io-client";
 
 export default function WaitingRoomHost() {
   const [searchParams, ] = useSearchParams();
+  const location = useLocation();
+  const socket = location.state.socket;
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';
   });
 
+  
   console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
   console.log( "session-name received " + searchParams.get("session-name"));
   console.log( "host-name received " + searchParams.get("host-name"));
-
+  let playerId = 0;
+  
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true, id: 0}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true, id: playerId++}]);
 
-
+  useEffect(() => {
+    socket.on("new_join_player" , (newPlayer) => {
+      playersList.push({type : "player", name : newPlayer, isConnected : true, id : playerId++});
+      alert("Nuevooo");
+    })
+  }, [socket, playersList, playerId]);
+  
   return (
     <>
     <Layout/>
