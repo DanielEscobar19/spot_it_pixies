@@ -14,6 +14,7 @@ import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ErrorNotFound from './pages/ErrorNotFound';
+import Client from './pages/Client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
         <Route path="/credits" element={<Credits />}/>
         <Route path="/leaderboard" element={<Leaderboard/>}/>
         <Route path="*" element={<ErrorNotFound />}/>
+        <Route path='client' element=<Client/>/>
     </Routes>
   </Router>
 );

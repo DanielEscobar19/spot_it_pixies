@@ -1,5 +1,6 @@
 import Layout from './Layout'
 import '../css/pages/Homepage.scss'
+// import { io } from "socket.io-client";
 
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -12,8 +13,6 @@ export default function HomePage() {
   const [sessionPin, setSessionPin] = useState(0);
   
   const validateSession = !(name.length > 0 && session.length > 0);
-  
-
   // variable to store the session pin
   
   useEffect(() => {
