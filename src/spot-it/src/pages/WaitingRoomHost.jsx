@@ -1,7 +1,7 @@
 import '../css/waitingRooms/waitingRoom.scss'
 
 import React, {useEffect, useState} from 'react'
-import {useSearchParams, Link, useLocation} from 'react-router-dom';
+import {useSearchParams, Link} from 'react-router-dom';
 
 import Layout from './Layout'
 import Button from '../components/Button';
@@ -9,9 +9,9 @@ import ConnectedPlayers from '../components/ConnectedPlayers';
 import io from "socket.io-client";
 
 export default function WaitingRoomHost() {
+  const socket = io.connect("http://localhost:3001");
+
   const [searchParams, ] = useSearchParams();
-  const location = useLocation();
-  const socket = location.state.socket;
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';
   });

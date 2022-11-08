@@ -45,12 +45,7 @@ export default function HomePage() {
     socket.emit("create_session");
     if (sessionPin > 0) {
       console.log(`Created session with number ${sessionPin}`);
-      navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, 
-      {
-        state : {
-          sock : socket,
-        },
-      });
+      navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`);
     }
   }
 

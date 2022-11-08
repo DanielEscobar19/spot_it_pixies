@@ -11,7 +11,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors : {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -44,6 +44,9 @@ function shuffleCards (cartas) {
   return arrayShuffle(unshuffledCards);
 }
 
+let sessionNumber = 100;
+
+let rooms = [];
 
 io.on("connection", (socket) => {
 
@@ -72,8 +75,38 @@ io.on("connection", (socket) => {
   })
 
 
-  
-  // End Testing
+  socket.on("join_session", (joinInfo) => {
+    console.log(`${joinInfo.playerName} Trying to join session with number ${joinInfo.sessionId}`);
+
+    let canJoin = false;
+    let roomIndex = -1;
+    if (rooms.length > 0) {
+      roomIndex = rooms.findIndex(x => x.id == joinInfo.sessionId);
+      console.log(`rooms ${rooms[0].id} found ${roomIndex}`);
+    }
+
+    if (roomIndex != -1 && rooms[roomIndex].playersCount < 7) {
+      ++rooms[roomIndex].playersCount;
+      socket.join(sessionId);
+      canJoin = true;
+      socket.broadcast.emit("new_join_player", joinInfo.playerName);
+      console.log(`Joined session with number ${joinInfo.sessionId}`);
+    } else {
+      console.log(`Not joined session with number ${joinInfo.sessionId}`);
+    }
+    socket.emit("join_validation", canJoin);
+  })
+
+
+  socket.on("create_session", () => {
+    rooms.push({id : sessionNumber, playersCount : 1, topCard : "null", winnerPlayer : "null"});
+    console.log(`rooms ${rooms}`);
+
+    socket.join(sessionNumber);
+    socket.emit("room_id", sessionNumber);
+    console.log(`Created session with number ${sessionNumber}`);
+    // TODO: increment session number after creating the room
+  })
 });
 
 
