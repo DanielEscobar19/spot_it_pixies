@@ -99,15 +99,27 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("new_join_player", rooms[roomIndex].players);
       socket.emit("new_join_player", rooms[roomIndex].players);
       console.log(`Joined session with number ${joinInfo.sessionId}`);
+      socket.emit("join_validation", true, rooms[roomIndex].sessionName);
     } else {
       console.log(`Not joined session with number ${joinInfo.sessionId}`);
+      socket.emit("join_validation", false, "");
     }
-    socket.emit("join_validation", canJoin);
   })
 
+  socket.on("get_players", (sessionId) => {
+    let roomIndex = -1;
+    if (rooms.length > 0) {
+      roomIndex = rooms.findIndex(x => x.id == sessionId);
+      console.log(`Update: searched room id (${sessionId}) found at index ${roomIndex}`);
+    }
 
-  socket.on("create_session", (name) => {
-    rooms.push({id : sessionNumber, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [name]});
+    if (roomIndex !== -1) {
+      socket.emit("players_list", rooms[roomIndex].players);
+    }
+  })
+
+  socket.on("create_session", (hostName, sessionName) => {
+    rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [hostName]});
     console.log(`rooms ${rooms}`);
 
     socket.join(sessionNumber);
