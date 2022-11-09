@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
 
     if (roomIndex != -1 && rooms[roomIndex].playersCount < 7) {
       ++rooms[roomIndex].playersCount;
-      socket.join(sessionId);
+      socket.join(joinInfo.sessionId);
       canJoin = true;
       socket.broadcast.emit("new_join_player", joinInfo.playerName);
       console.log(`Joined session with number ${joinInfo.sessionId}`);
