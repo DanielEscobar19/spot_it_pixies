@@ -33,23 +33,14 @@ export default function WaitingRoomGuest() {
 
   useEffect(() => {
     socket.on("new_join_player" , (players) => {
-      let newList =  [...playersList];
-      let playerType = "";
-      for(let i = 0; i < players.length; ++i) {
-        if (newList.findIndex((x) => x.name == players[i]) < 0) {
-          if (i > 0) {
-            playerType = "player";
-          } else {
-            playerType = "host";
-          }
-          newList = [...newList, {type : playerType, name : players[i], isConnected : false, id : playerId++}];
-        }
-      }
-      setPlayerList(newList);
-      console.log(playersList);
+      updatePlayers(players);
     })
 
     socket.on("players_list", (players) => {
+      updatePlayers(players);
+    })
+
+    function updatePlayers(players) {
       let newList =  [...playersList];
       let playerType = "";
       for(let i = 0; i < players.length; ++i) {
@@ -64,8 +55,7 @@ export default function WaitingRoomGuest() {
       }
       setPlayerList(newList);
       console.log(playersList);
-    })
-
+    }
   }, [socket]);
   
   useEffect(() => {
@@ -75,7 +65,6 @@ export default function WaitingRoomGuest() {
       newPlayersList[index].isConnected = guestData.boolGuestReady;
       setPlayerList(newPlayersList);
     });
-    
   },[socket]);
 
 

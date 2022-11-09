@@ -14,8 +14,9 @@ export default function WaitingRoomHost() {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    document.title = 'Spot it - Waiting room - host';
-  });
+    document.title = 'Spot it - Waiting room - guest';
+    socket.emit("get_players", location.state.sessionPin);
+  }, []);
 
   // ********
   // Testing console prints
@@ -33,6 +34,10 @@ export default function WaitingRoomHost() {
 
   useEffect(() => {
     socket.on("new_join_player" , (players) => {
+      updatePlayers(players);
+    })
+
+    socket.on("players_list", (players) => {
       updatePlayers(players);
     })
     
