@@ -8,64 +8,63 @@ import Button from '../components/Button';
 import { SocketContext } from '../context/socket';
 
 export default function HomePage() {
+  const [joinError, setJoinError] = useState(false);
+
   const [name, setName] = useState('');
   const navigate  = useNavigate()
 
-  // creation of session
+  // creation of session variables
   const [session, setSession] = useState('');
   const [sessionPin, setSessionPin] = useState(0);
   const validateSession = !(name.length > 0 && session.length > 0);
 
-  // joining a session
+  // joining a session variables
   const [canJoin, setCanJoin] = useState(false);
   const [joinSessionPin, setJoinSessionPin] = useState(0);
   const validateJoinSession = !(name.length > 0 && joinSessionPin > 0);
-  // useEffect(() => {
-  //   // data fetching here
-  //   // fetching the session pin form api
-  //   // TODO: fecth from our server the session pin
-  //   fetch('https://www.randomnumberapi.com/api/v1.0/random?min=100&max=1000&count=1').then(
-  //     (response) => response.json())
-  //     .then((data) => {setSessionPin(data[0])} );
-  // }, []);
 
-  // TODO: connect to server in oracle or debian machine
   const socket = useContext(SocketContext);
   useEffect(() => {
     socket.on("room_id", (roomId) => {
       setSessionPin(roomId);
     })
-    
-    socket.on("join_validation", (canJoin) => {
+
+    socket.on("join_validation", (canJoin, sessionName) => {
       setCanJoin(canJoin);
+      if (sessionName !== "") {
+        setSession(sessionName);
+      }
+      console.log("canJoin ", canJoin);
+      if (canJoin === true) {
+        setJoinError(false);
+      } else {
+        setJoinError(true);
+      }
     })
     
-  }, [socket, sessionPin])
+  }, [socket])
   
-  function createSession() {
-    socket.emit("create_session", name);
+  useEffect(() => {
     if (sessionPin > 0) {
       console.log(`Created session with number ${sessionPin}`);
-      navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, 
+      navigate("/new-session", 
       {replace : true, 
       state : {
-        sessionPin : joinSessionPin,
+        sessionPin : sessionPin,
         hostName : name,
         sessionName : session,
       }});
     }
-  }
+  }, [sessionPin])
 
-  function joinSession() {
-    console.log("Trying join session ", joinSessionPin, "  ", name);
-    socket.emit("join_session", {sessionId : joinSessionPin, playerName : name});
+  useEffect(() => {
     if (canJoin === true) {
       console.log(`Can join session with number ${sessionPin}`);
 
       navigate(`/existing-session`, 
       {replace : true, 
       state : {
-        sessionPin : sessionPin,
+        sessionPin : joinSessionPin,
         guestName : name,
         sessionName : session,
       }});
@@ -73,7 +72,17 @@ export default function HomePage() {
     } else {
       console.log("Couldn't join");
     }
+  }, [canJoin])
+
+  function createSession() {
+    socket.emit("create_session", name, session);
   }
+
+  function joinSession() {
+    console.log("Trying join session ", joinSessionPin, "  ", name);
+    socket.emit("join_session", {sessionId : joinSessionPin, playerName : name});
+  }
+
 
   return (
     <>
@@ -117,8 +126,8 @@ export default function HomePage() {
                     <label  className="form-label h3">Session pin</label>
                     <input value={joinSessionPin} onChange={(e) => {setJoinSessionPin(e.currentTarget.value)}} type="text" className="form-control mb-3" id="sessionPin" placeholder="e.g: 1254" size="50"/>
                     <Button onClick={joinSession} title="Join" disabled={validateJoinSession} />
-                    <div className="alert alert-warning unselectable-text ms-1 mt-2 me-1 mb-0" role="alert">
-                      Joining a session is not available at the moment
+                    <div className={`${joinError === true? "" : "hiden"} alert alert-warning unselectable-text ms-1 mt-2 me-1 mb-0`} role="alert">
+                      Could not join the session {joinSessionPin}
                     </div>
                   </div>
                 </div>
