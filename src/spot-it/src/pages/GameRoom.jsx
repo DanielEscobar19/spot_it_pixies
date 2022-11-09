@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import Layout from './Layout'
 import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
-import { SOCKET_URL } from '../context/socket';
+import { SOCKET_URL, SocketContext } from '../context/socket';
 
 
 import arrayShuffle from 'array-shuffle';
@@ -16,7 +16,7 @@ import io from 'socket.io-client';
 
 
 export default function GameRoom(props) {
-    const socket = io.connect(SOCKET_URL);
+    const socket = useContext(SocketContext);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -110,7 +110,7 @@ export default function GameRoom(props) {
                 setPuedeElegirCarta(false);
             }
         })        
-    }, [socket])
+    })
 
 
     function enviarCartaSeleccionada(idSimbolo) {
