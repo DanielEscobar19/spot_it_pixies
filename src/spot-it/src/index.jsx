@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap';
 //import Popper from 'popper.js';
 import './css/common/common.scss';
 import WaitingRoomHost from './pages/WaitingRoomHost';
+import WaitingRoomGuest from './pages/WaitingRoomGuest';
 import HomePage from './pages/HomePage';
 import GameRoom from './pages/GameRoom';
 import Help from './pages/Help'
@@ -22,6 +23,7 @@ root.render(
     <Router>
       <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/existing-session" element={<WaitingRoomGuest />} />
           <Route path="/home-page" element={<HomePage/>} />
           <Route path="/new-session" element={<WaitingRoomHost />} />
           <Route path="/game-room" element={<GameRoom/>}/>

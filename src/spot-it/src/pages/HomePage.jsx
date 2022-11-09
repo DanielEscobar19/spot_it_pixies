@@ -43,13 +43,13 @@ export default function HomePage() {
   }, [socket, sessionPin])
   
   function createSession() {
-    socket.emit("create_session");
+    socket.emit("create_session", name);
     if (sessionPin > 0) {
       console.log(`Created session with number ${sessionPin}`);
       navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, 
       {replace : true, 
       state : {
-        sessionPin : sessionPin,
+        sessionPin : joinSessionPin,
         hostName : name,
         sessionName : session,
       }});
@@ -61,7 +61,15 @@ export default function HomePage() {
     socket.emit("join_session", {sessionId : joinSessionPin, playerName : name});
     if (canJoin === true) {
       console.log(`Can join session with number ${sessionPin}`);
-      alert("Puede entrar");
+
+      navigate(`/existing-session`, 
+      {replace : true, 
+      state : {
+        sessionPin : sessionPin,
+        guestName : name,
+        sessionName : session,
+      }});
+
     } else {
       console.log("Couldn't join");
     }
