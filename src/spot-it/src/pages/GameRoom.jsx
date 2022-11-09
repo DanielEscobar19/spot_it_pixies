@@ -4,6 +4,7 @@ import Layout from './Layout'
 import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
+import { SOCKET_URL } from '../context/socket';
 
 
 import arrayShuffle from 'array-shuffle';
@@ -15,7 +16,7 @@ import io from 'socket.io-client';
 
 
 export default function GameRoom(props) {
-    const socket = io.connect("http://localhost:3001");
+    const socket = io.connect(SOCKET_URL);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
