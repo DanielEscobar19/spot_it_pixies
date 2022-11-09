@@ -87,10 +87,10 @@ io.on("connection", (socket) => {
     let roomIndex = -1;
     if (rooms.length > 0) {
       roomIndex = rooms.findIndex(x => x.id == joinInfo.sessionId);
-      console.log(`rooms ${rooms[0].id} found ${roomIndex}`);
+      console.log(`rooms ${rooms[0].id} found index ${roomIndex}`);
     }
 
-    if (roomIndex != -1 && rooms[roomIndex].playersCount < 7) {
+    if (roomIndex != -1 && rooms[roomIndex].playersCount < 8) {
       ++rooms[roomIndex].playersCount;
       socket.join(joinInfo.sessionId);
       canJoin = true;
