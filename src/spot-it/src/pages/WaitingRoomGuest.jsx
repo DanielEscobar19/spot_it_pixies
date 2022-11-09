@@ -16,7 +16,8 @@ export default function WaitingRoomGuest() {
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
-  });
+    socket.emit("get_players", location.state.sessionPin);
+  }, []);
 
   // ********
   // Testing console prints
@@ -29,24 +30,6 @@ export default function WaitingRoomGuest() {
   
   // TODO: add the new connected players. This logic is managed through sockets
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++}]);
-
-  useEffect(() => {
-    socket.on("new_join_player" , (newPlayer) => {
-      const newList =  [...playersList, {type : "player", name : newPlayer, isConnected : false, id : playerId++}];
-      setPlayerList(newList);
-      console.log(playersList);
-    })
-  }, [socket, playersList, playerId]);
-  
-  useEffect(() => {
-    socket.on("newReadyGuest", (guestData) => {
-      let index = playersList.findIndex((x) => x.name == guestData.guestName);
-      let newPlayersList = [...playersList];
-      newPlayersList[index].isConnected = guestData.boolGuestReady;
-      setPlayerList(newPlayersList);
-    });
-    
-  },[socket, playersList]);
 
   useEffect(() => {
     socket.on("new_join_player" , (players) => {
@@ -65,7 +48,36 @@ export default function WaitingRoomGuest() {
       setPlayerList(newList);
       console.log(playersList);
     })
-  }, [socket, playersList, playerId]);
+
+    socket.on("players_list", (players) => {
+      let newList =  [...playersList];
+      let playerType = "";
+      for(let i = 0; i < players.length; ++i) {
+        if (newList.findIndex((x) => x.name == players[i]) < 0) {
+          if (i > 0) {
+            playerType = "player";
+          } else {
+            playerType = "host";
+          }
+          newList = [...newList, {type : playerType, name : players[i], isConnected : false, id : playerId++}];
+        }
+      }
+      setPlayerList(newList);
+      console.log(playersList);
+    })
+
+  }, [socket]);
+  
+  useEffect(() => {
+    socket.on("newReadyGuest", (guestData) => {
+      let index = playersList.findIndex((x) => x.name == guestData.guestName);
+      let newPlayersList = [...playersList];
+      newPlayersList[index].isConnected = guestData.boolGuestReady;
+      setPlayerList(newPlayersList);
+    });
+    
+  },[socket]);
+
 
   function clickedReady () {
     let index = playersList.findIndex((x) => x.name == location.state.guestName);
@@ -126,20 +138,20 @@ export default function WaitingRoomGuest() {
 
     {/* <!-- box indicating if we for the host to start the game --> */}
       {/* <!-- This text only appears if there is no player connected apart from the host --> */}
-      <div class="col d-flex text-center justify-content-center my-5 d-cursor pt-5">
-        <section class="box-container py-3">
+      <div className="col d-flex text-center justify-content-center my-5 d-cursor pt-5">
+        <section className="box-container py-3">
           <h1>
             Please wait
             <br />
             The sesion host will start game soon.
           </h1>
         </section>
-        <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" class="hand-logo"/>
+        <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>
       </div>
 
       {/* <!-- inspirational quotes --> */}
-      <div class="col d-flex text-center justify-content-center mb-5">
-        <h3 class="quote">
+      <div className="col d-flex text-center justify-content-center mb-5">
+        <h3 className="quote">
           are you good? be better
           <br />
           -Sanderson

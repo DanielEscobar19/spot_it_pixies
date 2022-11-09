@@ -29,8 +29,14 @@ export default function WaitingRoomHost() {
   // TODO: add the new connected players. This logic is managed through sockets
   const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: playerId++}]);
 
+  
+
   useEffect(() => {
     socket.on("new_join_player" , (players) => {
+      updatePlayers(players);
+    })
+    
+    function updatePlayers(players) {
       let newList =  [...playersList];
       for(let i = 0; i < players.length; ++i) {
         if (newList.findIndex((x) => x.name == players[i]) < 0) {
@@ -39,9 +45,9 @@ export default function WaitingRoomHost() {
       }
       setPlayerList(newList);
       console.log(playersList);
-    })
-  }, [socket, playersList, playerId]);
-  
+    }
+  }, [socket]);
+
   return (
     <>
     <Layout/>
