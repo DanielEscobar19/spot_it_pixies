@@ -3,8 +3,9 @@ import '../css/pages/Homepage.scss'
 import { io } from "socket.io-client";
 
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Button from '../components/Button';
+import { SocketContext } from '../context/socket';
 
 export default function HomePage() {
   const [name, setName] = useState('');
@@ -29,7 +30,7 @@ export default function HomePage() {
   // }, []);
 
   // TODO: connect to server in oracle or debian machine
-  const socket = io.connect("http://localhost:3001");
+  const socket = useContext(SocketContext);
   useEffect(() => {
     socket.on("room_id", (roomId) => {
       setSessionPin(roomId);
@@ -45,7 +46,13 @@ export default function HomePage() {
     socket.emit("create_session");
     if (sessionPin > 0) {
       console.log(`Created session with number ${sessionPin}`);
-      navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`);
+      navigate(`/new-session?session-pin=${sessionPin}&host-name=${name}&session-name=${session}`, 
+      {replace : true, 
+      state : {
+        sessionPin : sessionPin,
+        hostName : name,
+        sessionName : session,
+      }});
     }
   }
 

@@ -1,34 +1,39 @@
 import '../css/waitingRooms/waitingRoom.scss'
 
-import React, {useEffect, useState} from 'react'
-import {useSearchParams, Link} from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 
 import Layout from './Layout'
 import Button from '../components/Button';
 import ConnectedPlayers from '../components/ConnectedPlayers';
-import io from "socket.io-client";
+import { SocketContext } from '../context/socket';
+
 
 export default function WaitingRoomHost() {
-  const socket = io.connect("http://localhost:3001");
+  const location = useLocation();
+  const socket = useContext(SocketContext);
 
-  const [searchParams, ] = useSearchParams();
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';
   });
 
-  
-  console.log( "\n\nsession-pin received " + searchParams.get("session-pin"));
-  console.log( "session-name received " + searchParams.get("session-name"));
-  console.log( "host-name received " + searchParams.get("host-name"));
+  // ********
+  // Testing console prints
+  console.log( "\n\nsession-pin received " + location.state.sessionPin);
+  console.log( "session-name received " + location.state.sessionName);
+  console.log( "host-name received " + location.state.hostName);
+  // ********
+
   let playerId = 0;
   
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "host", name : searchParams.get("host-name"), isConnected : true, id: playerId++}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: playerId++}]);
 
   useEffect(() => {
     socket.on("new_join_player" , (newPlayer) => {
-      playersList.push({type : "player", name : newPlayer, isConnected : true, id : playerId++});
-      alert("Nuevooo");
+      const newList =  [...playersList, {type : "player", name : newPlayer, isConnected : true, id : playerId++}];
+      setPlayerList(newList);
+      console.log(playersList);
     })
   }, [socket, playersList, playerId]);
   
@@ -42,7 +47,7 @@ export default function WaitingRoomHost() {
         <div className="col">
           <h1> 
             {/* <!-- TODO: Instead of "Session name", we must put the name given by the host" --> */}
-            <span className="text-muted">The Well/</span>{searchParams.get("session-name")}
+            <span className="text-muted">The Well/</span>{location.state.sessionName}
           </h1>
         </div>
       
@@ -65,13 +70,13 @@ export default function WaitingRoomHost() {
           <h2 className="unselectable-text">Session pin</h2>
           <div className="box-container mt-2">
             {/* <!-- TODO: The pin is generated automatically following a generation algorithm --> */}
-            <p className="selectable-text-all">{searchParams.get("session-pin")}</p>
+            <p className="selectable-text-all">{location.state.sessionPin}</p>
           </div>
         </div>
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
         <div className="col d-flex justify-content-center">
-          <Link replace={true} state={{playersConnected : playersList, actualPlayer : playersList[0], sessionName : searchParams.get("session-name"), sessionPin : searchParams.get("session-pin")}} to={{
+          <Link replace={true} state={{playersConnected : playersList, actualPlayer : playersList[0], sessionName :location.state.sessionName, sessionPin : location.state.sessionPin}} to={{
             pathname: "/game-room",
            }}> 
             <Button title="Start" /> 
