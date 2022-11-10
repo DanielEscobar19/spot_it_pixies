@@ -19,65 +19,17 @@ export default function WaitingRoomGuest() {
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
-    socket.emit("get_players", location.state.sessionPin);
   }, []);
 
-  // ********
-  // Testing console prints
-  console.log( "\n\nsession-pin received " + location.state.sessionPin);
-  console.log( "session-name received " + location.state.sessionName);
- 
-  console.log( "guest-name received " + location.state.guestName);
-  // ********
-  
-  
-  // TODO: add the new connected players. This logic is managed through sockets
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++ }]);
 
   useEffect(() => {
-    console.log("Update de playersList ", playersList);
-  }, [playersList]);
-
-  useEffect(() => {
-    socket.on("new_join_player" , (players) => {
-      console.log("Received players ", players);
-      updatePlayers(players);
-    })
-
-    socket.on("players_list", (players) => {
-      console.log("Received players ", players);
-      updatePlayers(players);
-    })
-
-    function updatePlayers(players) {
-      let playerType = "";
-      console.log("players.length ", players.length);
-      for(let i = 0; i < players.length; ++i) {
-        if (playersList.findIndex((x) => x.name == players[i]) < 0) {
-          if (i > 0) {
-            playerType = "player";
-          } else {
-            playerType = "host";
-          }
-
-          setPlayerList([...playersList, {type : playerType, name : players[i], isConnected : false, 
-            id : playerId++ }])
-        }
-      }
-
-      console.log("playersList ", playersList);
-    }
-  }, [socket, playersList]);
-  
-
-  useEffect(() => {
-    socket.on("newReadyGuest", (guestData) => {
-      let index = playersList.findIndex((x) => x.name == guestData.guestName);
-      let newPlayersList = [...playersList];
-      newPlayersList[index].isConnected = guestData.boolGuestReady;
-      setPlayerList(newPlayersList);
-    });
-
+    // socket.on("newReadyGuest", (guestData) => {
+    //   let index = playersList.findIndex((x) => x.name == guestData.guestName);
+    //   let newPlayersList = [...playersList];
+    //   newPlayersList[index].isConnected = guestData.boolGuestReady;
+    //   setPlayerList(newPlayersList);
+    // });
 
     socket.on("started_game", (useless) => {
       console.log("Game started");
@@ -90,7 +42,7 @@ export default function WaitingRoomGuest() {
           , sessionPin : location.state.sessionPin
       }})
     });
-  },[socket]);
+  });
 
 
   function clickedReady () {
@@ -148,7 +100,7 @@ export default function WaitingRoomGuest() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList}/>
+    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} playerId={playerId} sessionPin={location.state.sessionPin}/>
 
     {/* <!-- box indicating if we for the host to start the game --> */}
     {/* <!-- This text only appears if there is no player connected apart from the host --> */}
