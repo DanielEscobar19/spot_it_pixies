@@ -55,6 +55,7 @@ io.on("connection", (socket) => {
   socket.on("cliente-pedir-cartas", (data) =>{
     let cartaARepartir = rooms[data].cardToDeal;
     socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + (56 / rooms[data].playersCount))), wellTop]);
+    cartaARepartir += ((56 / rooms[data].playersCount) -1)
   });
 
   socket.on("simbolo_seleccionado", (data) => {
