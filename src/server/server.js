@@ -80,31 +80,37 @@ io.on("connection", (socket) => {
   })
 
 
-  socket.on("join_session", (joinInfo) => {
-    console.log(`${joinInfo.playerName} Trying to join session with number ${joinInfo.sessionId}`);
+  socket.on("join_session", (playerName, sessionId) => {
+    console.log(`${playerName} Trying to join session with number ${sessionId}`);
 
-    let canJoin = false;
     let roomIndex = -1;
     if (rooms.length > 0) {
-      roomIndex = rooms.findIndex(x => x.id == joinInfo.sessionId);
-      console.log(`rooms ${rooms[0].id} found index ${roomIndex}`);
+      roomIndex = rooms.findIndex(x => x.id == sessionId);
+      console.log(`Join session: forund room id (${rooms[0].id}) found at index ${roomIndex}`);
     }
 
     if (roomIndex != -1 && rooms[roomIndex].playersCount < 8) {
       ++rooms[roomIndex].playersCount;
-      socket.join(joinInfo.sessionId);
-      canJoin = true;
-      rooms[roomIndex].players.push(joinInfo.playerName);
+      socket.join(sessionId);
+      console.log(`Joined session with number ${sessionId}`);
+      rooms[roomIndex].players.push(playerName);
+      console.log("Socket rooms: ", socket.rooms);
+      console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
       // TODO: cambiar el 100 quemado 
-      socket.broadcast.emit("new_join_player", rooms[roomIndex].players);
-      socket.emit("new_join_player", rooms[roomIndex].players);
-      console.log(`Joined session with number ${joinInfo.sessionId}`);
+      socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
+      // socket.emit("new_join_player", rooms[roomIndex].players);
       socket.emit("join_validation", true, rooms[roomIndex].sessionName);
     } else {
-      console.log(`Not joined session with number ${joinInfo.sessionId}`);
+      console.log(`Not joined session with number ${sessionId}`);
       socket.emit("join_validation", false, "");
     }
   })
+
+  socket.on("start_game", (sessionId) => {
+    console.log("Host started the game");
+    console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
+    socket.to(parseInt(sessionId)).emit("started_game", "useless");
+  });
 
   socket.on("get_players", (sessionId) => {
     let roomIndex = -1;
