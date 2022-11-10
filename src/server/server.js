@@ -52,8 +52,22 @@ io.on("connection", (socket) => {
 
   console.log(`User connected: ${socket.id}`);
 
+  socket.on("send_message", (message) => {
+    console.log("rooms ", socket.rooms);
+    socket.emit("received_message", socket.rooms[1]);
+  });
+
+  socket.on("join-socket-room", (number) => {
+    socket.join(number);
+    console.log("socket joined rooms ", socket.rooms);
+  })
+
   socket.on("cliente-pedir-cartas", (data) =>{
+    console.log("Pin ", data);
     let roomIndex =  rooms.findIndex(x => x.id == data);
+    console.log("roomIndex ", roomIndex);
+    console.log("rooms[roomIndex] ", rooms[roomIndex]);
+
     let cartaARepartir = rooms[roomIndex].cardToDeal;
     let cartasPorJugador = (56 / rooms[roomIndex].playersCount)
     socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador)), wellTop]);
@@ -61,6 +75,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("simbolo_seleccionado", (data) => {
+    console.log("simbolo_seleccionado data", data);
     let esta = false;
     for (let i = 0; i < 8; i += 1) {
       if (data.simbolo == wellTop[i]) {
@@ -136,7 +151,7 @@ io.on("connection", (socket) => {
     if (rooms.length > 0 && rooms.findIndex(x => x.id == sessionNumber) > -1) {
       console.log(`The room already exists room id ${rooms[0].id}`);
     } else {
-      rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [hostName]});
+      rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, cardToDeal : 1, winnerPlayer : "null", players: [hostName]});
       console.log(`rooms ${rooms}`);
   
       socket.join(sessionNumber);

@@ -16,7 +16,7 @@ import io from 'socket.io-client';
 
 
 export default function GameRoom(props) {
-    const socket = useContext(SocketContext);
+    const socket = io.connect(SOCKET_URL);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -42,6 +42,7 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         setInitialTime(new Date());
+        socket.emit("join-socket-room", location.state.sessionPin);
         socket.emit("cliente-pedir-cartas",location.state.sessionPin);
     },[]);
 
@@ -115,14 +116,14 @@ export default function GameRoom(props) {
         })      
         
         socket.on("cambio-top-well", (data) => {
-            alert("Se cambia el tope del well");
+            // alert("Se cambia el tope del well");
             setWellTop(data);
         })
 
         socket.on("hay-ganador", (data)=>{
             setHayGanador(data);
         })
-    })
+    }, [socket])
 
 
     function enviarCartaSeleccionada(idSimbolo) {

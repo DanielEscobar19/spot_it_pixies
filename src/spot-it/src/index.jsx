@@ -16,12 +16,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ErrorNotFound from './pages/ErrorNotFound';
 import {SocketContext, socket} from './context/socket';
-
+import Client from './pages/Client';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <SocketContext.Provider value={socket}>
     <Router>
       <Routes>
+          <Route path="/client" element={<Client />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/existing-session" element={<WaitingRoomGuest />} />
           <Route path="/home-page" element={<HomePage/>} />
