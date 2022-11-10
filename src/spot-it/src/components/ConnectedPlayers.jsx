@@ -32,12 +32,7 @@ export default function ConnectedPlayers({playersList, setPlayerList, sessionPin
             playerType = "host";
           }
           newList = [...newList, {type : playerType, name : players[i], isConnected : false, 
-            id : () => {
-              let temp = playerId;
-              setPlayerId(playerId + 1);
-              return temp;
-            }
-        }];
+            id : ++playerId }];
         }
       }
       setPlayerList(newList);
