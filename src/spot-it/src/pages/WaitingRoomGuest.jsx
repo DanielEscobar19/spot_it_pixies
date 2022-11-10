@@ -13,26 +13,62 @@ import { SocketContext } from '../context/socket';
 export default function WaitingRoomGuest() {
   const location = useLocation();
   const socket = useContext(SocketContext);
-  const playerId = 0;
+  let playerId = 0;
 
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
+    socket.emit("get_players", location.state.sessionPin);
   }, []);
 
   // ********
   // Testing console prints
   console.log( "\n\nsession-pin received " + location.state.sessionPin);
   console.log( "session-name received " + location.state.sessionName);
+ 
   console.log( "guest-name received " + location.state.guestName);
   // ********
   
   
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: 0 }]);
+  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++ }]);
 
+  useEffect(() => {
+    console.log("Update de playersList ", playersList);
+  }, [playersList]);
 
+  useEffect(() => {
+    socket.on("new_join_player" , (players) => {
+      console.log("Received players ", players);
+      updatePlayers(players);
+    })
+
+    socket.on("players_list", (players) => {
+      console.log("Received players ", players);
+      updatePlayers(players);
+    })
+
+    function updatePlayers(players) {
+      let playerType = "";
+      console.log("players.length ", players.length);
+      for(let i = 0; i < players.length; ++i) {
+        if (playersList.findIndex((x) => x.name == players[i]) < 0) {
+          if (i > 0) {
+            playerType = "player";
+          } else {
+            playerType = "host";
+          }
+
+          setPlayerList([...playersList, {type : playerType, name : players[i], isConnected : false, 
+            id : playerId++ }])
+        }
+      }
+
+      console.log("playersList ", playersList);
+    }
+  }, [socket, playersList]);
+  
 
   useEffect(() => {
     socket.on("newReadyGuest", (guestData) => {
@@ -47,8 +83,8 @@ export default function WaitingRoomGuest() {
       console.log("Game started");
       navigate("/game-room", {
         replace : true,
-         state : 
-         {playersConnected : playersList
+         state : { 
+          playersConnected : playersList
           , actualPlayer : playersList.find((x) => x.name == location.state.guestName)
           , sessionName :location.state.sessionName
           , sessionPin : location.state.sessionPin
@@ -67,8 +103,8 @@ export default function WaitingRoomGuest() {
     socket.emit("guestIsReady", {guestName: location.state.guestName, boolGuestReady: true, sessionPin: location.state.sessionPin})
   }
 
-    return (
-      <>
+  return (
+    <>
     <Layout/>
     {/* <!-- information about the session section --> */}
     <section className="container text-center">
@@ -112,29 +148,29 @@ export default function WaitingRoomGuest() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId}/>
+    <ConnectedPlayers playersList={playersList}/>
 
     {/* <!-- box indicating if we for the host to start the game --> */}
-      {/* <!-- This text only appears if there is no player connected apart from the host --> */}
-      <div className="col d-flex text-center justify-content-center my-5 d-cursor pt-5">
-        <section className="box-container py-3">
-          <h1>
-            Please wait
-            <br />
-            The session host will start game soon.
-          </h1>
-        </section>
-        <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>
-      </div>
-
-      {/* <!-- inspirational quotes --> */}
-      <div className="col d-flex text-center justify-content-center mb-5">
-        <h3 className="quote">
-          are you good? be better
+    {/* <!-- This text only appears if there is no player connected apart from the host --> */}
+    <div className="col d-flex text-center justify-content-center my-5 d-cursor pt-5">
+      <section className="box-container py-3">
+        <h1>
+          Please wait
           <br />
-          -Sanderson
-        </h3>
-      </div>
+          The session host will start game soon.
+        </h1>
+      </section>
+      <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>
+    </div>
+
+    {/* <!-- inspirational quotes --> */}
+    <div className="col d-flex text-center justify-content-center mb-5">
+      <h3 className="quote">
+        are you good? be better
+        <br />
+        -Sanderson
+      </h3>
+    </div>
   </>
   )
 }

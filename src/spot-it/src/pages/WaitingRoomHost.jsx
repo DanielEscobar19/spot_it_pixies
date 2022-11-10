@@ -11,11 +11,12 @@ import { SocketContext } from '../context/socket';
 
 export default function WaitingRoomHost() {
   const location = useLocation();
-  const playerId = 0;
+  let playerId = 0;
 
   const socket = useContext(SocketContext);
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';
+    socket.emit("get_players", location.state.sessionPin);
   }, []);
 
   // ********
@@ -26,7 +27,43 @@ export default function WaitingRoomHost() {
   // ********
 
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: 0}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: playerId++}]);
+
+  useEffect(() => {
+    console.log("Update de playersList ", playersList);
+  }, [playersList]);
+
+  useEffect(() => {
+    socket.on("new_join_player" , (players) => {
+      console.log("Received players ", players);
+      updatePlayers(players);
+    })
+
+    socket.on("players_list", (players) => {
+      console.log("Received players ", players);
+      updatePlayers(players);
+    })
+
+    function updatePlayers(players) {
+      let playerType = "";
+      console.log("players.length ", players.length);
+      for(let i = 0; i < players.length; ++i) {
+        if (playersList.findIndex((x) => x.name == players[i]) < 0) {
+          if (i > 0) {
+            playerType = "player";
+          } else {
+            playerType = "host";
+          }
+
+          setPlayerList([...playersList, {type : playerType, name : players[i], isConnected : false, 
+            id : playerId++ }])
+        }
+      }
+
+      console.log("playersList ", playersList);
+    }
+  }, [socket, playersList]);
+  
 
   return (
     <>
@@ -80,7 +117,7 @@ export default function WaitingRoomHost() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId}/>
+    <ConnectedPlayers playersList={playersList}/>
     {/* <!-- box indicating if we are still waiting for players --> */}
     {/* <!-- TODO: This text only appears if there is no player connected apart from the host --> */}
     <div className="col d-flex text-center justify-content-center">
