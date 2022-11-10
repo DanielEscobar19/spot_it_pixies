@@ -80,7 +80,7 @@ export default function HomePage() {
 
   function joinSession() {
     console.log("Trying join session ", joinSessionPin, "  ", name);
-    socket.emit("join_session", {sessionId : joinSessionPin, playerName : name});
+    socket.emit("join_session", name, joinSessionPin);
   }
 
 
