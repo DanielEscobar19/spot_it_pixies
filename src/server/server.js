@@ -105,27 +105,48 @@ io.on("connection", (socket) => {
 
   socket.on("join_session", (playerName, sessionId) => {
     console.log(`${playerName} Trying to join session with number ${sessionId}`);
-
+    let repeatedName = false;
     let roomIndex = -1;
     if (rooms.length > 0) {
       roomIndex = rooms.findIndex(x => x.id == sessionId);
-      console.log(`Join session: forund room id (${rooms[0].id}) found at index ${roomIndex}`);
+      if (roomIndex > -1) {
+        repeatedName = rooms[roomIndex].players.findIndex((x) => x == playerName) !== -1;
+      } 
+      console.log(`Join session: found room id (${rooms[0].id}) found at index ${roomIndex}`);
     }
 
-    if (roomIndex != -1 && rooms[roomIndex].playersCount < 8) {
-      ++rooms[roomIndex].playersCount;
+    if (roomIndex != -1 && rooms[roomIndex].playersCount < 8 && repeatedName == false) {
+      // we add the player name
+      rooms[roomIndex].players.push(playerName);
+      // player count increase wwith the join
+      rooms[roomIndex].playersCount = rooms[roomIndex].players.length;
+
+      // join the socket room to emit messages
       socket.join(sessionId);
       console.log(`Joined session with number ${sessionId}`);
-      rooms[roomIndex].players.push(playerName);
       console.log("Socket rooms: ", socket.rooms);
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
-      // TODO: cambiar el 100 quemado 
+
+
+      // sends the player list to everyone in the room so they can update their list
       socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
-      socket.emit("new_join_player", rooms[roomIndex].players);
+
+      // socket.emit("new_join_player", rooms[roomIndex].players);
+      // sends permission to client to join
       socket.emit("join_validation", true, rooms[roomIndex].sessionName);
     } else {
+      let denegationMessage = "";
+
+      if (roomIndex == -1) {
+        denegationMessage = `Room ${sessionId} not found`;
+      } else if (rooms[roomIndex].playersCount >= 8) {
+        denegationMessage = `Room ${sessionId} is full`;
+      } else if ( repeatedName == true ) {
+        denegationMessage = `There is already a player named ${playerName} in room ${sessionId}`;
+      }
+
       console.log(`Not joined session with number ${sessionId}`);
-      socket.emit("join_validation", false, "");
+      socket.emit("join_validation", false, denegationMessage);
     }
   })
 
@@ -149,14 +170,16 @@ io.on("connection", (socket) => {
 
   socket.on("create_session", (hostName, sessionName) => {
     if (rooms.length > 0 && rooms.findIndex(x => x.id == sessionNumber) > -1) {
-      console.log(`The room already exists room id ${rooms[0].id}`);
+      console.log(`\n The room already exists room id ${rooms[0].id}`);
     } else {
+      // creation of the room
       rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, cardToDeal : 1, winnerPlayer : "null", players: [hostName]});
-      console.log(`rooms ${rooms}`);
-  
-      socket.join(sessionNumber);
+      console.log(`\n create_session: rooms in rooms array: ${rooms}`);
+
+      // server responds to client with yhe session number assigned
       socket.emit("room_id", sessionNumber);
-      console.log(`Created session with number ${sessionNumber}`);
+      console.log(`Created session with number ${sessionNumber} \n`);
+
       // TODO: increment session number after creating the room
     }
   })

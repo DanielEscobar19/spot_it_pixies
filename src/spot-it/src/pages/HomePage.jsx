@@ -5,10 +5,13 @@ import { io } from "socket.io-client";
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
 import Button from '../components/Button';
-import { SocketContext } from '../context/socket';
+import { SOCKET_URL } from '../context/socket';
+
 
 export default function HomePage() {
   const [joinError, setJoinError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
 
   const [name, setName] = useState('');
   const navigate  = useNavigate()
@@ -23,22 +26,24 @@ export default function HomePage() {
   const [joinSessionPin, setJoinSessionPin] = useState(0);
   const validateJoinSession = !(name.length > 0 && joinSessionPin > 0);
 
-  const socket = useContext(SocketContext);
+  // socket to commuunicate with server
+  const socket = io.connect(SOCKET_URL);
+
   useEffect(() => {
     socket.on("room_id", (roomId) => {
       setSessionPin(roomId);
     })
 
-    socket.on("join_validation", (canJoin, sessionName) => {
+    socket.on("join_validation", (canJoin, data) => {
       setCanJoin(canJoin);
-      if (sessionName !== "") {
-        setSession(sessionName);
-      }
       console.log("canJoin ", canJoin);
       if (canJoin === true) {
         setJoinError(false);
+        setSession(data);
+
       } else {
         setJoinError(true);
+        setErrorMessage(data);
       }
     })
     
@@ -46,6 +51,7 @@ export default function HomePage() {
   
   useEffect(() => {
     if (sessionPin > 0) {
+      // if session pin is greater than 0 it means we received the new pin form the server
       console.log(`Created session with number ${sessionPin}`);
       navigate("/new-session", 
       {replace : true, 
@@ -127,7 +133,7 @@ export default function HomePage() {
                     <input value={joinSessionPin} onChange={(e) => {setJoinSessionPin(e.currentTarget.value)}} type="text" className="form-control mb-3" id="sessionPin" placeholder="e.g: 1254" size="50"/>
                     <Button onClick={joinSession} title="Join" disabled={validateJoinSession} />
                     <div className={`${joinError === true? "" : "hiden"} alert alert-warning unselectable-text ms-1 mt-2 me-1 mb-0`} role="alert">
-                      Could not join the session {joinSessionPin}
+                      {errorMessage}
                     </div>
                   </div>
                 </div>
