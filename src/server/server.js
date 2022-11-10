@@ -52,8 +52,9 @@ io.on("connection", (socket) => {
 
   console.log(`User connected: ${socket.id}`);
 
-  socket.on("cliente-pedir-cartas", () =>{
-    socket.emit("servidor-enviar-cartas", [shuffledCards.slice(1,56), wellTop]);
+  socket.on("cliente-pedir-cartas", (data) =>{
+    let cartaARepartir = rooms[data].cardToDeal;
+    socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + (56 / rooms[data].playersCount))), wellTop]);
   });
 
   socket.on("simbolo_seleccionado", (data) => {
@@ -67,7 +68,11 @@ io.on("connection", (socket) => {
     if (esta) {
       socket.emit("acerto-simbolo", [true]);
       wellTop = data.carta;
-      socket.broadcast.emit("cambio-top-well", wellTop);
+      socket.to(parseInt(data.sessionPin)).emit("cambio-top-well", wellTop);
+      if (data.cantidadCartas == 1) {
+        socket.to(parseInt(data.sessionPin)).emit("hay-ganador", true);
+        socket.emit("hay-ganador", true);
+      }
     } else {
       socket.emit("acerto-simbolo", [false]);
     }
@@ -107,7 +112,7 @@ io.on("connection", (socket) => {
 
 
   socket.on("create_session", (name) => {
-    rooms.push({id : sessionNumber, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [name]});
+    rooms.push({id : sessionNumber, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [name], cardToDeal: 1});
     console.log(`rooms ${rooms}`);
 
     socket.join(sessionNumber);

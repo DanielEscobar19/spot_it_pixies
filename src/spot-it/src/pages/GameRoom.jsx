@@ -27,6 +27,7 @@ export default function GameRoom(props) {
     const [cantidadCartasJugador, setCantidadCartasJugador] = useState(0);
     const [initialTime, setInitialTime] = useState(moment());
     const [wellTop, setWellTop] = useState([]);
+    const [hayGanador, setHayGanador] = useState(false);
     
     // TODO: distribute cards through players and no the same amount to every player
     location.state.playersConnected.map((player) => {
@@ -41,7 +42,7 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         setInitialTime(new Date());
-        socket.emit("cliente-pedir-cartas","1");
+        socket.emit("cliente-pedir-cartas",location.state.sessionPin);
     },[]);
 
     useEffect(() => {
@@ -64,9 +65,9 @@ export default function GameRoom(props) {
 
 
     useEffect(()=>{
-        setCartaActualJugador( () => {
+        setHayGanador( () => {
             // TODO: check each player cards
-            if (cartaActualJugador === 57) {
+            if (hayGanador === true) {
                 let finalTime = moment();
                 let hoursDiff = finalTime.diff(initialTime, "hours");
                 let minutesDiff = finalTime.diff(initialTime, "minutes");
@@ -79,10 +80,10 @@ export default function GameRoom(props) {
                     sessionTime : `${hoursDiff}:${minutesDiff}:${secondsDiff}`,
                 }});
             }
-            return cartaActualJugador;
+            return hayGanador;
         });
     },[
-        cartaActualJugador, initialTime,
+        hayGanador, initialTime,
         location.state.playersConnected, location.state.sessionName,
         location.state.sessionPin, navigate
     ]);
@@ -104,18 +105,30 @@ export default function GameRoom(props) {
                     setCantidadCartasJugador(cantidadCartasJugador - 1);
                     setActivarAnimacion(false);
                 }, 1200);
+
             }
+            
             else {
                 setAcertoSimbolo(false);
                 setPuedeElegirCarta(false);
             }
-        })        
+        })      
+        
+        socket.on("cambio-top-well", (data) => {
+            alert("Se cambia el tope del well");
+            setWellTop(data);
+        })
+
+        socket.on("hay-ganador", (data)=>{
+            setHayGanador(data);
+        })
     })
 
 
     function enviarCartaSeleccionada(idSimbolo) {
         if (puedeElegirCarta) {
-            socket.emit("simbolo_seleccionado", {simbolo: idSimbolo, carta: shuffledCards[cartaActualJugador].simbolos});
+            socket.emit("simbolo_seleccionado", {simbolo: idSimbolo, carta: shuffledCards[cartaActualJugador].simbolos
+                , cantidadCartas: cantidadCartasJugador, sessionPin: location.state.sessionPin});
         }
     }
 
