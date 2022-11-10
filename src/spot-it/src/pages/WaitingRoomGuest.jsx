@@ -13,7 +13,8 @@ import { SocketContext } from '../context/socket';
 export default function WaitingRoomGuest() {
   const location = useLocation();
   const socket = useContext(SocketContext);
-  const [playerId, setPlayerId] = useState(0);
+  const playerId = 0;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +31,8 @@ export default function WaitingRoomGuest() {
   
   // TODO: add the new connected players. This logic is managed through sockets
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: 0 }]);
+
+
 
   useEffect(() => {
     socket.on("newReadyGuest", (guestData) => {
@@ -109,7 +112,7 @@ export default function WaitingRoomGuest() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId} setPlayerId={setPlayerId}/>
+    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId}/>
 
     {/* <!-- box indicating if we for the host to start the game --> */}
       {/* <!-- This text only appears if there is no player connected apart from the host --> */}
@@ -118,7 +121,7 @@ export default function WaitingRoomGuest() {
           <h1>
             Please wait
             <br />
-            The sesion host will start game soon.
+            The session host will start game soon.
           </h1>
         </section>
         <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>

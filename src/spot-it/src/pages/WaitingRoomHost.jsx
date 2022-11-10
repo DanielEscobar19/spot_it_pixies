@@ -11,10 +11,11 @@ import { SocketContext } from '../context/socket';
 
 export default function WaitingRoomHost() {
   const location = useLocation();
-  const [playerId, setPlayerId] = useState(0);
+  const playerId = 0;
+
   const socket = useContext(SocketContext);
   useEffect(() => {
-    document.title = 'Spot it - Waiting room - guest';
+    document.title = 'Spot it - Waiting room - host';
   }, []);
 
   // ********
@@ -79,7 +80,7 @@ export default function WaitingRoomHost() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId} setPlayerId={setPlayerId}/>
+    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} sessionPin={location.state.sessionPin} playerId={playerId}/>
     {/* <!-- box indicating if we are still waiting for players --> */}
     {/* <!-- TODO: This text only appears if there is no player connected apart from the host --> */}
     <div className="col d-flex text-center justify-content-center">
