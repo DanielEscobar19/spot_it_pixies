@@ -53,9 +53,11 @@ io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
   socket.on("cliente-pedir-cartas", (data) =>{
-    let cartaARepartir = rooms[data].cardToDeal;
-    socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + (56 / rooms[data].playersCount))), wellTop]);
-    cartaARepartir += ((56 / rooms[data].playersCount) -1)
+    let roomIndex =  rooms.findIndex(x => x.id == data);
+    let cartaARepartir = rooms[roomIndex].cardToDeal;
+    let cartasPorJugador = (56 / rooms[roomIndex].playersCount)
+    socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador)), wellTop]);
+    cartaARepartir += (cartasPorJugador -1)
   });
 
   socket.on("simbolo_seleccionado", (data) => {
