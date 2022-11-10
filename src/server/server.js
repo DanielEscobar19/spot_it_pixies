@@ -98,7 +98,7 @@ io.on("connection", (socket) => {
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
       // TODO: cambiar el 100 quemado 
       socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
-      // socket.emit("new_join_player", rooms[roomIndex].players);
+      socket.emit("new_join_player", rooms[roomIndex].players);
       socket.emit("join_validation", true, rooms[roomIndex].sessionName);
     } else {
       console.log(`Not joined session with number ${sessionId}`);
@@ -109,7 +109,8 @@ io.on("connection", (socket) => {
   socket.on("start_game", (sessionId) => {
     console.log("Host started the game");
     console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
-    socket.to(parseInt(sessionId)).emit("started_game", "useless");
+    console.log("Socket rooms: ", socket.rooms);
+    socket.broadcast.emit("started_game", "useless");
   });
 
   socket.on("get_players", (sessionId) => {
