@@ -11,11 +11,10 @@ import { SocketContext } from '../context/socket';
 
 export default function WaitingRoomHost() {
   const location = useLocation();
-  const socket = useContext(SocketContext);
   const [playerId, setPlayerId] = useState(0);
+  const socket = useContext(SocketContext);
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
-    // socket.emit("get_players", location.state.sessionPin);
   }, []);
 
   // ********
@@ -26,34 +25,7 @@ export default function WaitingRoomHost() {
   // ********
 
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: () => {
-    let temp = playerId;
-    setPlayerId(playerId + 1);
-    return temp;
-  } }]);
-
-  
-
-  // useEffect(() => {
-  //   socket.on("new_join_player" , (players) => {
-  //     updatePlayers(players);
-  //   })
-
-  //   socket.on("players_list", (players) => {
-  //     updatePlayers(players);
-  //   })
-
-  //   function updatePlayers(players) {
-  //     let newList =  [...playersList];
-  //     for(let i = 0; i < players.length; ++i) {
-  //       if (newList.findIndex((x) => x.name == players[i]) < 0) {
-  //         newList = [...newList, {type : "player", name : players[i], isConnected : false, id : playerId++}];
-  //       }
-  //     }
-  //     setPlayerList(newList);
-  //     console.log(playersList);
-  //   }
-  // }, [socket]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: 0}]);
 
   return (
     <>
@@ -94,10 +66,13 @@ export default function WaitingRoomHost() {
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
         <div className="col d-flex justify-content-center">
-          <Link replace={true} state={{playersConnected : playersList, actualPlayer : playersList[0], sessionName :location.state.sessionName, sessionPin : location.state.sessionPin}} to={{
-            pathname: "/game-room",
-           }}> 
-            <Button title="Start" /> 
+          <Link replace={true} state={
+            {playersConnected : playersList
+              , actualPlayer : playersList.find((x) => x.name == location.state.hostName)
+              , sessionName :location.state.sessionName
+              , sessionPin : location.state.sessionPin
+            }} to={{pathname: "/game-room",}}> 
+            <Button title="Start" onClick={() => {socket.emit("start_game", location.state.sessionPin)}} /> 
           </Link>
         </div>
       </div>

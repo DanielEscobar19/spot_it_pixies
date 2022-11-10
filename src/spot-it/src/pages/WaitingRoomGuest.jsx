@@ -2,7 +2,7 @@ import '../css/waitingRooms/waitingRoom.scss'
 import '../css/waitingRooms/guestRoom.css'
 
 import React, { useEffect, useState, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Layout from './Layout'
 import Button from '../components/Button';
@@ -14,10 +14,10 @@ export default function WaitingRoomGuest() {
   const location = useLocation();
   const socket = useContext(SocketContext);
   const [playerId, setPlayerId] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
-    // socket.emit("get_players", location.state.sessionPin);
   }, []);
 
   // ********
@@ -29,46 +29,27 @@ export default function WaitingRoomGuest() {
   
   
   // TODO: add the new connected players. This logic is managed through sockets
-  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: () => {
-      let temp = playerId;
-      setPlayerId(playerId + 1);
-      return temp;
-    }
-  }]);
+  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: 0 }]);
 
-  // useEffect(() => {
-  //   socket.on("new_join_player" , (players) => {
-  //     updatePlayers(players);
-  //   })
-
-  //   socket.on("players_list", (players) => {
-  //     updatePlayers(players);
-  //   })
-
-  //   function updatePlayers(players) {
-  //     let newList =  [...playersList];
-  //     let playerType = "";
-  //     for(let i = 0; i < players.length; ++i) {
-  //       if (newList.findIndex((x) => x.name == players[i]) < 0) {
-  //         if (i > 0) {
-  //           playerType = "player";
-  //         } else {
-  //           playerType = "host";
-  //         }
-  //         newList = [...newList, {type : playerType, name : players[i], isConnected : false, id : playerId++}];
-  //       }
-  //     }
-  //     setPlayerList(newList);
-  //     console.log(playersList);
-  //   }
-  // }, [socket]);
-  
   useEffect(() => {
     socket.on("newReadyGuest", (guestData) => {
       let index = playersList.findIndex((x) => x.name == guestData.guestName);
       let newPlayersList = [...playersList];
       newPlayersList[index].isConnected = guestData.boolGuestReady;
       setPlayerList(newPlayersList);
+    });
+
+
+    socket.on("started_game", (useless) => {
+      console.log("Game started");
+      navigate("/game-room", {
+        replace : true,
+         state : 
+         {playersConnected : playersList
+          , actualPlayer : playersList.find((x) => x.name == location.state.guestName)
+          , sessionName :location.state.sessionName
+          , sessionPin : location.state.sessionPin
+      }})
     });
   },[socket]);
 
