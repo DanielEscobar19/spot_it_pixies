@@ -119,13 +119,17 @@ io.on("connection", (socket) => {
   })
 
   socket.on("create_session", (hostName, sessionName) => {
-    rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [hostName]});
-    console.log(`rooms ${rooms}`);
-
-    socket.join(sessionNumber);
-    socket.emit("room_id", sessionNumber);
-    console.log(`Created session with number ${sessionNumber}`);
-    // TODO: increment session number after creating the room
+    if (rooms.length > 0 && rooms.findIndex(x => x.id == sessionNumber) > -1) {
+      console.log(`The room already exists room id ${rooms[0].id}`);
+    } else {
+      rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, topCard : "null", winnerPlayer : "null", players: [hostName]});
+      console.log(`rooms ${rooms}`);
+  
+      socket.join(sessionNumber);
+      socket.emit("room_id", sessionNumber);
+      console.log(`Created session with number ${sessionNumber}`);
+      // TODO: increment session number after creating the room
+    }
   })
 });
 
