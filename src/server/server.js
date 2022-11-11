@@ -102,6 +102,14 @@ io.on("connection", (socket) => {
 
   })
 
+  socket.on("announce_join", (sessionId) => {
+    // sends the player list to everyone in the room so they can update their list
+    let roomIndex = rooms.findIndex(x => x.id == sessionId);
+    if (roomIndex > -1) {
+      console.log("new_join_player to toom ", sessionId, " data room ", rooms[roomIndex]);
+      socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
+    }
+  })
 
   socket.on("join_session", (playerName, sessionId) => {
     console.log(`${playerName} Trying to join session with number ${sessionId}`);
@@ -128,8 +136,8 @@ io.on("connection", (socket) => {
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
 
 
-      // sends the player list to everyone in the room so they can update their list
-      socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
+      // // sends the player list to everyone in the room so they can update their list
+      // socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
 
       // socket.emit("new_join_player", rooms[roomIndex].players);
       // sends permission to client to join

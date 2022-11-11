@@ -6,16 +6,19 @@ import { Link, useLocation } from 'react-router-dom';
 import Layout from './Layout'
 import Button from '../components/Button';
 import ConnectedPlayers from '../components/ConnectedPlayers';
-import { SocketContext } from '../context/socket';
+import { SOCKET_URL } from '../context/socket';
+import { io } from "socket.io-client";
 
 
 export default function WaitingRoomHost() {
   const location = useLocation();
   let playerId = 0;
 
-  const socket = useContext(SocketContext);
+  const socket = io.connect(SOCKET_URL);
+
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';
+    socket.emit("join-socket-room", location.state.sessionPin);
   }, []);
 
   const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: playerId++}]);

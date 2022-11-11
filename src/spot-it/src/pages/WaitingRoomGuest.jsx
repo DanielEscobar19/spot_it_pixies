@@ -7,18 +7,23 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Layout from './Layout'
 import Button from '../components/Button';
 import ConnectedPlayers from '../components/ConnectedPlayers';
-import { SocketContext } from '../context/socket';
+import { SOCKET_URL } from '../context/socket';
+import { io } from "socket.io-client";
 
 
 export default function WaitingRoomGuest() {
   const location = useLocation();
-  const socket = useContext(SocketContext);
   let playerId = 0;
+  
+  const socket = io.connect(SOCKET_URL);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
+    socket.emit("join-socket-room", location.state.sessionPin);
+    socket.emit("get_players", location.state.sessionPin);
+    socket.emit("announce_join", location.state.sessionPin);
   }, []);
 
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++ }]);
@@ -42,7 +47,7 @@ export default function WaitingRoomGuest() {
           , sessionPin : location.state.sessionPin
       }})
     });
-  });
+  }, [socket]);
 
 
   function clickedReady () {
