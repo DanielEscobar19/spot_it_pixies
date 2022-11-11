@@ -36,17 +36,17 @@ export default function WaitingRoomGuest() {
     //   setPlayerList(newPlayersList);
     // });
 
-    socket.on("started_game", (useless) => {
-      console.log("Game started");
-      navigate("/game-room", {
-        replace : true,
-         state : { 
-          playersConnected : playersList
-          , actualPlayer : playersList.find((x) => x.name == location.state.guestName)
-          , sessionName :location.state.sessionName
-          , sessionPin : location.state.sessionPin
-      }})
-    });
+    // socket.on("started_game", (useless) => {
+    //   console.log("Game started");
+    //   navigate("/game-room", {
+    //     replace : true,
+    //      state : { 
+    //       playersConnected : playersList
+    //       , actualPlayer : playersList.find((x) => x.name == location.state.guestName)
+    //       , sessionName :location.state.sessionName
+    //       , sessionPin : location.state.sessionPin
+    //   }})
+    // });
   }, [socket]);
 
 
@@ -105,7 +105,7 @@ export default function WaitingRoomGuest() {
 
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} playerId={playerId} sessionPin={location.state.sessionPin}/>
+    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} playerId={playerId} sessionPin={location.state.sessionPin} sessionName={location.state.sessionName} playerActual={playersList[0]}/>
 
     {/* <!-- box indicating if we for the host to start the game --> */}
     {/* <!-- This text only appears if there is no player connected apart from the host --> */}

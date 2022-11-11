@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join-socket-room", (number) => {
-    socket.join(number);
+    socket.join(parseInt(number));
     console.log("socket joined rooms ", socket.rooms);
   })
 
@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
     let cartaARepartir = rooms[roomIndex].cardToDeal;
     let cartasPorJugador = (56 / rooms[roomIndex].playersCount)
     socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador)), wellTop]);
-    cartaARepartir += (cartasPorJugador -1)
+    rooms[roomIndex].cardToDeal += (cartasPorJugador -1)
   });
 
   socket.on("simbolo_seleccionado", (data) => {
@@ -97,7 +97,7 @@ io.on("connection", (socket) => {
 
     socket.on("guestIsReady", (data) => {
       let session = data.sessionPin.toString();
-      socket.broadcast.emit("newReadyGuest", data);
+      socket.to(parseInt(data.sessionPin)).emit("newReadyGuest", data);
     })
 
   })
@@ -107,9 +107,11 @@ io.on("connection", (socket) => {
     let roomIndex = rooms.findIndex(x => x.id == sessionId);
     if (roomIndex > -1) {
       console.log("new_join_player to toom ", sessionId, " data room ", rooms[roomIndex]);
+      console.log("new_join_player socket rooms ", socket.rooms);
+
       socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
     }
-  })
+  });
 
   socket.on("join_session", (playerName, sessionId) => {
     console.log(`${playerName} Trying to join session with number ${sessionId}`);
@@ -130,7 +132,7 @@ io.on("connection", (socket) => {
       rooms[roomIndex].playersCount = rooms[roomIndex].players.length;
 
       // join the socket room to emit messages
-      socket.join(sessionId);
+      socket.join(parseInt(sessionId));
       console.log(`Joined session with number ${sessionId}`);
       console.log("Socket rooms: ", socket.rooms);
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
@@ -162,7 +164,7 @@ io.on("connection", (socket) => {
     console.log("Host started the game");
     console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
     console.log("Socket rooms: ", socket.rooms);
-    socket.broadcast.emit("started_game", "useless");
+    socket.to(parseInt(sessionId)).emit("started_game", "useless");
   });
 
   socket.on("get_players", (sessionId) => {
@@ -189,11 +191,12 @@ io.on("connection", (socket) => {
       console.log(`Created session with number ${sessionNumber} \n`);
 
       // TODO: increment session number after creating the room
+      // ++rooms;
     }
   })
 });
 
 
-server.listen(3001, () => {
+server.listen(8080, "192.168.68.34", () => {
   console.log("Server running");
 });

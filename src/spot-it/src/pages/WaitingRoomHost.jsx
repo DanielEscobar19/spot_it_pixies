@@ -74,7 +74,7 @@ export default function WaitingRoomHost() {
       </div>
     </section>
 
-    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} playerId={playerId} sessionPin={location.state.sessionPin}/>
+    <ConnectedPlayers playersList={playersList} setPlayerList={setPlayerList} playerId={playerId} sessionPin={location.state.sessionPin} sessionName={location.state.sessionName} playerActual={playersList[0]}/>
     {/* <!-- box indicating if we are still waiting for players --> */}
     {/* <!-- TODO: This text only appears if there is no player connected apart from the host --> */}
     <div className="col d-flex text-center justify-content-center">

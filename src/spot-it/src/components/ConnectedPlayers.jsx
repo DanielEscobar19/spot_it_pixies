@@ -3,12 +3,13 @@ import React, { useEffect, useContext, useState } from 'react'
 import PlayerConnection from './PlayerConnection';
 import { SOCKET_URL } from '../context/socket';
 import { io } from "socket.io-client";
+import { useNavigate } from 'react-router';
 
 
-export default function ConnectedPlayers({playersList, setPlayerList, playerId, sessionPin}) {
+export default function ConnectedPlayers({playersList, setPlayerList, playerId, sessionPin, sessionName, playerActual}) {
   const playersTextColors = ["red-color", "cyan-color", "pink-color", "orange-color", "gray-color", "dark-yellow-color", "green-color"];
   const socket = io.connect(SOCKET_URL);
-
+  const navigate = useNavigate();
   useEffect(() => {
     socket.emit("join-socket-room", sessionPin);
     socket.emit("get_players", sessionPin);
@@ -17,6 +18,7 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
   }, [])
 
   useEffect(() => {
+    socket.emit("join-socket-room", sessionPin);
     socket.on("new_join_player" , (players) => {
       console.log("New_join_player Received players ", players);
       updatePlayers(players);
@@ -45,9 +47,17 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
       });
     }
 
-    return () => {
-
-    }
+    socket.on("started_game", (useless) => {
+      console.log("Game started");
+      navigate("/game-room", {
+        replace : true,
+         state : { 
+          playersConnected : playersList
+          , actualPlayer : playerActual
+          , sessionName : sessionName
+          , sessionPin : sessionPin
+      }})
+    });
   }, [socket]);
 
   return (
