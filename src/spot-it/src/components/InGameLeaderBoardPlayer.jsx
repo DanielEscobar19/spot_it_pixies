@@ -1,12 +1,12 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { SOCKET_URL, SocketContext } from '../context/socket';
 import io from 'socket.io-client';
 
 
 
 export default function InGameLeaderBoardPlayer({player, sessionPin}) {
-  const socket = io.connect(SOCKET_URL);
+  const socket = useContext(SocketContext);
   const[playerCardsRemaining, setPlayerCardsRemaining] = useState(player.cardsRemaining);
 
   useEffect(() => {
