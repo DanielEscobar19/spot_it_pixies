@@ -71,10 +71,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("cliente-pedir-cartas", (data) =>{
-    console.log("Pin ", data);
     let roomIndex =  rooms.findIndex(x => x.id == data);
-    console.log("roomIndex ", roomIndex);
-    console.log("rooms[roomIndex] ", rooms[roomIndex]);
 
     let cartaARepartir = rooms[roomIndex].cardToDeal;
     let cartasPorJugador = (56 / rooms[roomIndex].playersCount)
@@ -83,7 +80,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("simbolo_seleccionado", (data) => {
-    console.log("simbolo_seleccionado data", data);
     let esta = false;
     for (let i = 0; i < 8; i += 1) {
       if (data.simbolo == wellTop[i]) {
@@ -145,11 +141,6 @@ io.on("connection", (socket) => {
       console.log("Socket rooms: ", socket.rooms);
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
 
-
-      // // sends the player list to everyone in the room so they can update their list
-      // socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
-
-      // socket.emit("new_join_player", rooms[roomIndex].players);
       // sends permission to client to join
       socket.emit("join_validation", true, rooms[roomIndex].sessionName);
     } else {
@@ -199,7 +190,7 @@ io.on("connection", (socket) => {
       console.log(`Created session with number ${sessionNumber} \n`);
 
       // TODO: increment session number after creating the room
-      // ++rooms;
+      ++sessionNumber;
     }
   })
 });
