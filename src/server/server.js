@@ -91,6 +91,7 @@ io.on("connection", (socket) => {
       socket.emit("acerto-simbolo", [true]);
       wellTop = data.carta;
       socket.to(parseInt(data.sessionPin)).emit("cambio-top-well", wellTop);
+      socket.to(parseInt(data.sessionPin)).emit("cambio-cantidad-cartas", {name: data.name});
       if (data.cantidadCartas == 1) {
         socket.to(parseInt(data.sessionPin)).emit("hay-ganador", true);
         socket.emit("hay-ganador", true);
@@ -177,6 +178,10 @@ io.on("connection", (socket) => {
     }
   })
 
+  socket.on("restar-carta-jugador", (infoJugador) => {
+    socket.to(parseInt(infoJugador.sessionPin)).emit("cambiar-cantidad-cartas", {name: infoJugador.name, cardsRemaining: infoJugador.cardsRemaining});
+  })
+
   socket.on("create_session", (hostName, sessionName) => {
     if (rooms.length > 0 && rooms.findIndex(x => x.id == sessionNumber) > -1) {
       console.log(`\n The room already exists room id ${rooms[0].id}`);
@@ -192,6 +197,7 @@ io.on("connection", (socket) => {
       ++sessionNumber;
     }
   })
+
 });
 
 
