@@ -1,24 +1,26 @@
 import arrayShuffle from 'array-shuffle';
 import React, { useEffect, useContext, useState } from 'react'
 import PlayerConnection from './PlayerConnection';
-import { SOCKET_URL } from '../context/socket';
+import { SocketContext, SOCKET_URL } from '../context/socket';
 import { io } from "socket.io-client";
 import { useNavigate } from 'react-router';
 
 
 export default function ConnectedPlayers({playersList, setPlayerList, playerId, sessionPin, sessionName, playerActual}) {
   const playersTextColors = ["red-color", "cyan-color", "pink-color", "orange-color", "gray-color", "dark-yellow-color", "green-color"];
-  const socket = io.connect(SOCKET_URL);
+
+  // const socket = io.connect(SOCKET_URL);
+  const socket = useContext(SocketContext);
+
   const navigate = useNavigate();
   useEffect(() => {
-    socket.emit("join-socket-room", sessionPin);
+    // socket.emit("join-socket-room", sessionPin);
     socket.emit("get_players", sessionPin);
     socket.emit("announce_join", sessionPin);
     arrayShuffle(playersTextColors);
   }, [])
 
   useEffect(() => {
-    socket.emit("join-socket-room", sessionPin);
     socket.on("new_join_player" , (players) => {
       console.log("New_join_player Received players ", players);
       updatePlayers(players);
@@ -57,7 +59,7 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
           , sessionPin : sessionPin
       }})
     });
-  }, [socket]);
+  });
 
   useEffect(() => {
     console.log("update playersList ", playersList);

@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Layout from './Layout'
 import Button from '../components/Button';
 import ConnectedPlayers from '../components/ConnectedPlayers';
-import { SOCKET_URL } from '../context/socket';
+import { SocketContext,SOCKET_URL } from '../context/socket';
 import { io } from "socket.io-client";
 
 
@@ -14,7 +14,9 @@ export default function WaitingRoomHost() {
   const location = useLocation();
   let playerId = 0;
 
-  const socket = io.connect(SOCKET_URL);
+  // const socket = io.connect(SOCKET_URL);
+  const socket = useContext(SocketContext);
+
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - host';

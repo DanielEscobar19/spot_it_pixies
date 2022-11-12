@@ -41,7 +41,7 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         setInitialTime(new Date());
-        socket.emit("join-socket-room", location.state.sessionPin);
+        // socket.emit("join-socket-room", location.state.sessionPin);
         socket.emit("cliente-pedir-cartas",location.state.sessionPin);
     },[]);
 

@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
 import Button from '../components/Button';
-import { SOCKET_URL } from '../context/socket';
+import { SocketContext,SOCKET_URL } from '../context/socket';
 
 
 export default function HomePage() {
@@ -27,7 +27,9 @@ export default function HomePage() {
   const validateJoinSession = !(name.length > 0 && joinSessionPin > 0);
 
   // socket to commuunicate with server
-  const socket = io.connect(SOCKET_URL);
+  // const socket = io.connect(SOCKET_URL);
+  const socket = useContext(SocketContext);
+
 
   useEffect(() => {
     socket.on("room_id", (roomId) => {
