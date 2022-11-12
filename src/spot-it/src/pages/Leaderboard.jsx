@@ -42,7 +42,12 @@ export default function Leaderboard() {
           </div>
           
           <div className="col justify-content-start">
-            <Link to={`/new-session?session-pin=${location.state.sessionPin}&host-name=${players.find(x => x.type === "host").name}&session-name=${location.state.sessionName}`} replace={true}> 
+            <Link to={`/new-session?session-pin=${location.state.sessionPin}&host-name=${players.find(x => x.type === "host").name}&session-name=${location.state.sessionName}`} replace={true} 
+              state={{
+                sessionPin : location.state.sessionPin,
+                actualPlayerName : players[0].name,
+                sessionName : location.state.sessionName,
+              }}> 
               <Button title="Play again"/>
             </Link>
           </div>

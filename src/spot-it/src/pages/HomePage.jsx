@@ -57,7 +57,7 @@ export default function HomePage() {
       {replace : true, 
       state : {
         sessionPin : sessionPin,
-        hostName : name,
+        actualPlayerName : name,
         sessionName : session,
       }});
     }
@@ -71,7 +71,7 @@ export default function HomePage() {
       {replace : true, 
       state : {
         sessionPin : joinSessionPin,
-        guestName : name,
+        actualPlayerName : name,
         sessionName : session,
       }});
 

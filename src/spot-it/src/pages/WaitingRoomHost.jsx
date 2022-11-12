@@ -21,7 +21,7 @@ export default function WaitingRoomHost() {
     socket.emit("join-socket-room", location.state.sessionPin);
   }, []);
 
-  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.hostName, isConnected : true, id: playerId++}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.actualPlayerName, isConnected : true, id: playerId++}]);
 
   return (
     <>
@@ -64,7 +64,7 @@ export default function WaitingRoomHost() {
         <div className="col d-flex justify-content-center">
           <Link replace={true} state={
             {playersConnected : playersList
-              , actualPlayer : playersList.find((x) => x.name == location.state.hostName)
+              , actualPlayer : playersList.find((x) => x.name == location.state.actualPlayerName)
               , sessionName :location.state.sessionName
               , sessionPin : location.state.sessionPin
             }} to={{pathname: "/game-room",}}> 

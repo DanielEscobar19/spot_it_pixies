@@ -24,7 +24,7 @@ export default function WaitingRoomGuest() {
     socket.emit("join-socket-room", location.state.sessionPin);
   }, []);
 
-  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++ }]);
+  const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.actualPlayerName, isConnected : false, id: playerId++ }]);
 
   useEffect(() => {
     // socket.on("newReadyGuest", (guestData) => {
@@ -38,13 +38,13 @@ export default function WaitingRoomGuest() {
 
 
   function clickedReady () {
-    let index = playersList.findIndex((x) => x.name == location.state.guestName);
+    let index = playersList.findIndex((x) => x.name == location.state.actualPlayerName);
 
     let newList = [...playersList];
     newList[index].isConnected = true;
     setPlayerList(newList);
 
-    socket.emit("guestIsReady", {guestName: location.state.guestName, boolGuestReady: true, sessionPin: location.state.sessionPin})
+    socket.emit("guestIsReady", {guestName: location.state.actualPlayerName, boolGuestReady: true, sessionPin: location.state.sessionPin})
   }
 
   return (
