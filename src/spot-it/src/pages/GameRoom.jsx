@@ -28,14 +28,13 @@ export default function GameRoom(props) {
     const [initialTime, setInitialTime] = useState(moment());
     const [wellTop, setWellTop] = useState([]);
     const [hayGanador, setHayGanador] = useState(false);
+    const [cantidadCartasJugadores, setCantidadCartasJugadores] = useState(new Array(location.state.playersConnected.length).fill(56/location.state.playersConnected.length));
     
     // TODO: distribute cards through players and no the same amount to every player
-    location.state.playersConnected.map((player) => {
-        player.cardsRemaining = cantidadCartasJugador;
-        player.victories = 0;
-        player.bestTime = "You have to win to measure your best time!";
-        return player;
-    }) 
+    for (let index = 0; index < location.state.playersConnected.length; index += 1) {
+        location.state.playersConnected[index].cardsRemaining = cantidadCartasJugadores[index];
+    }
+
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
 
@@ -100,6 +99,7 @@ export default function GameRoom(props) {
             if (data[0] == true) {
                 setActivarAnimacion(true);
                 setAcertoSimbolo(true);
+                socket.emit("restar-carta-jugador", {sessionPin: location.state.sessionPin, name: location.state.actualPlayer.name, cardsRemaining: cantidadCartasJugador-1});
                 setTimeout(function () {
                     setWellTop(shuffledCards[cartaActualJugador].simbolos);
                     setCartaActualJugador(cartaActualJugador + 1);
@@ -123,13 +123,14 @@ export default function GameRoom(props) {
         socket.on("hay-ganador", (data)=>{
             setHayGanador(data);
         })
+
     }, [socket])
 
 
     function enviarCartaSeleccionada(idSimbolo) {
         if (puedeElegirCarta) {
             socket.emit("simbolo_seleccionado", {simbolo: idSimbolo, carta: shuffledCards[cartaActualJugador].simbolos
-                , cantidadCartas: cantidadCartasJugador, sessionPin: location.state.sessionPin});
+                , cantidadCartas: cantidadCartasJugador, sessionPin: location.state.sessionPin, name: location.state.actualPlayer.name});
         }
     }
 
@@ -140,7 +141,7 @@ export default function GameRoom(props) {
         <section className="container-principal">
             <section id="seccion-izquierda">
                 
-                <InGameLeaderBoard players={location.state.playersConnected}/>
+                <InGameLeaderBoard players={location.state.playersConnected} sessionPin={location.state.sessionPin}/>
 
                 <GameChat actualPlayer={location.state.actualPlayer}/>
             </section>
