@@ -17,7 +17,7 @@ export default function WaitingRoomGuest() {
   
   const socket = io.connect(SOCKET_URL);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
@@ -26,25 +26,9 @@ export default function WaitingRoomGuest() {
 
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.actualPlayerName, isConnected : false, id: playerId++ }]);
 
-  useEffect(() => {
-    // socket.on("newReadyGuest", (guestData) => {
-    //   let index = playersList.findIndex((x) => x.name == guestData.guestName);
-    //   let newPlayersList = [...playersList];
-    //   newPlayersList[index].isConnected = guestData.boolGuestReady;
-    //   setPlayerList(newPlayersList);
-    // });
-
-  }, [socket]);
-
-
   function clickedReady () {
-    let index = playersList.findIndex((x) => x.name == location.state.actualPlayerName);
-
-    let newList = [...playersList];
-    newList[index].isConnected = true;
-    setPlayerList(newList);
-
-    socket.emit("guestIsReady", {guestName: location.state.actualPlayerName, boolGuestReady: true, sessionPin: location.state.sessionPin})
+    console.log("I'm ready");
+    socket.emit("guest-ready", location.state.actualPlayerName, location.state.sessionPin);
   }
 
   return (
@@ -85,8 +69,8 @@ export default function WaitingRoomGuest() {
         </div>
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
-        <div className="col d-flex justify-content-center">
-            <Button onClick={clickedReady} title="I'm ready" />
+        <div className="col d-flex justify-content-center" title="Ready option will be implemented in future versions">
+            <Button  onClick={clickedReady} title="I'm ready"  disabled={true}/>
         </div>
       </div>
 

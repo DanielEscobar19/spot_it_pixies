@@ -1,22 +1,13 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '../css/waitingRooms/waitingRoom.scss'
 
-
-export default function PlayerConnection({player, colorText}) {
+export default function PlayerConnection({player, colorText, sessionPin}) {
   const idRef = useRef(null)
   const playerNameRef = useRef(null);
   const connectionDot = useRef(null);
   const crownBadge = useRef(null);
-
-
-  function assignConnectionDot() {
-    if (player.isConnected === true) {
-      connectionDot.current.classList.add("player-connected");
-    } else {
-      connectionDot.current.classList.add("player-disconnected");
-    }
-  }
+  const [isConnected, setIsConnected] = useState();
 
   function assignClassesToPlayer() {
     if(player.type === "host"){
@@ -34,17 +25,16 @@ export default function PlayerConnection({player, colorText}) {
 
   useEffect(() => {
     assignClassesToPlayer();
-    assignConnectionDot();
   });
-  
+
   return (
     <>
       <div ref={idRef} className="d-flex col-md align-items-center justify-content-center">
         <span ref={crownBadge} className="p-0 mb-2 badge bg-transparent">
           <img id="host-crown-icon" src="../../img/common/magic-crown.svg" alt="Crown icon"/>
         </span>
-        <span ref={connectionDot} id="foo" className="bi bi-dot player-connection-dot unselectable-text"></span>
-        <p className="mx-3 my-2 selectable-text-all" ref={playerNameRef}>{player.name}</p>
+        <span ref={connectionDot} id="foo" className={`${isConnected == true ? "player-connected" : "player-disconnected"} bi bi-dot player-connection-dot unselectable-text`}></span>
+        <p className="mx-3 my-2 selectable-text-all" ref={playerNameRef}>{player.name} {}</p>
       </div>
     </>
   )

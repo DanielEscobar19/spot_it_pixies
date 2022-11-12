@@ -21,7 +21,8 @@ export default function WaitingRoomHost() {
     socket.emit("join-socket-room", location.state.sessionPin);
   }, []);
 
-  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.actualPlayerName, isConnected : true, id: playerId++}]);
+  const [playersList,setPlayerList] = useState([{type: "host", name : location.state.actualPlayerName, isConnected : false, id: playerId++}]);
+
 
   return (
     <>

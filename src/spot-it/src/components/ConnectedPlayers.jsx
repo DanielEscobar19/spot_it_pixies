@@ -41,8 +41,7 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
           } else {
             playerType = "guest";
           }
-          tempList = [...tempList, {type : playerType, name : element, isConnected : false, 
-            id : playerId++ }]};
+          tempList = [...tempList, {type : playerType, name : element, isConnected : false, id : playerId++ }]};
         setPlayerList(tempList);
       });
     }
@@ -60,6 +59,9 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
     });
   }, [socket]);
 
+  useEffect(() => {
+    console.log("update playersList ", playersList);
+  }, [playersList])
 
   return (
     <div className="container w-75 d-flex justify-content-center mb-4">
@@ -71,7 +73,7 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
   
                 console.log(`colorIndex ${colorIndex} color${color} `);
   
-                return <PlayerConnection key={player.name} player={player} colorText={color}/>
+                return <PlayerConnection key={player.name} player={player} colorText={color} sessionPin={sessionPin}/>
               }
             )
           }

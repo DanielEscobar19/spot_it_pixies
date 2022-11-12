@@ -98,14 +98,14 @@ io.on("connection", (socket) => {
     } else {
       socket.emit("acerto-simbolo", [false]);
     }
-
-    socket.on("guestIsReady", (data) => {
-      let session = data.sessionPin.toString();
-      socket.to(parseInt(data.sessionPin)).emit("newReadyGuest", data);
-    })
-
   })
 
+  socket.on("guest-ready", (playerName, sessionPin) => {
+    console.log("Player ", playerName, " is ready")
+    socket.to(parseInt(sessionPin)).emit("new-guest-ready", playerName);
+    socket.emit("new-guest-ready", playerName, sessionPin);
+  })
+  
   socket.on("announce_join", (sessionId) => {
     // sends the player list to everyone in the room so they can update their list
     let roomIndex = rooms.findIndex(x => x.id == sessionId);
