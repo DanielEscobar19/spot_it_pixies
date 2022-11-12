@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react'
-import '../css/waitingRooms/waitingRoom.scss'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import '../css/waitingRooms/waitingRoom.scss'
 
 
 export default function PlayerConnection({player, colorText}) {
@@ -26,7 +26,7 @@ export default function PlayerConnection({player, colorText}) {
     } else {
       crownBadge.current.classList.add("d-none");
     }
-    console.log(`color [${colorText}] sdasd`)
+    console.log(`color assigned [${colorText}]`)
     if (colorText !== "") {
       playerNameRef.current.classList.add(colorText);  
     }

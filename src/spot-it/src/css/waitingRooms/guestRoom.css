@@ -27,10 +27,6 @@
   color: #A3A3A2;
 }
 
-#player-hostname {
-  color: var(--purple-color);
-}
-
 p,h2 {
   font-size: var(--medium-font-size);
   padding: 0px;

@@ -60,17 +60,21 @@ export default function ConnectedPlayers({playersList, setPlayerList, playerId, 
     });
   }, [socket]);
 
+
   return (
     <div className="container w-75 d-flex justify-content-center mb-4">
         <div className="row d-flex text-center">
-          {playersList.map((player, colorIndex) => {
-              let color = "";
-              player.type === "host" ? (color = "purple-color") : (color = playersTextColors[colorIndex-1]);
-
-              console.log(`colorIndex ${colorIndex} color${color} `);
-              return <PlayerConnection key={player.name} player={player} colorText={color}/>
-            }
-          )}
+          {
+            playersList.map((player, colorIndex=0) => {
+                let color = "";
+                player.type === "host" ? (color = "purple-color") : (color = playersTextColors[colorIndex++]);
+  
+                console.log(`colorIndex ${colorIndex} color${color} `);
+  
+                return <PlayerConnection key={player.name} player={player} colorText={color}/>
+              }
+            )
+          }
         </div>
     </div>
   )
