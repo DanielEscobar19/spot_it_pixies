@@ -5,6 +5,12 @@ const { Server } = require("socket.io")
 const cors = require("cors");
 const cards = require("./cards.json");
 
+// port used by the server
+const PORT = 3001;
+
+// change host to public ip or local host
+const HOST = "localhost"
+
 app.use(cors());
 
 const server = http.createServer(app);
@@ -52,6 +58,8 @@ io.on("connection", (socket) => {
 
   console.log(`User connected: ${socket.id}`);
 
+  // this is a testing method
+  // works wiht Client component
   socket.on("send_message", (message) => {
     console.log("rooms ", socket.rooms);
     socket.emit("received_message", socket.rooms[1]);
@@ -197,6 +205,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(8080, "192.168.68.34", () => {
+server.listen(PORT, HOST, () => {
   console.log("Server running");
 });

@@ -22,8 +22,6 @@ export default function WaitingRoomGuest() {
   useEffect(() => {
     document.title = 'Spot it - Waiting room - guest';
     socket.emit("join-socket-room", location.state.sessionPin);
-    socket.emit("get_players", location.state.sessionPin);
-    socket.emit("announce_join", location.state.sessionPin);
   }, []);
 
   const [playersList,setPlayerList] = useState([{type: "guest", name : location.state.guestName, isConnected : false, id: playerId++ }]);
@@ -36,17 +34,6 @@ export default function WaitingRoomGuest() {
     //   setPlayerList(newPlayersList);
     // });
 
-    // socket.on("started_game", (useless) => {
-    //   console.log("Game started");
-    //   navigate("/game-room", {
-    //     replace : true,
-    //      state : { 
-    //       playersConnected : playersList
-    //       , actualPlayer : playersList.find((x) => x.name == location.state.guestName)
-    //       , sessionName :location.state.sessionName
-    //       , sessionPin : location.state.sessionPin
-    //   }})
-    // });
   }, [socket]);
 
 
