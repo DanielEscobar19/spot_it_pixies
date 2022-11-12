@@ -189,7 +189,6 @@ io.on("connection", (socket) => {
       socket.emit("room_id", sessionNumber);
       console.log(`Created session with number ${sessionNumber} \n`);
 
-      // TODO: increment session number after creating the room
       ++sessionNumber;
     }
   })
