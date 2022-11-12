@@ -19,7 +19,7 @@ export default function InGameLeaderBoardPlayer({player, sessionPin}) {
         setPlayerCardsRemaining(playerData.cardsRemaining);
       }
     });
-  },[socket]);
+  });
 
   return (
     <div className="tarjeta-nombres unselectable-text">

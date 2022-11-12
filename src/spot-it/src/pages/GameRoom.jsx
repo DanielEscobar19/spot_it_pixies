@@ -16,7 +16,7 @@ import io from 'socket.io-client';
 
 
 export default function GameRoom(props) {
-    const socket = io.connect(SOCKET_URL);
+    const socket = useContext(SocketContext);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
@@ -124,7 +124,7 @@ export default function GameRoom(props) {
             setHayGanador(data);
         })
 
-    }, [socket])
+    })
 
 
     function enviarCartaSeleccionada(idSimbolo) {
