@@ -33,6 +33,7 @@ export default function GameRoom(props) {
     // TODO: distribute cards through players and no the same amount to every player
     for (let index = 0; index < location.state.playersConnected.length; index += 1) {
         location.state.playersConnected[index].cardsRemaining = cantidadCartasJugadores[index];
+        location.state.playersConnected[index].victories = 0;
     }
 
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
