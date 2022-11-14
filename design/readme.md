@@ -61,6 +61,10 @@ Fue elegida utilizando <a href="https://color.adobe.com/">Adobe Color</a>, basá
 
 <img src="resources/ColorPalette.png"  alt="Logo" width="800px">
 
+## Máquina de estados
+
+<img src="img/Maquina de estados - spot it.png"  alt="Logo" width="800px">
+
 ## Otras rutas
 
 - [Link del prototipo en figma](https://www.figma.com/proto/7EKI0R0xJH1RVGjZheae10/Proyecto_Web?node-id=16%3A31&scaling=scale-down&page-id=0%3A1&starting-point-node-id=16%3A31&show-proto-sidebar=1)
