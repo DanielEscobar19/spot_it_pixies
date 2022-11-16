@@ -5,10 +5,6 @@ import socket from "../Socket";
 export default function InGameLeaderBoardPlayer({player, sessionPin}) {
   const[playerCardsRemaining, setPlayerCardsRemaining] = useState(player.cardsRemaining);
 
-  useEffect(() => {
-    socket.emit("join-socket-room", sessionPin);
-  },[]);
-
   useEffect(()=>{
     socket.on("cambiar-cantidad-cartas", (playerData) => {
       if (playerData.name === player.name) {

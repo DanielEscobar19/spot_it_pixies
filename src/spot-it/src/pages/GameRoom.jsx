@@ -85,7 +85,7 @@ export default function GameRoom(props) {
             setCantidadCartasJugador(data[0].length);
         }) 
         
-        socket.on("acerto-simbolo", (data, name) => {
+        socket.on("acerto-simbolo", (data) => {
             if (data[0] === true) {
                 setActivarAnimacion(true);
                 setAcertoSimbolo(true);
