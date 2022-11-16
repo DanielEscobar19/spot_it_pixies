@@ -160,6 +160,8 @@ io.on("connection", (socket) => {
   })
 
   socket.on("start_game", (sessionId) => {
+    roomIndex = rooms.findIndex(x => x.id == sessionId);
+    rooms[sessionId].cardToDeal = 1;
     console.log("Host started the game");
     console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
     console.log("Socket rooms: ", socket.rooms);
