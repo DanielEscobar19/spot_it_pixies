@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
-import { useLocation, Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link } from "react-router-dom";
 import PlayerLeadearBoard from '../components/PlayerLeadearBoard';
 import Button from '../components/Button';
 import Layout from './Layout'
 import "../css/pages/Leaderboard.css"
+import  { GameContext } from '../context/Game'
 
 export default function Leaderboard() {
-  const location = useLocation();
+  const {
+    players, bestTime, winCount, name, sessionName, finalTime, isHost
+  } = useContext(GameContext);
+  const indx = players.findIndex((x) => x.name === name);
 
-  const [players, ] = useState(() => {
-    location.state.playersConnected[0].bestTime = location.state.sessionTime;
-    return location.state.playersConnected;
-  });
-  console.log(location.state);
+  const millToTimeFormat = (myDuration) => {
+    var result = Math.floor(myDuration/(1000*60*60)) + ":" + Math.floor(myDuration/(1000*60))%60 + ":" + Math.floor(myDuration/1000)%60;
+    return result;
+  }
+
   return (
     <>
       <Layout/>
@@ -21,7 +25,7 @@ export default function Leaderboard() {
         
           <div className="col">
             <h1> 
-              <span className="text-muted">The Well/</span>{location.state.sessionName}
+              <span className="text-muted">The Well/</span>{sessionName}
             </h1>
           </div>
         
@@ -37,17 +41,12 @@ export default function Leaderboard() {
           <div className="col d-flex flex-column align-items-center">
             <h2>Match duration</h2>
             <div className="box-container  b-duration">
-              <h3 className="m-0">{location.state.sessionTime}</h3>
+              <h3 className="m-0">{millToTimeFormat(finalTime)}</h3>
             </div>
           </div>
           
           <div className="col justify-content-start">
-            <Link to={`/new-session?session-pin=${location.state.sessionPin}&host-name=${players.find(x => x.type === "host").name}&session-name=${location.state.sessionName}`} replace={true} 
-              state={{
-                sessionPin : location.state.sessionPin,
-                actualPlayerName : players[0].name,
-                sessionName : location.state.sessionName,
-              }}> 
+            <Link to={isHost ? '/new-session' : '/existing-session'}> 
               <Button title="Play again"/>
             </Link>
           </div>
@@ -71,19 +70,16 @@ export default function Leaderboard() {
               <h2>Rank</h2>
             </div>
             <div className="col-4 ps-5 col-name text-center">
-              <h2>Name</h2>
-              <h3>personal best time</h3>
+              <h2>{name}</h2>
+              <h3>{millToTimeFormat(bestTime[indx])}</h3>
             </div>
             <div className="col-4 pe-5 col-wincount text-end">
-              <h2>Wincount</h2>
+              <h2>{winCount[indx]}</h2>
             </div>
           </div>
           {
             players.map((player, index) => {
-              if (index === 0) {
-                ++player.victories;
-              }
-              return <PlayerLeadearBoard key={player.id} player={player} rank={index + 1}/>
+              return <PlayerLeadearBoard key={player.id} name={player.name} rank={index + 1} bestTime={millToTimeFormat(bestTime[index])} victories={winCount[index]}/>
             })
           }
         </div>

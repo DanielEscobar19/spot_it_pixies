@@ -1,25 +1,20 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext} from 'react';
 import Layout from './Layout'
 import Timer from '../components/Timer'
 import '../css/pages/gameRoom.css'
 import '../css/common/common.scss'
-import { SOCKET_URL, SocketContext } from '../context/socket';
-
-
-import arrayShuffle from 'array-shuffle';
+import socket from "../Socket";
 import InGameLeaderBoard from '../components/InGameLeaderBoard';
 import GameChat from '../components/GameChat';
 import moment from "moment";
-import io from 'socket.io-client';
-
-
+import  { GameContext } from '../context/Game'
 
 export default function GameRoom(props) {
-    const socket = useContext(SocketContext);
     const navigate = useNavigate();
-    const location = useLocation();
-    console.log(location);
+    const {
+        players, roomId, name, setFinalTime, ganador, setGanador
+    } = useContext(GameContext);
     const[shuffledCards, setCards] = useState([]);
 
     const [activarAnimacion, setActivarAnimacion] = useState(false);
@@ -28,11 +23,11 @@ export default function GameRoom(props) {
     const [initialTime, setInitialTime] = useState(moment());
     const [wellTop, setWellTop] = useState([]);
     const [hayGanador, setHayGanador] = useState(false);
-    const [cantidadCartasJugadores, setCantidadCartasJugadores] = useState(new Array(location.state.playersConnected.length).fill(56/location.state.playersConnected.length));
+    const cantidadCartasJugadores = new Array(players.length).fill(56/players.length);
     
     // TODO: distribute cards through players and no the same amount to every player
-    for (let index = 0; index < location.state.playersConnected.length; index += 1) {
-        location.state.playersConnected[index].cardsRemaining = cantidadCartasJugadores[index];
+    for (let index = 0; index < players.length; index += 1) {
+        players[index].cardsRemaining = cantidadCartasJugadores[index];
     }
 
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
@@ -41,9 +36,9 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         setInitialTime(new Date());
-        // socket.emit("join-socket-room", location.state.sessionPin);
-        socket.emit("cliente-pedir-cartas",location.state.sessionPin);
-    },[]);
+        // socket.emit("join-socket-room", roomId);
+        socket.emit("cliente-pedir-cartas",roomId);
+    },[roomId]);
 
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {
@@ -68,24 +63,19 @@ export default function GameRoom(props) {
         setHayGanador( () => {
             // TODO: check each player cards
             if (hayGanador === true) {
-                let finalTime = moment();
-                let hoursDiff = finalTime.diff(initialTime, "hours");
-                let minutesDiff = finalTime.diff(initialTime, "minutes");
-                let secondsDiff = finalTime.diff(initialTime, "seconds");
-                location.state.playersConnected[0].bestTime = `${hoursDiff}:${minutesDiff}:${secondsDiff}`;
-                navigate("/leaderboard", {replace : true, state : {
-                    playersConnected : location.state.playersConnected, 
-                    sessionName : location.state.sessionName, 
-                    sessionPin :  location.state.sessionPin,
-                    sessionTime : `${hoursDiff}:${minutesDiff}:${secondsDiff}`,
-                }});
+                let endTime = moment();
+                const finalTime = endTime - initialTime;
+                setFinalTime(finalTime);
+                if (ganador === name) socket.emit("updateLeaderBoard", name, finalTime, roomId);
+                navigate("/leaderboard");
             }
             return hayGanador;
         });
     },[
         hayGanador, initialTime,
-        location.state.playersConnected, location.state.sessionName,
-        location.state.sessionPin, navigate
+        ganador,navigate, 
+        name, setFinalTime,
+        roomId
     ]);
 
     useEffect(() => {
@@ -95,13 +85,13 @@ export default function GameRoom(props) {
             setCantidadCartasJugador(data[0].length);
         }) 
         
-        socket.on("acerto-simbolo", (data) => {
-            if (data[0] == true) {
+        socket.on("acerto-simbolo", (data, name) => {
+            if (data[0] === true) {
                 setActivarAnimacion(true);
                 setAcertoSimbolo(true);
-                socket.emit("restar-carta-jugador", {sessionPin: location.state.sessionPin, name: location.state.actualPlayer.name, cardsRemaining: cantidadCartasJugador-1});
+                socket.emit("restar-carta-jugador", {sessionPin: roomId, name: name, cardsRemaining: cantidadCartasJugador-1});
                 setTimeout(function () {
-                    setWellTop(shuffledCards[cartaActualJugador].simbolos);
+                    setWellTop(shuffledCards[cartaActualJugador]?.simbolos);
                     setCartaActualJugador(cartaActualJugador + 1);
                     setCantidadCartasJugador(cantidadCartasJugador - 1);
                     setActivarAnimacion(false);
@@ -120,8 +110,9 @@ export default function GameRoom(props) {
             setWellTop(data);
         })
 
-        socket.on("hay-ganador", (data)=>{
+        socket.on("hay-ganador", (data, winnerName)=>{
             setHayGanador(data);
+            setGanador(winnerName);
         })
 
     })
@@ -130,7 +121,7 @@ export default function GameRoom(props) {
     function enviarCartaSeleccionada(idSimbolo) {
         if (puedeElegirCarta) {
             socket.emit("simbolo_seleccionado", {simbolo: idSimbolo, carta: shuffledCards[cartaActualJugador].simbolos
-                , cantidadCartas: cantidadCartasJugador, sessionPin: location.state.sessionPin, name: location.state.actualPlayer.name});
+                , cantidadCartas: cantidadCartasJugador, sessionPin: roomId, name: name});
         }
     }
 
@@ -141,9 +132,9 @@ export default function GameRoom(props) {
         <section className="container-principal">
             <section id="seccion-izquierda">
                 
-                <InGameLeaderBoard players={location.state.playersConnected} sessionPin={location.state.sessionPin}/>
+                <InGameLeaderBoard players={players} sessionPin={roomId}/>
 
-                <GameChat actualPlayer={location.state.actualPlayer}/>
+                <GameChat/>
             </section>
             <section id="seccion-derecha">
                 <section id="seccion-timers">
@@ -159,10 +150,10 @@ export default function GameRoom(props) {
                     <div className="columna-circulos unselectable-text">
                         {cartaActualJugador < 57 ?
                         <>
-                        <p className="h2">{location.state.actualPlayer.name}</p>
+                        <p className="h2">{name}</p>
                         <div id={activarAnimacion ? "carta-izquierda-slide" : "carta-izquierda-spawn"} className=" rounded-circle circulo-carta">
                             <div className="fila-imagenes-laterales">
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[0]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[0]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(0);      
                                         enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[0]);  
@@ -171,17 +162,17 @@ export default function GameRoom(props) {
                             </div>
                             <div className="fila-imagenes">
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[1]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[1]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(1);      
                                         enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[1]);  
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[2]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[2]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(2);
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[2]);        
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[2]);        
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
 
@@ -189,18 +180,18 @@ export default function GameRoom(props) {
                             </div>
                             <div className="fila-imagenes-centro">
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[3]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[3]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(3);
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[3]);        
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[3]);        
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
 
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[4]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[4]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(4); 
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[4]);       
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[4]);
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
                                     
@@ -208,27 +199,27 @@ export default function GameRoom(props) {
                             </div>
                             <div className="fila-imagenes">
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[5]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[5]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(5);
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[5]);        
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[5]);        
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[6]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[6]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(6); 
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[6]);       
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[6]);       
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
 
                             </div>
                             <div className="fila-imagenes-laterales">
 
-                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador].simbolos[7]}.png`} 
+                                    <img src={`../img/common/cards-img/${shuffledCards[cartaActualJugador]?.simbolos[7]}.png`} 
                                     onClick={function(e) {
                                         //timeoutEleccion(7);
-                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador].simbolos[7]);      
+                                        enviarCartaSeleccionada(shuffledCards[cartaActualJugador]?.simbolos[7]);      
                                     }}
                                     className="imagen-carta" alt="Player icon"/> 
                             </div>

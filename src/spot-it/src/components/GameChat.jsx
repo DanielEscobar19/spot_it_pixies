@@ -1,9 +1,11 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import "../css/components/GameChat.scss";
 import ChatMessage from './ChatMessage';
 import {v4} from 'uuid';
+import  { GameContext } from '../context/Game'
 
-export default function GameChat({actualPlayer, gameEvent}) {
+export default function GameChat({ gameEvent }) {
+  const { name } = useContext(GameContext);
   const [messagesList, setMessagesList] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const chatWindowRef =  useRef(null);
@@ -14,7 +16,7 @@ export default function GameChat({actualPlayer, gameEvent}) {
       // 👇️ access input value from state
       if (event.target.value !== "") {
         setMessagesList(previous => {
-          return [...previous,{playerName: actualPlayer.name, content: event.target.value, id : v4()}];
+          return [...previous,{playerName: name, content: event.target.value, id : v4()}];
         });
       }
       setCurrentMessage("");

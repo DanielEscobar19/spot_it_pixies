@@ -1,12 +1,8 @@
 import React from 'react'
-import { useEffect, useState, useContext } from 'react'
-import { SOCKET_URL, SocketContext } from '../context/socket';
-import io from 'socket.io-client';
-
-
+import { useEffect, useState } from 'react'
+import socket from "../Socket";
 
 export default function InGameLeaderBoardPlayer({player, sessionPin}) {
-  const socket = useContext(SocketContext);
   const[playerCardsRemaining, setPlayerCardsRemaining] = useState(player.cardsRemaining);
 
   useEffect(() => {
@@ -15,7 +11,7 @@ export default function InGameLeaderBoardPlayer({player, sessionPin}) {
 
   useEffect(()=>{
     socket.on("cambiar-cantidad-cartas", (playerData) => {
-      if (playerData.name == player.name) {
+      if (playerData.name === player.name) {
         setPlayerCardsRemaining(playerData.cardsRemaining);
       }
     });

@@ -1,13 +1,23 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/common/common.scss'
+import  { GameContext } from '../context/Game'
 
 export default function Layout() {
+  const { setRoomId, setCanJoin, setSessionName, setErrorMessage, setIsHost } = useContext(GameContext);
+  
+  const onClick = () => { 
+    setRoomId("");
+    setIsHost(false);
+    setCanJoin(false);
+    setSessionName("");
+    setErrorMessage("");
+  };
 
   return (
     <header>
       <nav className="navbar w-100 navbar-expand-lg bg-light unselectable-text">
-        <Link className="navbar-brand homeLogo unselectable-text" to="/home-page" replace="true">
+        <Link className="navbar-brand homeLogo unselectable-text" to="/home-page" onClick={onClick} replace="true">
           <img src="../../Img/common/spot-it-logo.svg" alt="Spot it logo" className="img-fluid ms-4 me-0"/>
         </Link>
 
@@ -18,10 +28,10 @@ export default function Layout() {
         <div className="collapse navbar-collapse justify-content-end mx-3" id="navbarText">
           <ul className="navbar-nav mr-auto ">
             <li className="nav-item">
-              <Link to="/help" className="nav-link unselectable-text">Help</Link>
+              <Link to="/help" className="nav-link unselectable-text" onClick={onClick}>Help</Link>
             </li>
             <li className="nav-item">
-              <Link to="/credits" className="nav-link unselectable-text">Credits</Link>
+              <Link to="/credits" className="nav-link unselectable-text" onClick={onClick}>Credits</Link>
             </li>
           </ul>
         </div>

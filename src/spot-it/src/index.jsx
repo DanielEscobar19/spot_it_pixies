@@ -11,15 +11,15 @@ import Help from './pages/Help'
 import Credits from './pages/Credits';
 import Leaderboard from './pages/Leaderboard';
 
-import {Routes, Route, BrowserRouter as Router} from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ErrorNotFound from './pages/ErrorNotFound';
-import {SocketContext, socket} from './context/socket';
+import { GameProvider } from './context/Game';
 import Client from './pages/Client';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <SocketContext.Provider value={socket}>
+  <GameProvider>
     <Router>
       <Routes>
           <Route path="/client" element={<Client />} />
@@ -34,5 +34,5 @@ root.render(
           <Route path="*" element={<ErrorNotFound />}/>
       </Routes>
     </Router>
-  </SocketContext.Provider>
+  </GameProvider>
 );

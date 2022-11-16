@@ -6,10 +6,10 @@ const cors = require("cors");
 const cards = require("./cards.json");
 
 // port used by the server
-const PORT = 3001;
+const PORT = 8080;
 
 // change host to public ip or local host
-const HOST = "localhost"
+const HOST = "http://localhost"
 
 app.use(cors());
 
@@ -67,14 +67,14 @@ io.on("connection", (socket) => {
 
   socket.on("join-socket-room", (number) => {
     socket.join(parseInt(number));
-    console.log("socket joined rooms ", socket.rooms);
+    console.log("socket joined rooms ", socket.rooms, " number: ", number);
   })
 
   socket.on("cliente-pedir-cartas", (data) =>{
     let roomIndex =  rooms.findIndex(x => x.id == data);
 
     let cartaARepartir = rooms[roomIndex].cardToDeal;
-    let cartasPorJugador = (56 / rooms[roomIndex].playersCount)
+    let cartasPorJugador = (56 / rooms[roomIndex].playersCount);
     socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador)), wellTop]);
     rooms[roomIndex].cardToDeal += (cartasPorJugador -1)
   });
@@ -92,8 +92,8 @@ io.on("connection", (socket) => {
       wellTop = data.carta;
       socket.to(parseInt(data.sessionPin)).emit("cambio-top-well", wellTop);
       if (data.cantidadCartas == 1) {
-        socket.to(parseInt(data.sessionPin)).emit("hay-ganador", true);
-        socket.emit("hay-ganador", true);
+        socket.to(parseInt(data.sessionPin)).emit("hay-ganador", true, data.name);
+        socket.emit("hay-ganador", true, data.name);
       }
     } else {
       socket.emit("acerto-simbolo", [false]);
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
     // sends the player list to everyone in the room so they can update their list
     let roomIndex = rooms.findIndex(x => x.id == sessionId);
     if (roomIndex > -1) {
-      console.log("new_join_player to toom ", sessionId, " data room ", rooms[roomIndex]);
+      console.log("new_join_player to room ", sessionId, " data room ", rooms[roomIndex]);
       console.log("new_join_player socket rooms ", socket.rooms);
 
       socket.to(parseInt(sessionId)).emit("new_join_player", rooms[roomIndex].players);
@@ -142,7 +142,7 @@ io.on("connection", (socket) => {
       console.log("sessionId received: ", sessionId, " data type ", typeof parseInt(sessionId));
 
       // sends permission to client to join
-      socket.emit("join_validation", true, rooms[roomIndex].sessionName);
+      socket.emit("join_validation", true, rooms[roomIndex].sessionName, sessionId);
     } else {
       let denegationMessage = "";
 
@@ -164,6 +164,7 @@ io.on("connection", (socket) => {
     console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
     console.log("Socket rooms: ", socket.rooms);
     socket.to(parseInt(sessionId)).emit("started_game", "useless");
+
   });
 
   socket.on("get_players", (sessionId) => {
@@ -182,12 +183,40 @@ io.on("connection", (socket) => {
     socket.emit("cambiar-cantidad-cartas", {name: infoJugador.name, cardsRemaining: infoJugador.cardsRemaining});
   })
 
+  socket.on("updateLeaderBoard", (name, winTime, sessionId) => {
+    const time = parseInt(winTime);
+    let roomIndex = -1;
+    let index = -1;
+    if (rooms.length > 0) {
+      roomIndex = rooms.findIndex(x => x.id == sessionId);
+      index = rooms[roomIndex].players.indexOf(name);
+    }
+    if (index > -1) {
+      rooms[roomIndex].winCount[index]++;
+      if (rooms[roomIndex].bestTime[index] > time || rooms[roomIndex].bestTime[index] === 0) {
+        rooms[roomIndex].bestTime[index] = time;
+      }
+    }
+    console.log("updateLeaderBoard to room ", sessionId, " data room ", rooms[roomIndex]);
+    socket.emit("reflectLeaderBoard", rooms[roomIndex].winCount, rooms[roomIndex].bestTime);
+    socket.to(parseInt(sessionId)).emit("reflectLeaderBoard", rooms[roomIndex].winCount, rooms[roomIndex].bestTime);
+  })
+
   socket.on("create_session", (hostName, sessionName) => {
     if (rooms.length > 0 && rooms.findIndex(x => x.id == sessionNumber) > -1) {
       console.log(`\n The room already exists room id ${rooms[0].id}`);
     } else {
       // creation of the room
-      rooms.push({id : sessionNumber, sessionName : sessionName, playersCount : 1, cardToDeal : 1, winnerPlayer : "null", players: [hostName]});
+      rooms.push({
+        id : sessionNumber,
+        sessionName : sessionName,
+        playersCount : 1,
+        cardToDeal : 1,
+        lastWinner : "null",
+        players: [hostName],
+        winCount: new Array(8).fill(0),
+        bestTime: new Array(8).fill(0)
+       });
       console.log(`\n create_session: rooms in rooms array: ${rooms}`);
 
       // server responds to client with yhe session number assigned
@@ -201,6 +230,6 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(PORT, HOST, () => {
+server.listen(PORT, () => {
   console.log("Server running");
 });
