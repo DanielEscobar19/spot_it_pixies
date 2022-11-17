@@ -1,25 +1,14 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import socket from "../Socket";
+import "../css/components/inGameLeaberboard.scss"
 
-export default function InGameLeaderBoardPlayer({player, sessionPin}) {
-  const[playerCardsRemaining, setPlayerCardsRemaining] = useState(player.cardsRemaining);
-
-  useEffect(()=>{
-    socket.on("cambiar-cantidad-cartas", (playerData) => {
-      if (playerData.name === player.name) {
-        setPlayerCardsRemaining(playerData.cardsRemaining);
-      }
-    });
-  });
-
+export default function InGameLeaderBoardPlayer({name, cards}) {
   return (
     <div className="tarjeta-nombres unselectable-text">
         <div className="nombre-jugador">
-            <p className="h6">{player.name}</p>
+            <p className="h6">{name}</p>
         </div>
         <div className="numero-jugador">
-          <p className="h6">{playerCardsRemaining}</p>
+          <p className="h6">{cards}</p>
         </div>
     </div>
   )

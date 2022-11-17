@@ -8,8 +8,9 @@ import  { GameContext } from '../context/Game'
 
 export default function Leaderboard() {
   const {
-    players, bestTime, winCount, name, sessionName, finalTime, isHost
+    players, bestTime, winCount, name, sessionName, finalTime, host
   } = useContext(GameContext);
+  const isHost = name === host;
   const indx = players.findIndex((x) => x.name === name);
 
   const millToTimeFormat = (myDuration) => {

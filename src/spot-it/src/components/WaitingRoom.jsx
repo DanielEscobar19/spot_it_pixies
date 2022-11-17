@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 
 export default function WaitingRoom( { onClick } ) {
-  const { name, sessionName, roomId, isHost } = useContext(GameContext);
+  const { name, sessionName, roomId, host } = useContext(GameContext);
+  const isHost = host === name;
   const navigate  = useNavigate()
   let playerId = 0;
 

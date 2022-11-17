@@ -5,8 +5,8 @@ import socket from "../Socket";
 export const GameContext = createContext({
   players: [],
   setPlayers: (players) => {},
-  isHost: false,
-  setIsHost: (isHost) => {},
+  host: "",
+  setHost: (host) => {},
   name: "",
   setName: (name) => {},
   ganador: "",
@@ -27,11 +27,13 @@ export const GameContext = createContext({
   setBestTime: (bestTime) => {},
   finalTime: 0,
   setFinalTime: (finalTime) => {},
+  playerCardsRemaining: [],
+  setPlayerCardsRemaining: (players) => {},
 });
 
 export function GameProvider({ children }) {
   const [players, setPlayers] = useState([]);
-  const [isHost, setIsHost] = useState(false);
+  const [host, setHost] = useState("");
   const [name, setName] = useState("");
   const [ganador, setGanador] = useState("");
   const [roomId, setRoomId] = useState("");
@@ -42,11 +44,12 @@ export function GameProvider({ children }) {
   const [winCount, setWinCount] = useState([]);
   const [bestTime, setBestTime] = useState([]);
   const [finalTime, setFinalTime] = useState(0);
+  const[playerCardsRemaining, setPlayerCardsRemaining] = useState([]);
   const context = {
     players,
     setPlayers,
-    isHost,
-    setIsHost,
+    host,
+    setHost,
     roomId,
     setRoomId,
     sessionName,
@@ -66,22 +69,23 @@ export function GameProvider({ children }) {
     bestTime,
     setBestTime,
     finalTime,
-    setFinalTime
+    setFinalTime,
+    playerCardsRemaining,
+    setPlayerCardsRemaining
   };
 
   useEffect(() => {
     socket.on("new_join_player" , (newPlayers) => {
       console.log("New_join_player Received players ", newPlayers);
-      updatePlayers(newPlayers);
+      setPlayers(newPlayers);
     })
 
     socket.on("players_list", (newPlayers) => {
       console.log("Players_list received players ", newPlayers);
-      updatePlayers(newPlayers);
+      setPlayers(newPlayers);
     })
 
     socket.on("room_id", (newRoomId) => {
-      setPlayers([]);
       setRoomId(newRoomId);
     })
 
@@ -90,33 +94,25 @@ export function GameProvider({ children }) {
       setBestTime(times);
     })
 
-    socket.on("join_validation", (canJoin, data, id) => {
+    socket.on("join_validation", (canJoin, data, id, host) => {
       setCanJoin(canJoin);
       console.log("canJoin ", canJoin, " roomId:", id);
       if (canJoin === true) {
         setSessionName(data);
         setRoomId(id)
-
+        setHost(host)
       } else {
         setErrorMessage(data);
       }
     })
 
-    function updatePlayers(newPlayers) {
+    socket.on("cambiar-cantidad-cartas", (cardsData) => {
+      setPlayerCardsRemaining(cardsData);
+    });
 
-      let playerType = "guest";
-      let tempList = players;
-      let playerId = 0;
-      newPlayers.forEach((element, index) => {
-        if (tempList.findIndex((x) => x.name === element) === -1) {
-
-          if (index === 0) {
-            playerType = "host";
-          }
-          tempList = [...tempList, {type : playerType, name : element, isConnected : false, id : playerId++ }]};
-          setPlayers(tempList);
-      });
-    }
+    socket.on("new_host", (newHost) => {
+      setHost(newHost);
+    });
   });
 
   return <GameContext.Provider value={context}>{children}</GameContext.Provider>;

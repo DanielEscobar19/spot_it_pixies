@@ -10,7 +10,7 @@ import  { GameContext } from '../context/Game'
 
 export default function HomePage() {
   const {
-    errorMessage, name, setName, roomId, setRoomId, canJoin, sessionName, setSessionName, setIsHost
+    errorMessage, name, setName, roomId, canJoin, sessionName, setSessionName, setHost
   } = useContext(GameContext);
   const navigate  = useNavigate()
 
@@ -26,8 +26,7 @@ export default function HomePage() {
       // if session pin is greater than 0 it means we received the new pin form the server
       console.log(`Created session with number ${roomId}`);
       navigate("/new-session");
-      setRoomId(roomId);
-      setIsHost(true);
+      setHost(name);
     }
     if (canJoin === true) {
       console.log(`Can join session with number ${roomId}`);
@@ -38,7 +37,7 @@ export default function HomePage() {
   }, [roomId, canJoin])
 
   function createSession() {
-    console.log("Trying create session ", sessionName, "  ", name);
+    console.log("Trying create session ", sessionName, name);
     socket.emit("create_session", name, sessionName);
   }
 

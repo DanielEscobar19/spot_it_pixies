@@ -13,7 +13,7 @@ import  { GameContext } from '../context/Game'
 export default function GameRoom(props) {
     const navigate = useNavigate();
     const {
-        players, roomId, name, setFinalTime, ganador, setGanador
+        roomId, name, setFinalTime, ganador, setGanador,
     } = useContext(GameContext);
     const[shuffledCards, setCards] = useState([]);
 
@@ -23,13 +23,6 @@ export default function GameRoom(props) {
     const [initialTime, setInitialTime] = useState(moment());
     const [wellTop, setWellTop] = useState([]);
     const [hayGanador, setHayGanador] = useState(false);
-    const cantidadCartasJugadores = new Array(players.length).fill(56/players.length);
-    
-    // TODO: distribute cards through players and no the same amount to every player
-    for (let index = 0; index < players.length; index += 1) {
-        players[index].cardsRemaining = cantidadCartasJugadores[index];
-    }
-
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
 
@@ -89,7 +82,7 @@ export default function GameRoom(props) {
             if (data[0] === true) {
                 setActivarAnimacion(true);
                 setAcertoSimbolo(true);
-                socket.emit("restar-carta-jugador", {sessionPin: roomId, name: name, cardsRemaining: cantidadCartasJugador-1});
+                socket.emit("restar-carta-jugador", roomId, name, cantidadCartasJugador-1);
                 setTimeout(function () {
                     setWellTop(shuffledCards[cartaActualJugador]?.simbolos);
                     setCartaActualJugador(cartaActualJugador + 1);
@@ -132,7 +125,7 @@ export default function GameRoom(props) {
         <section className="container-principal">
             <section id="seccion-izquierda">
                 
-                <InGameLeaderBoard players={players} sessionPin={roomId}/>
+                <InGameLeaderBoard />
 
                 <GameChat/>
             </section>

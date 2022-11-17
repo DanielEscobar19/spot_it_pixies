@@ -1,17 +1,23 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/common/common.scss'
+import socket from "../Socket";
 import  { GameContext } from '../context/Game'
 
 export default function Layout() {
-  const { setRoomId, setCanJoin, setSessionName, setErrorMessage, setIsHost } = useContext(GameContext);
-  
-  const onClick = () => { 
+  const {
+    setRoomId, setCanJoin, setSessionName, setErrorMessage, setHost,
+    setPlayerCardsRemaining, roomId, name
+  } = useContext(GameContext);
+  console.log(name, roomId);
+  const onClick = () => {
+    socket.emit("abandon_game", name, roomId);
     setRoomId("");
-    setIsHost(false);
+    setHost("");
     setCanJoin(false);
     setSessionName("");
     setErrorMessage("");
+    setPlayerCardsRemaining([]);
   };
 
   return (
