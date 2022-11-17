@@ -76,13 +76,20 @@ io.on("connection", (socket) => {
     console.log("socket joined rooms ", socket.rooms, " number: ", number);
   })
 
-  socket.on("cliente-pedir-cartas", (data) =>{
+  socket.on("cliente-pedir-cartas", (data, playerName) =>{
     let room = findRoom(data);
     let cartaARepartir = room.cardToDeal;
     let cartasPorJugador = (56 / room.playersCount);
-    room.cantidadCartas.fill(cartasPorJugador);
+    // room.cantidadCartas.fill(cartasPorJugador);
+
+    let playerCardsArray = shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador));
+    let actualPlayerIndex = room.players.findIndex(x => x == playerName);
+    room.cantidadCartas[actualPlayerIndex] = playerCardsArray.length;
+    console.log("Array despues de asignar ",   room.cantidadCartas);
+
     socket.to(parseInt(data)).emit("cambiar-cantidad-cartas", room.cantidadCartas);
-    socket.emit("servidor-enviar-cartas", [shuffledCards.slice(cartaARepartir,(cartaARepartir + cartasPorJugador)), wellTop]);
+    socket.emit("cambiar-cantidad-cartas", room.cantidadCartas);
+    socket.emit("servidor-enviar-cartas", [playerCardsArray, wellTop]);
     room.cardToDeal += (cartasPorJugador -1)
   });
 

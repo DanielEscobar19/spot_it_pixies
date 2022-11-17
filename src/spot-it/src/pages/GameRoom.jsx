@@ -30,8 +30,8 @@ export default function GameRoom(props) {
     useEffect(() => {
         setInitialTime(new Date());
         // socket.emit("join-socket-room", roomId);
-        socket.emit("cliente-pedir-cartas",roomId);
-    },[roomId]);
+        socket.emit("cliente-pedir-cartas",roomId, name);
+    },[roomId, name]);
 
     useEffect(() => {
         setAcertoSimbolo(acertoSimbolo => {

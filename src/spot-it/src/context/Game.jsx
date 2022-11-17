@@ -107,6 +107,7 @@ export function GameProvider({ children }) {
     })
 
     socket.on("cambiar-cantidad-cartas", (cardsData) => {
+      
       setPlayerCardsRemaining(cardsData);
     });
 
