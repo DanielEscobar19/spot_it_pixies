@@ -1,9 +1,8 @@
-import '../css/waitingRooms/waitingRoom.scss'
+
 
 import { useContext } from 'react'
 import { useNavigate } from 'react-router';
-import Layout from './Layout'
-import WaitingRoom from '../components/WaitingRoom';
+import WaitingRoomCommun from './WaitingRoomCommun';
 import socket from "../Socket";
 import  { GameContext } from '../context/Game'
 
@@ -19,8 +18,7 @@ export default function WaitingRoomHost() {
 
   return (
     <>
-      <Layout/>
-      <WaitingRoom onClick={clickStart}/>
+      <WaitingRoomCommun onClick={clickStart}/>
       {/* <!-- box indicating if we are still waiting for players --> */}
       {/* <!-- TODO: This text only appears if there is no player connected apart from the host --> */}
       <div className="col d-flex text-center justify-content-center">

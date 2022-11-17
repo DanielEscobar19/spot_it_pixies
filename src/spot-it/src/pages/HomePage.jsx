@@ -25,12 +25,12 @@ export default function HomePage() {
     if (roomId > 0 && !canJoin) {
       // if session pin is greater than 0 it means we received the new pin form the server
       console.log(`Created session with number ${roomId}`);
-      navigate("/new-session");
+      navigate("/waiting-room");
       setHost(name);
     }
     if (canJoin === true) {
       console.log(`Can join session with number ${roomId}`);
-      navigate("/existing-session");
+      navigate("/waiting-room");
     } else {
       console.log("Couldn't join");
     }

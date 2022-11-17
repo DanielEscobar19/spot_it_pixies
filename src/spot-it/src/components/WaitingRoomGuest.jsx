@@ -2,8 +2,7 @@ import '../css/waitingRooms/waitingRoom.scss'
 import '../css/waitingRooms/guestRoom.css'
 
 import React, { useContext } from 'react'
-import Layout from './Layout'
-import WaitingRoom from '../components/WaitingRoom';
+import WaitingRoomCommun from './WaitingRoomCommun';
 import socket from "../Socket";
 import  { GameContext } from '../context/Game'
 
@@ -19,8 +18,7 @@ export default function WaitingRoomGuest() {
 
   return (
     <>
-      <Layout/>
-      <WaitingRoom onClick={clickReady}/>
+      <WaitingRoomCommun onClick={clickReady}/>
       {/* <!-- box indicating if we for the host to start the game --> */}
       {/* <!-- This text only appears if there is no player connected apart from the host --> */}
       <div className="col d-flex text-center justify-content-center my-5 d-cursor pt-5">

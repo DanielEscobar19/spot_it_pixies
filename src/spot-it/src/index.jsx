@@ -3,8 +3,7 @@ import 'bootstrap/dist/js/bootstrap';
 //import $ from 'jquery';
 //import Popper from 'popper.js';
 import './css/common/common.scss';
-import WaitingRoomHost from './pages/WaitingRoomHost';
-import WaitingRoomGuest from './pages/WaitingRoomGuest';
+import WaitingRoom from './pages/WaitingRoom';
 import HomePage from './pages/HomePage';
 import GameRoom from './pages/GameRoom';
 import Help from './pages/Help'
@@ -24,9 +23,8 @@ root.render(
       <Routes>
           <Route path="/client" element={<Client />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/existing-session" element={<WaitingRoomGuest />} />
           <Route path="/home-page" element={<HomePage/>} />
-          <Route path="/new-session" element={<WaitingRoomHost />} />
+          <Route path="/waiting-room" element={<WaitingRoom />} />
           <Route path="/game-room" element={<GameRoom/>}/>
           <Route path="/help" element={<Help />}/>
           <Route path="/credits" element={<Credits />}/>
