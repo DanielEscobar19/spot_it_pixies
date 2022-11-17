@@ -8,10 +8,20 @@ import  { GameContext } from '../context/Game'
 
 export default function Leaderboard() {
   const {
-    players, bestTime, winCount, name, sessionName, finalTime, host
+    players, bestTime, winCount, name, sessionName, finalTime
   } = useContext(GameContext);
-  const isHost = name === host;
-  const indx = players.findIndex((x) => x.name === name);
+  const playerList = [];
+  const indx = players.findIndex((x) => x === name);
+  const result = Array.from(Array(winCount.length).keys())
+      .sort((a, b) => winCount[a] > winCount[b] ? -1 : (winCount[b] > winCount[a]) | 0);
+  for (let val of result){
+    if(players[val].length > 0){
+      playerList.push(val);
+    }
+  };
+  console.log(playerList[0], indx, playerList[0] === indx);
+  const rank = playerList.indexOf(indx) + 1;
+  console.log(playerList, indx);
 
   const millToTimeFormat = (myDuration) => {
     var result = Math.floor(myDuration/(1000*60*60)) + ":" + Math.floor(myDuration/(1000*60))%60 + ":" + Math.floor(myDuration/1000)%60;
@@ -47,7 +57,7 @@ export default function Leaderboard() {
           </div>
           
           <div className="col justify-content-start">
-            <Link to={isHost ? '/new-session' : '/existing-session'}> 
+            <Link to="/waiting-room"> 
               <Button title="Play again"/>
             </Link>
           </div>
@@ -68,7 +78,7 @@ export default function Leaderboard() {
           {/* <!--Player 1--> */}
           <div className="row d-flex align-items-center mb-3 py-1">
             <div className="col-4 ps-5 col-position">
-              <h2>Rank</h2>
+              <h2>{rank}</h2>
             </div>
             <div className="col-4 ps-5 col-name text-center">
               <h2>{name}</h2>
@@ -79,8 +89,8 @@ export default function Leaderboard() {
             </div>
           </div>
           {
-            players.map((player, index) => {
-              return <PlayerLeadearBoard key={player.id} name={player.name} rank={index + 1} bestTime={millToTimeFormat(bestTime[index])} victories={winCount[index]}/>
+            playerList.map((id, index) => {
+              return <PlayerLeadearBoard key={index} name={players[id]} rank={index + 1} bestTime={millToTimeFormat(bestTime[id])} victories={winCount[id]}/>
             })
           }
         </div>

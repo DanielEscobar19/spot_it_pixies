@@ -9,16 +9,16 @@ export default function InGameLeaderBoard() {
 
   useEffect(() => {
     let result = Array.from(Array(playerCardsRemaining.length).keys())
-      .sort((a, b) => playerCardsRemaining[a] > playerCardsRemaining[b] ? -1 : (playerCardsRemaining[b] > playerCardsRemaining[a]) | 0);
+      .sort((a, b) => playerCardsRemaining[a] < playerCardsRemaining[b] ? -1 : (playerCardsRemaining[b] < playerCardsRemaining[a]) | 0);
     let newArr = [];
     for (let val of result){
       if(players[val].length > 0){
-        newArr.push([val]);
+        newArr.push(val);
       }
     }
     setPlayerList(newArr);
   }, [playerCardsRemaining, players]);
-  console.log(playerCardsRemaining);
+
   return (
     <>
       <section id="subseccion-nombres">

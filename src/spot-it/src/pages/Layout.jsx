@@ -9,7 +9,7 @@ export default function Layout() {
     setRoomId, setCanJoin, setSessionName, setErrorMessage, setHost,
     setPlayerCardsRemaining, roomId, name
   } = useContext(GameContext);
-  console.log(name, roomId);
+
   const onClick = () => {
     socket.emit("abandon_game", name, roomId);
     setRoomId("");
