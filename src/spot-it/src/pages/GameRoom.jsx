@@ -13,7 +13,7 @@ import  { GameContext } from '../context/Game'
 export default function GameRoom(props) {
     const navigate = useNavigate();
     const {
-        roomId, name, setFinalTime, ganador, setGanador,
+        roomId, name, setFinalTime, ganador, setGanador, setMessagesList
     } = useContext(GameContext);
     const[shuffledCards, setCards] = useState([]);
 
@@ -26,6 +26,9 @@ export default function GameRoom(props) {
     const [acertoSimbolo, setAcertoSimbolo] = useState(true);
     const [puedeElegirCarta, setPuedeElegirCarta] = useState(true);
 
+    useEffect(() => {
+        setMessagesList([]);
+    }, []);
 
     useEffect(() => {
         setInitialTime(new Date());

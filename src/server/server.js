@@ -215,8 +215,15 @@ io.on("connection", (socket) => {
         socket.to(parseInt(sessionId)).emit("new_host", room.hostName);
       }
       socket.leave(parseInt(sessionId));
+      // borrar el room si esta con 0 jugadores?
+      let roomIndex = rooms.findIndex(x => x.id == sessionId);
+      console.log("Room a borrar  index", roomIndex , " lista de rooms: ",rooms);
+
+      if (room.playersCount < 1) {
+        rooms.splice(roomIndex, 1);
+        console.log("Elimna el room ", rooms);
+      }
     }
-    // borrar el room si esta con 0 jugadores?
   });
 
   socket.on("updateLeaderBoard", (name, winTime, sessionId) => {
