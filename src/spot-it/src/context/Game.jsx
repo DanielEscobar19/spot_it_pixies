@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import socket from "../Socket";
+import {v4} from 'uuid';
 
 export const GameContext = createContext({
   players: [],
@@ -29,6 +30,8 @@ export const GameContext = createContext({
   setFinalTime: (finalTime) => {},
   playerCardsRemaining: [],
   setPlayerCardsRemaining: (players) => {},
+  messagesList: [],
+  setMessagesLis: (messagesList) => {}
 });
 
 export function GameProvider({ children }) {
@@ -45,6 +48,7 @@ export function GameProvider({ children }) {
   const [bestTime, setBestTime] = useState([]);
   const [finalTime, setFinalTime] = useState(0);
   const[playerCardsRemaining, setPlayerCardsRemaining] = useState([]);
+  const [messagesList, setMessagesList] = useState([]);
   const context = {
     players,
     setPlayers,
@@ -71,7 +75,9 @@ export function GameProvider({ children }) {
     finalTime,
     setFinalTime,
     playerCardsRemaining,
-    setPlayerCardsRemaining
+    setPlayerCardsRemaining,
+    messagesList,
+    setMessagesList
   };
 
   useEffect(() => {
@@ -114,6 +120,11 @@ export function GameProvider({ children }) {
     socket.on("new_host", (newHost) => {
       setHost(newHost);
     });
+
+    socket.on("new-event", (message) => {
+      message.id = v4();
+      setMessagesList([...messagesList, message]);
+    })
   });
 
   return <GameContext.Provider value={context}>{children}</GameContext.Provider>;

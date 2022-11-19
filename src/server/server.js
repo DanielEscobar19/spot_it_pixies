@@ -4,7 +4,6 @@ const http = require("http");
 const { Server } = require("socket.io")
 const cors = require("cors");
 const cards = require("./cards.json");
-
 // port used by the server
 const PORT = 8080;
 
@@ -71,6 +70,11 @@ io.on("connection", (socket) => {
     socket.emit("received_message", socket.rooms[1]);
   });
 
+  socket.on("send-new-event", (roomId, message) => {
+    socket.to(parseInt(roomId)).emit("new-event", message);
+    socket.emit("new-event", message);
+  });
+
   socket.on("join-socket-room", (number) => {
     socket.join(parseInt(number));
     console.log("socket joined rooms ", socket.rooms, " number: ", number);
@@ -105,6 +109,8 @@ io.on("connection", (socket) => {
     }
     if (esta) {
       socket.emit("acerto-simbolo", [true]);
+      socket.to(parseInt(data.sessionPin)).emit("new-event", {playerName: data.name, content: "Spotted the correct symbol!"});
+      socket.emit("new-event", {playerName: data.name, content: "Spotted the correct symbol!"});
       wellTop = data.carta;
       socket.to(parseInt(data.sessionPin)).emit("cambio-top-well", wellTop);
       if (data.cantidadCartas == 1) {

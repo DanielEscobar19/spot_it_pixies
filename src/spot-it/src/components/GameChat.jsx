@@ -3,10 +3,11 @@ import "../css/components/GameChat.scss";
 import ChatMessage from './ChatMessage';
 import {v4} from 'uuid';
 import  { GameContext } from '../context/Game'
+import socket from "../Socket";
 
 export default function GameChat({ gameEvent }) {
-  const { name } = useContext(GameContext);
-  const [messagesList, setMessagesList] = useState([]);
+  const { name, messagesList, setMessagesList, roomId } = useContext(GameContext);
+  
   const [currentMessage, setCurrentMessage] = useState("");
   const chatWindowRef =  useRef(null);
 
@@ -14,11 +15,12 @@ export default function GameChat({ gameEvent }) {
     if (event.key === 'Enter') {
       event.preventDefault();
       // 👇️ access input value from state
-      if (event.target.value !== "") {
-        setMessagesList(previous => {
-          return [...previous,{playerName: name, content: event.target.value, id : v4()}];
-        });
-      }
+      // if (event.target.value !== "") {
+      //   setMessagesList(previous => {
+      //     return [...previous,{playerName: name, content: event.target.value, id : v4()}];
+      //   });
+      // }
+      socket.emit("send-new-event", roomId, {playerName: name, content: event.target.value})
       setCurrentMessage("");
     }
   };
