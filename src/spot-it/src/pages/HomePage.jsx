@@ -10,7 +10,7 @@ import  { GameContext } from '../context/Game'
 
 export default function HomePage() {
   const {
-    errorMessage, name, setName, roomId, canJoin, setCanJoin, sessionName, setSessionName, setHost
+    errorMessage, name, setName, roomId, setRoomId, canJoin, setCanJoin, sessionName, setSessionName, setHost
   } = useContext(GameContext);
   const navigate  = useNavigate()
 
@@ -23,7 +23,12 @@ export default function HomePage() {
   
   useEffect(() => {
     setCanJoin(false);
+    setRoomId(0);
   }, [])
+
+  useEffect(() => {
+    console.log("Home page can join ", canJoin);
+  })
 
   useEffect(() => {
     if (roomId > 0 && !canJoin) {

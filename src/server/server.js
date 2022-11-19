@@ -208,6 +208,7 @@ io.on("connection", (socket) => {
         room.hostName = room.players.find( x => x.length > 0);
         socket.to(parseInt(sessionId)).emit("new_host", room.hostName);
       }
+      socket.leave(parseInt(sessionId));
     }
     // borrar el room si esta con 0 jugadores?
   });

@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import PlayerLeadearBoard from '../components/PlayerLeadearBoard';
 import Button from '../components/Button';
-import Layout from './Layout'
-import "../css/pages/Leaderboard.css"
-import  { GameContext } from '../context/Game'
+import Layout from './Layout';
+import "../css/pages/Leaderboard.css";
+import  { GameContext } from '../context/Game';
+import socket from "../Socket";
 
 export default function Leaderboard() {
   const {
-    players, bestTime, winCount, name, setCanJoin, sessionName, finalTime
+    players, bestTime, winCount, name, setCanJoin, sessionName, finalTime, roomId
   } = useContext(GameContext);
   const playerList = [];
   const indx = players.findIndex((x) => x === name);
@@ -31,6 +32,10 @@ export default function Leaderboard() {
     return result;
   }
 
+  const backHome = () => {
+    socket.emit("abandon_game", name, roomId);
+  }
+
   return (
     <>
       <Layout/>
@@ -47,7 +52,7 @@ export default function Leaderboard() {
         
         <div className="row align-items-end my-5">
           <div className="col d-flex justify-content-center">
-            <Link  to={"/home-page"} replace={true}> 
+            <Link onClick={backHome} to={"/home-page"} replace={true}> 
               <Button title="Back home"/>
             </Link>
           </div>

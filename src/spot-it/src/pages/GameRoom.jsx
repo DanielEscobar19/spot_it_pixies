@@ -41,7 +41,7 @@ export default function GameRoom(props) {
                         ()=>{
                             setPuedeElegirCarta(true);
                         },
-                        0
+                        5000
                     );
             }
             else {
