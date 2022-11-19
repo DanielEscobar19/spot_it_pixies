@@ -10,7 +10,7 @@ import  { GameContext } from '../context/Game'
 
 export default function HomePage() {
   const {
-    errorMessage, name, setName, roomId, canJoin, sessionName, setSessionName, setHost
+    errorMessage, name, setName, roomId, canJoin, setCanJoin, sessionName, setSessionName, setHost
   } = useContext(GameContext);
   const navigate  = useNavigate()
 
@@ -22,6 +22,10 @@ export default function HomePage() {
   const validateJoinSession = !(name.length > 0 && joinSessionPin > 0);
   
   useEffect(() => {
+    setCanJoin(false);
+  }, [])
+
+  useEffect(() => {
     if (roomId > 0 && !canJoin) {
       // if session pin is greater than 0 it means we received the new pin form the server
       console.log(`Created session with number ${roomId}`);
@@ -29,6 +33,7 @@ export default function HomePage() {
       setHost(name);
     }
     if (canJoin === true) {
+      setCanJoin(false);
       console.log(`Can join session with number ${roomId}`);
       navigate("/waiting-room");
     } else {

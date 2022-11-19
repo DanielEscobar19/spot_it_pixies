@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import PlayerLeadearBoard from '../components/PlayerLeadearBoard';
 import Button from '../components/Button';
@@ -8,7 +8,7 @@ import  { GameContext } from '../context/Game'
 
 export default function Leaderboard() {
   const {
-    players, bestTime, winCount, name, sessionName, finalTime
+    players, bestTime, winCount, name, setCanJoin, sessionName, finalTime
   } = useContext(GameContext);
   const playerList = [];
   const indx = players.findIndex((x) => x === name);
@@ -20,8 +20,11 @@ export default function Leaderboard() {
     }
   };
   console.log(playerList[0], indx, playerList[0] === indx);
-  const rank = playerList.indexOf(indx) + 1;
   console.log(playerList, indx);
+  
+  useEffect(() => {
+    setCanJoin(false);
+  }, [])
 
   const millToTimeFormat = (myDuration) => {
     var result = Math.floor(myDuration/(1000*60*60)) + ":" + Math.floor(myDuration/(1000*60))%60 + ":" + Math.floor(myDuration/1000)%60;
@@ -78,14 +81,13 @@ export default function Leaderboard() {
           {/* <!--Player 1--> */}
           <div className="row d-flex align-items-center mb-3 py-1">
             <div className="col-4 ps-5 col-position">
-              <h2>{rank}</h2>
+              <h3>Rank</h3>
             </div>
             <div className="col-4 ps-5 col-name text-center">
-              <h2>{name}</h2>
-              <h3>{millToTimeFormat(bestTime[indx])}</h3>
+              <h3>Best time</h3>
             </div>
             <div className="col-4 pe-5 col-wincount text-end">
-              <h2>{winCount[indx]}</h2>
+              <h3>Win count</h3>
             </div>
           </div>
           {

@@ -41,7 +41,7 @@ export default function GameRoom(props) {
                         ()=>{
                             setPuedeElegirCarta(true);
                         },
-                        5000
+                        0
                     );
             }
             else {
@@ -73,6 +73,9 @@ export default function GameRoom(props) {
 
     useEffect(() => {
         socket.on("servidor-enviar-cartas", (data) => {
+            console.log("Cartas del mae ", data[0]);
+            console.log("Cartas del pozo de evrga ", data[1]);
+
             setCards(data[0]);
             setWellTop(data[1]);
             setCantidadCartasJugador(data[0].length);
@@ -84,7 +87,7 @@ export default function GameRoom(props) {
                 setAcertoSimbolo(true);
                 socket.emit("restar-carta-jugador", roomId, name, cantidadCartasJugador-1);
                 setTimeout(function () {
-                    setWellTop(shuffledCards[cartaActualJugador]?.simbolos);
+                    setWellTop(shuffledCards[cartaActualJugador].simbolos);
                     setCartaActualJugador(cartaActualJugador + 1);
                     setCantidadCartasJugador(cantidadCartasJugador - 1);
                     setActivarAnimacion(false);

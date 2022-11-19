@@ -89,6 +89,8 @@ io.on("connection", (socket) => {
 
     socket.to(parseInt(data)).emit("cambiar-cantidad-cartas", room.cantidadCartas);
     socket.emit("cambiar-cantidad-cartas", room.cantidadCartas);
+
+
     socket.emit("servidor-enviar-cartas", [playerCardsArray, wellTop]);
     room.cardToDeal += (cartasPorJugador -1)
   });
@@ -184,7 +186,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("restar-carta-jugador", (sessionId, name, cantidadCartas) => {
-    console.log(sessionId, name, cantidadCartas)
     let room = findRoom(sessionId);
     index = room.players.indexOf(name);
     room.cantidadCartas[index] = cantidadCartas;
