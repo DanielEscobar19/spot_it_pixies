@@ -1,15 +1,23 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useState, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../css/common/common.scss'
 import socket from "../Socket";
 import  { GameContext } from '../context/Game'
+import Modal from '../components/Modal'
 
 export default function Layout() {
   const {
     setRoomId, setCanJoin, setSessionName, setErrorMessage, setHost,
     setPlayerCardsRemaining, roomId, name
   } = useContext(GameContext);
+  const location = useLocation();
+  const onGameRoom = location.pathname === "/game-room";
+  const noRoomNeed = location.pathname === "/help" || location.pathname === "/credits";
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
+  const hideModal = () => setShow(false);
+  const showModal = () => setShow(true);
   const onClick = () => {
     socket.emit("abandon_game", name, roomId);
     setRoomId("");
@@ -19,6 +27,12 @@ export default function Layout() {
     setErrorMessage("");
     setPlayerCardsRemaining([]);
   };
+
+  useEffect(() => {
+    if(!roomId > 0 && !noRoomNeed){
+      navigate("/");
+    }
+  }, [roomId, navigate, noRoomNeed]);
 
   return (
     <header>
@@ -34,7 +48,12 @@ export default function Layout() {
         <div className="collapse navbar-collapse justify-content-end mx-3" id="navbarText">
           <ul className="navbar-nav mr-auto ">
             <li className="nav-item">
-              <Link to="/help" className="nav-link unselectable-text" onClick={onClick}>Help</Link>
+              { onGameRoom ?
+                  <Link className="nav-link unselectable-text" onClick={showModal}>Help</Link>
+                :
+                  <Link to="/help" className="nav-link unselectable-text" onClick={onClick}>Help</Link>
+              }
+              
             </li>
             <li className="nav-item">
               <Link to="/credits" className="nav-link unselectable-text" onClick={onClick}>Credits</Link>
@@ -42,6 +61,7 @@ export default function Layout() {
           </ul>
         </div>
       </nav>
+      { (show && onGameRoom) && <Modal handleClose={hideModal} body="hello world" /> }
     </header>
   )
 }

@@ -95,13 +95,11 @@ export function GameProvider({ children }) {
 
   useEffect(() => {
     socket.on("new_join_player" , (newPlayers) => {
-      console.log("New_join_player Received players ", newPlayers);
       setPlayers(newPlayers);
       setPlayersCount(playersCount + 1);
     })
 
     socket.on("players_list", (newPlayers, count) => {
-      console.log("Players_list received players ", newPlayers, count);
       setPlayersCount(count);
       setPlayers(newPlayers);
     })
@@ -138,11 +136,12 @@ export function GameProvider({ children }) {
 
     socket.on("ready_list", (ready_list) => {
       let playersReady = 0;
-      for(let i = 0; i < players.length; i++){
+      for(let i = 0; i < ready_list.length; i++){
         if(ready_list[i] === true) playersReady++;
       }
       setReadyCount(playersReady)
       setReadyList(ready_list);
+      console.log("setting ready list", readyList, playersReady);
     });
 
     socket.on("new-event", (message) => {

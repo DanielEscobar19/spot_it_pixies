@@ -12,7 +12,6 @@ export default function WaitingRoom( { onClick } ) {
   const playersReady = readyCount === playersCount;
   const isHost = host === name;
   let playerId = 0;
-  console.log("start game",playersCount, readyCount, playersReady);
 
   const [playersList,setPlayerList] = useState([{type: "guest", name : name, isConnected : false, id: playerId++ }]);
 

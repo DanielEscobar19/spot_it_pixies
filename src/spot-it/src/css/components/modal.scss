@@ -1,0 +1,15 @@
+@import "../common/common.scss";
+
+.help-modal {
+  position: absolute;
+  background: white;
+  border: 2px solid $gray;
+  margin: 2rem;
+  z-index: 1;
+  border-radius: 30px;
+  padding-bottom: 1rem;
+  text-align: center;
+  .rules-text {
+    text-align: left;
+  }
+}
