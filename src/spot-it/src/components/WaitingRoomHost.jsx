@@ -8,12 +8,14 @@ import  { GameContext } from '../context/Game'
 
 
 export default function WaitingRoomHost() {
-  const { roomId } = useContext(GameContext);
+  const { roomId, playersCount, readyCount } = useContext(GameContext);
   const navigate = useNavigate();
 
   const clickStart= () => {
-    socket.emit("start_game", roomId)
-    navigate("/game-room");
+    if (readyCount === playersCount) {
+      socket.emit("start_game", roomId)
+      navigate("/game-room");
+    }
   }
 
   return (

@@ -1,6 +1,6 @@
 import '../css/waitingRooms/waitingRoom.scss'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import Layout from './Layout'
 import WaitingRoomGuest from '../components/WaitingRoomGuest';
@@ -14,18 +14,21 @@ export default function WaitingRoom() {
   const isHost = host === name;
   const navigate = useNavigate();
 
-  const clickStart= () => {
-    socket.emit("start_game", roomId)
-    navigate("/game-room");
-  }
+  useEffect(() => {
+    document.title = 'Spot it - Waiting room - guest';
+    socket.emit("join-socket-room", roomId);
+    if(!roomId > 0){
+      navigate("/");
+    }
+  });
 
   return (
     <>
       <Layout/>
       { isHost ? 
-          <WaitingRoomHost onClick={clickStart}/> 
+          <WaitingRoomHost /> 
         :
-          <WaitingRoomGuest onClick={clickStart}/>
+          <WaitingRoomGuest />
       }
     </>
   )

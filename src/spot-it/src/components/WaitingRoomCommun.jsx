@@ -1,27 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react'
 import Button from './Button';
 import ConnectedPlayers from './ConnectedPlayers';
-import socket from "../Socket";
 import  { GameContext } from '../context/Game'
 import PropTypes from 'prop-types';
 
 
 export default function WaitingRoom( { onClick } ) {
-  const { name, sessionName, roomId, host } = useContext(GameContext);
+  const {
+    name, sessionName, roomId, host, readyCount, playersCount
+  } = useContext(GameContext);
+  const playersReady = readyCount === playersCount;
   const isHost = host === name;
-  const navigate  = useNavigate()
   let playerId = 0;
-
-  // const navigate = useNavigate();
-
-  useEffect(() => {
-    document.title = 'Spot it - Waiting room - guest';
-    socket.emit("join-socket-room", roomId);
-    if(!roomId > 0){
-      navigate("/");
-    }
-  });
+  console.log("start game",playersCount, readyCount, playersReady);
 
   const [playersList,setPlayerList] = useState([{type: "guest", name : name, isConnected : false, id: playerId++ }]);
 
@@ -63,8 +54,8 @@ export default function WaitingRoom( { onClick } ) {
         
         {/* <!-- TODO: Start button. Is clickable if all players are ready  Disabled attribute is removed in this case--> */}
         <div className="col d-flex justify-content-center" title="Ready option will be implemented in future versions">
-            { isHost ? <Button title="Start" onClick={onClick} />
-            : <Button  onClick={onClick} title="I'm ready" disabled={true}/> }
+            { isHost ? <Button title="Start" disabled={!playersReady} onClick={onClick} />
+            : <Button  onClick={onClick} title="I'm ready"/> }
         </div>
       </div>
 

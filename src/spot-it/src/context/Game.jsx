@@ -31,7 +31,13 @@ export const GameContext = createContext({
   playerCardsRemaining: [],
   setPlayerCardsRemaining: (players) => {},
   messagesList: [],
-  setMessagesLis: (messagesList) => {}
+  setMessagesLis: (messagesList) => {},
+  playersCount: 0,
+  setPlayersCount: (playersCount) => {},
+  readyCount: 1,
+  setReadyCount: (readyCount) => {},
+  readyList: [],
+  setReadyList: (readyList) => {}
 });
 
 export function GameProvider({ children }) {
@@ -49,6 +55,9 @@ export function GameProvider({ children }) {
   const [finalTime, setFinalTime] = useState(0);
   const[playerCardsRemaining, setPlayerCardsRemaining] = useState([]);
   const [messagesList, setMessagesList] = useState([]);
+  const [playersCount, setPlayersCount] = useState([]);
+  const [readyCount, setReadyCount] = useState([]);
+  const [readyList, setReadyList] = useState([]);
   const context = {
     players,
     setPlayers,
@@ -77,17 +86,23 @@ export function GameProvider({ children }) {
     playerCardsRemaining,
     setPlayerCardsRemaining,
     messagesList,
-    setMessagesList
+    setMessagesList,
+    playersCount,
+    readyCount,
+    readyList,
+    setReadyList
   };
 
   useEffect(() => {
     socket.on("new_join_player" , (newPlayers) => {
       console.log("New_join_player Received players ", newPlayers);
       setPlayers(newPlayers);
+      setPlayersCount(playersCount + 1);
     })
 
-    socket.on("players_list", (newPlayers) => {
-      console.log("Players_list received players ", newPlayers);
+    socket.on("players_list", (newPlayers, count) => {
+      console.log("Players_list received players ", newPlayers, count);
+      setPlayersCount(count);
       setPlayers(newPlayers);
     })
 
@@ -119,6 +134,15 @@ export function GameProvider({ children }) {
 
     socket.on("new_host", (newHost) => {
       setHost(newHost);
+    });
+
+    socket.on("ready_list", (ready_list) => {
+      let playersReady = 0;
+      for(let i = 0; i < players.length; i++){
+        if(ready_list[i] === true) playersReady++;
+      }
+      setReadyCount(playersReady)
+      setReadyList(ready_list);
     });
 
     socket.on("new-event", (message) => {

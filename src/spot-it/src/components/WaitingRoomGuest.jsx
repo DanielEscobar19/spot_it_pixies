@@ -13,7 +13,7 @@ export default function WaitingRoomGuest() {
 
   function clickReady () {
     console.log("I'm ready");
-    socket.emit("guest-ready", name, roomId);
+    socket.emit("guest_ready", roomId, name);
   }
 
   return (

@@ -7,7 +7,7 @@ import  { GameContext } from '../context/Game'
 
 
 export default function ConnectedPlayers() {
-  const { players, host, roomId } = useContext(GameContext);
+  const { players, host, roomId, readyList } = useContext(GameContext);
   const playersTextColors = ["red-color", "cyan-color", "pink-color", "orange-color", "gray-color", "dark-yellow-color", "green-color"];
   const navigate = useNavigate();
   const filteredPlayers = players.filter( x => x !== "")
@@ -33,10 +33,11 @@ export default function ConnectedPlayers() {
           {
             filteredPlayers.map((player, index) => {
               const isHost = player === host;
+              let idx = players.indexOf(player);
               let color = "";
               isHost ? (color = "purple-color") : (color = playersTextColors[index]);
               console.log(`colorIndex ${index} color${color} `);
-              return <PlayerConnection key={index} player={player} colorText={color} host={isHost} />
+              return <PlayerConnection key={index} player={player} colorText={color} host={isHost} ready={readyList[idx]} />
             })
           }
         </div>

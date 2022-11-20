@@ -121,12 +121,6 @@ io.on("connection", (socket) => {
       socket.emit("acerto-simbolo", [false]);
     }
   })
-
-  socket.on("guest-ready", (playerName, sessionPin) => {
-    console.log("Player ", playerName, " is ready")
-    socket.to(parseInt(sessionPin)).emit("new-guest-ready", playerName);
-    socket.emit("new-guest-ready", playerName, sessionPin);
-  })
   
   socket.on("announce_join", (sessionId) => {
     // sends the player list to everyone in the room so they can update their list
@@ -134,6 +128,7 @@ io.on("connection", (socket) => {
     if (room) {
       console.log("new_join_player to room ", sessionId, " data room ", room);
       socket.to(parseInt(sessionId)).emit("new_join_player", room.players);
+      socket.to(parseInt(sessionId)).emit("ready_list", room.ready);
     }
   });
 
@@ -159,6 +154,7 @@ io.on("connection", (socket) => {
   
         // sends permission to client to join
         socket.emit("join_validation", true, room.sessionName, sessionId, room.hostName);
+        socket.emit("ready_list", room.ready);
       }
       if (room.playersCount >= 8) {
         denegationMessage += `Room ${sessionId} is full `;
@@ -177,26 +173,44 @@ io.on("connection", (socket) => {
 
   socket.on("start_game", (sessionId) => {
     let room = findRoom(sessionId);
-    room.cardToDeal = 1;
-    console.log("Host started the game");
-    console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
-    console.log("Socket rooms: ", socket.rooms);
-    socket.to(parseInt(sessionId)).emit("started_game", "useless");
+    let playersReady = 0;
+    room.ready.forEach(e => {
+      if(e) playersReady++;
+    });
+    if(playersReady === room.playersCount){
+      room.cardToDeal = 1;
+      console.log("Host started the game");
+      console.log("sessionId received: ", sessionId, " data type ", typeof sessionId);
+      console.log("Socket rooms: ", socket.rooms);
+      socket.to(parseInt(sessionId)).emit("started_game", "useless");
+    }
   });
 
   socket.on("get_players", (sessionId) => {
     let room = findRoom(sessionId);
     if (room) {
-      socket.emit("players_list", room.players);
+      socket.emit("players_list", room.players, room.playersCount);
+    }
+  });
+
+  socket.on("guest_ready", (sessionId, name) => {
+    let room = findRoom(sessionId);
+    if (room) {
+      index = room.players.indexOf(name);
+      room.ready[index] = true;
+      socket.emit("ready_list", room.ready);
+      socket.to(parseInt(sessionId)).emit("ready_list", room.ready);
     }
   });
 
   socket.on("restar-carta-jugador", (sessionId, name, cantidadCartas) => {
     let room = findRoom(sessionId);
-    index = room.players.indexOf(name);
-    room.cantidadCartas[index] = cantidadCartas;
-    socket.to(parseInt(sessionId)).emit("cambiar-cantidad-cartas", room.cantidadCartas);
-    socket.emit("cambiar-cantidad-cartas", room.cantidadCartas);
+    if(room) {
+      index = room.players.indexOf(name);
+      room.cantidadCartas[index] = cantidadCartas;
+      socket.to(parseInt(sessionId)).emit("cambiar-cantidad-cartas", room.cantidadCartas);
+      socket.emit("cambiar-cantidad-cartas", room.cantidadCartas);
+    }
   })
 
   socket.on("abandon_game", (name, sessionId) => {
@@ -207,11 +221,15 @@ io.on("connection", (socket) => {
       room.bestTime[index] = 0;
       room.winCount[index] = 0;
       room.players[index] = '';
+      room.ready[index] = false;
       room.playersCount -= 1;
       socket.to(parseInt(sessionId)).emit("reflectLeaderBoard", room.winCount, room.bestTime);
-      socket.to(parseInt(sessionId)).emit("players_list", room.players);
+      socket.to(parseInt(sessionId)).emit("players_list", room.players, room.playersCount);
+      socket.to(parseInt(sessionId)).emit("ready_list", room.ready);
       if (name === room.hostName){
         room.hostName = room.players.find( x => x.length > 0);
+        index = room.players.indexOf(room.hostName);
+        room.ready[index] = true;
         socket.to(parseInt(sessionId)).emit("new_host", room.hostName);
       }
       socket.leave(parseInt(sessionId));
@@ -255,15 +273,18 @@ io.on("connection", (socket) => {
       cardToDeal : 1,
       lastWinner : "null",
       players: new Array(8).fill(""),
+      ready: new Array(8).fill(false),
       winCount: new Array(8).fill(0),
       bestTime: new Array(8).fill(0),
       cantidadCartas: new Array(8).fill(0),
       };
     room.players[0] = hostName;
+    room.ready[0] = true;
     rooms.push(room);
     console.log(`\n create_session: rooms in rooms array: ${rooms}`);
     // server responds to client with yhe session number assigned
     socket.emit("room_id", sessionNumber);
+    socket.emit("ready_list", room.ready);
     console.log(`Created session with number ${sessionNumber} \n`);
     ++sessionNumber;
   });
