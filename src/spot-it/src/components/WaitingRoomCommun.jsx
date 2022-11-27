@@ -38,7 +38,7 @@ export default function WaitingRoom( { onClick } ) {
           <div className="player-count-container box-container unselectable-text">
             <img src="../../img/common/plaza.png" alt="Player icon"/>
             {/* <!-- TODO: this number is calculated counting the number of player connected including the host --> */}
-            <p>{playersList.length}</p>
+            <p>{playersCount}</p>
           </div>
         </div>
 
