@@ -76,7 +76,7 @@ El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, le
    <img src="design/img/play-disable-host.jpg"  height="200">  
 
    - Botón de play clickeable del host cuando todos están listos  
-   <img src="design/img/play-enable-host.jpg"  height="200">
+   <img src="design/img/play-enable-host.jpg"  height="200">  
 
 
 3. Chat de eventos que marca un “historial” de los emparejamientos de cartas.
