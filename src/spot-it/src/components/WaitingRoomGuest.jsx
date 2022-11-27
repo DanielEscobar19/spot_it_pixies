@@ -29,7 +29,7 @@ export default function WaitingRoomGuest() {
             The session host will start game soon.
           </h1>
         </section>
-        <img src="../../Img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>
+        <img src="../../img/common/spot_it_hand.svg" alt="Spot it hand" className="hand-logo"/>
       </div>
 
       {/* <!-- inspirational quotes --> */}
