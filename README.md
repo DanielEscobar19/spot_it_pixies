@@ -17,7 +17,7 @@
   </p>
   <p align="center">
     <br />
-    <a href="https://png.pngitem.com/pimgs/s/207-2073499_translate-platform-from-english-to-spanish-work-in.png">View Demo</a>
+    <a href="http://129.153.234.175/">Play de game!!</a>
     ·
     <a href="https://github.com/DanielEscobar19/spot_it_pixies/issues">Report Bug</a>
     ·
@@ -43,7 +43,7 @@
     <!-- <li><a href="#uso">Uso</a></li>
     -->
     <li><a href="#mapa-del-sitio">Mapa del Sitio</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#manual-de-uso">Manual de uso</a></li>
     <li><a href="#autores">Autores</a></li>
     <li><a href="#otras rutas">Otras rutas</a></li>
   </ol>
@@ -62,22 +62,24 @@ El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, le
 
 ### Adaptaciones
 
-1. El contador de tiempo para las partidas, que sirve como un marcador de “mejor tiempo” para un jugador en el leaderboard y como contador para el chat de eventos.
-   - Ejemplo - Durante la partida.  
-   ![img](design/img/adap_MatchTime.jpg)
+1. El contador de tiempo para las partidas, que sirve como un marcador de “mejor tiempo” para un jugador en el leaderboard. AL final de cada partida se actualiza el mejor tiempo de cada jugador y según los datos almacenados en el servidor.
    - Ejemplo - Al final de la partida.  
    ![img](design/img/adap_MatchDuration.jpg)
    - Ejemplo - Leaderboard.  
    ![img](design/img/adap_BestTime.png)
 
-2. Efectos de sonido y/o animación en el nombre del jugador, cuando "empareja" una carta.
-   - Ejemplo - antes de emparejar.  
-   ![img](design/img/adap_Spotit-Before.jpg)
-   - Ejemplo - después de emparejar.  
-   ![img](design/img/adap_Spotit-After.jpg)
+2. Botón de I'm ready para que el host solo puedar empezar la partida si todos los jugadores están listos.
+   - Botón del lado del guest antes de ser clickeado  
+   <img src="design/img/ready-button.jpg"  height="200">
+
+   - Botón de play no clickeable del host cuando no todos están listos  
+   <img src="design/img/play-disable-host.jpg"  height="200">
+   - Botón de play clickeable del host cuando todos están listos  
+   <img src="design/img/play-enable-host.jpg"  height="200">
+
 
 3. Chat de eventos que marca un “historial” de los emparejamientos de cartas.
-   - Ejemplo - Chat de eventos, incluye el uso del tiempo.  
+   - Ejemplo - Chat de eventos, incluye el uso del tiempo. Además esta chat es funcional y cualquier jugador puede enviar mensajes a través de este.  
    ![img](design/img/adapt_eventsChat.png)
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
@@ -114,29 +116,29 @@ Spot it! Consta de 55 cartas, con 8 símbolos por carta de los 50 disponibles, s
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
 <!-- ROADMAP -->
-## Roadmap
+## Manual de uso
 
-- [x] Entregable 1
-  - [x] Agregar Sketchs
-  - [x] Agregar Mapa del sito
-  - [x] Agregar readme.md
-  - [x] Adaptaciones
-  - [x] Agregar wireframes
-  - [x] Agregar Acuerdos de diagramas
-  - [x] Agregar readme.md de design
-- [x] Entregable 2
-  - [x] Contenido de todas las páginas de los wireframes en XHTML
-  - [x] Favicon en todas las páginas
-  - [x] Página de juego con sus contenidos sin posicionar
-  - [x] Sitio navegable por todas las páginas
-  - [x] Dar crédito a los autores de las imágenes/recursos
-  - [x] Usar una paleta de colores generada por un programa
-  - [x] Diseño adaptativo en todas las páginas (responsive design)
-  - [x] Estilos uniformes a lo largo del sitio
-  - [x] Reutilizar archivos de estilo a lo largo del sitio
-  - [x] Modularización: estilos propios de cada página
-  - [x] Transiciones/animaciones básicas
-- [ ] Entregable 3
+Se debe instalar Node.js: [Node.js](https://nodejs.org/en/)
+
+Para jugar se puede ingresar a nuestra juego en la siguiente dirección: [Spot it](http://129.153.234.175/)
+
+Para ejecutar el juego de forma local se debe abrir una temrinal en la carpeta de [src/server/](src/server/) y ejecutar los comando: 
+
+    npm i
+    npm dev run
+Esto levanta el servidor y la aplicación automáticamente.
+Nota: en la carpeta [src/spot-it](src/spot-it) tambien se debe ejecutar el comando npm i para instalar las dependencias de node.js
+
+Otra opción es ejcutar el servidor y a la aplicación por aparte. Para esto se debe abrir una temrinal en la carpeta [src/spot-it](src/spot-it) y ejecutar los comando: 
+
+    npm i
+    npm start
+
+Y abrir otra terminal en la carpeta [src/server/](src/server/) y ejecutar los comando:
+
+    npm i
+    npm start
+
 
 <!-- AUTORES -->
 ## Autores
