@@ -66,21 +66,26 @@ El sistema de juego debe contar con al menos la pantalla de créditos, ayuda, le
    - Ejemplo - Al final de la partida.  
    ![img](design/img/adap_MatchDuration.jpg)
    - Ejemplo - Leaderboard.  
-   ![img](design/img/adap_BestTime.png)
+   ![img](design/img/adap_BestTime.png)  
 
 2. Botón de I'm ready para que el host solo puedar empezar la partida si todos los jugadores están listos.
    - Botón del lado del guest antes de ser clickeado  
-   <img src="design/img/ready-button.jpg"  height="200">
+   <img src="design/img/ready-button.jpg"  height="200">  
 
    - Botón de play no clickeable del host cuando no todos están listos  
-   <img src="design/img/play-disable-host.jpg"  height="200">
+   <img src="design/img/play-disable-host.jpg"  height="200">  
+
    - Botón de play clickeable del host cuando todos están listos  
    <img src="design/img/play-enable-host.jpg"  height="200">
 
 
 3. Chat de eventos que marca un “historial” de los emparejamientos de cartas.
    - Ejemplo - Chat de eventos, incluye el uso del tiempo. Además esta chat es funcional y cualquier jugador puede enviar mensajes a través de este.  
-   ![img](design/img/adapt_eventsChat.png)
+   ![img](design/img/adapt_eventsChat.png)  
+
+3. Penalización al clickear la carta incorrecta de 5 segundos. Si el jugador clickea la carta incorrecta se penaliza con 5 segundos en los cuales no puede clickear ninguna carta.
+   - Ejemplo de la penalización:  
+   ![img](design/img/missclick-penalization.jpg)  
 
 <p align="right"><a href="#spot-it---team-pixies">↑ volver al inicio</a></p>
 
