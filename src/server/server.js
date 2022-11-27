@@ -8,7 +8,7 @@ const cards = require("./cards.json");
 const PORT = 8080;
 
 // change host to public ip or local host
-const HOST = "http://localhost"
+const HOST = "localhost"
 
 app.use(cors());
 
